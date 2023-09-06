@@ -1,28 +1,28 @@
 ---
 title: "Statistical inference  with weights and survey design"
 subtitle: A practical guide using  UKDS datasets
+author: Pierre Walthéry and Jennifer Buckley
+date: '`r format(Sys.Date(), "%d %B %Y")`'
+
 mainfont: Arial
 sansfont: Arial
 echo: true
+
 format:
   html:
     toc: true
     toc-location: left
-  
-  docx:
-    page-width: 8.27
-    
   pdf:
     pdf-engine: lualatex
     mainfont: Arial # {html, pdf, beamer} Font family for regular tex
     monofont: "Courier New" # {html, pdf, beamer} Font family for code
     monofontoptions: 
       'Scale=0.85'
-    sansfont: Arial
     fontsize: "14"
     papersize: A4
-author: Pierre Walthéry and Jennifer Buckley
-date: '`r format(Sys.Date(), "%d %B %Y")`'
+  docx:
+    page-width: 8.27
+
 bibliography: weighting_refs.bib
 nocite: |
   @*
@@ -65,7 +65,7 @@ The  nature of the  PAF address structure easily enables geographical clustering
 
 
 Figure 1 provides a simplified illustration of clustering with four districts as Primary Sampling Units (PSUs). The dotted lines indicate that districts 1 and 4 have been selected to be in the sample. A second stage of sampling follows where within the two sampled districts samples of households are taken. As a result, of this design we obtain a sample of households but these households are clustered within a sample of districts. 
-
+dta13
 Subsequently drawing   of either further clusters or final sample members take place within the already selected clusters. These higher level clusters, ie those at which the first random draw happened as known as  Primary Sampling Units (PSUs). In large scale surveys the PSUs are often  geographical areas. 
 
 
