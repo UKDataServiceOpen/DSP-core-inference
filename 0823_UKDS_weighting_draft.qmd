@@ -115,92 +115,8 @@ In the context of stratified sampling  *proportionate stratification* refers to 
 
 It is sometimes necessary to use  *disproportionate stratification* where the sampling fraction varies across strata. This method is used to increase the numbers of a specific group in the population and is useful when a sub-population of interest is numerically small, like less populated areas or ethnic minority groups. In such a case, $n_h/N_h>n_{h+1}/N_{h+1}$: the sampling fraction in stratum $h$ is larger ie we are proportionally drwing more units in that stratum relative to its size, than in stratum $h+1$. For example the British Election Study 2010 respondents from an ethnic minority background were  over-sampled as too little was known about ethnic minority voting behaviour.  Disproportionate stratification will mean some groups are over-represented in the sample.  
 
+@PierreWal: I think we should remove commented out content 
 
-<!-- ##  Explicit and Implicit   -->
-
-<!-- Additionally, stratification can be ‘explicit’ or ‘implicit’.   -->
-
-<!-- In explicit stratified sampling the population is partitioned into strata based on variables, such as regions, and a sample is selected within each strata. The approach applies in the example above.   -->
-
-
-
-<!-- With implicit stratification an alternative approach is used. In this case, the population of sampling units is sorted by some characteristic(s) and then a sample is selected from the sorted list using a fixed sampling interval and random start. Figure 3 below provides an example where the units have been sorted by region and every third unit is selected.  -->
-
-
-
-<!--  The interval is chosen to ensure the sample represents each stratum but units are selected at random.    -->
-
-
-
-<!-- Figure 3: Illustration of implicit stratification   -->
-
-
-
-<!-- ID  -->
-
-
-<!-- Region  -->
-
-<!-- 156  -->
-
-
-<!-- North  -->
-
-<!-- 247  -->
-
-
-<!-- North  -->
-
-<!-- 895  -->
-
-
-<!-- North  -->
-
-<!-- 456  -->
-
-
-<!-- North  -->
-
-<!-- 123  -->
-
-
-<!-- South  -->
-
-<!-- 147  -->
-
-
-<!-- South   -->
-
-<!-- 257  -->
-
-
-<!-- South  -->
-
-<!-- 526  -->
-
-
-<!-- South  -->
-
-<!-- 142  -->
-
-
-<!-- South  -->
-
-<!-- 465  -->
-
-
-<!-- South   -->
-
-<!-- 55  -->
-
-
-<!-- South   -->
-
-
-
-
-
-<!-- Large-scale surveys often use a combination of explicit and implicit stratification. This can be by splitting the sampling frame firstly by region and then selecting cases within the region based on a characteristic (for example level of deprivation) then selecting randomly within each grouping.   -->
 
 # 2 Design-based inference from social surveys 
 
@@ -331,46 +247,7 @@ The UKDS  does not recommend using command-specific or casual weighting for  inf
 In such cases,  it can be acceptable to compute point  estimates by applying weights to  commands that accepts them, without using survey design specific functions. Most of these will provide   the correct point estimate. By default however, some statistical software will also provide an estimate of standard errors or confidence intervals, which is likely to be  misleading as they 'silently' assume simple random sampling, and in some cases will carry out computation with population (ie grossed)  totals, resulting in the incorrect values.
 
 
-<!--
-
-```
-{r,echo=T,message=F,warning=F}
-library(dplyr)
-library(readstata13)
-library(survey)
-library(Hmisc)
-lfs<-read.dta13("/home/piet/Dropbox/work/UKDS/Weighting/8999stata_19F69364F347E76D69B733E62CBABA6D7EBB12BA9FBBED1871C583029D05A74B_V1/lfsp_aj22_eul_pwt22.dta")
-
-lfs$PWT22.s<-lfs$PWT22/mean(lfs$PWT22)
-cbind(xtabs(PWT22~SEX,lfs),xtabs(PWT22.s~SEX,lfs))
-cbind(round(100*prop.table(xtabs(PWT22~SEX,lfs)),1),round(100*prop.table(xtabs(PWT22.s~SEX,lfs)),1))
-cbind(lfs%>%group_by(SEX)%>%summarise(wtd.mean(TTACHR,PWT22)),lfs%>%group_by(SEX)%>%summarise(wtd.mean(TTACHR,PWT22.s)))
-
-lfs.srv<-svydesign(ids=~1,data=lfs%>%filter((FTPTWK=="Full-time" | FTPTWK=="Part-time") & TTACHR>=0 &  HOURPAY>=0),weights = ~PWT22)
-lfs.srv.s<-svydesign(ids=~1,data=lfs%>%filter((FTPTWK=="Full-time" | FTPTWK=="Part-time") & TTACHR>=0 &  HOURPAY>=0),weights = ~PWT22.s)
-
-cbind(svytable(~SEX,lfs.srv),svytable(~SEX,lfs.srv.s))
-cbind(svychisq(~SEX+FTPTWK,lfs.srv,statistic="Wald"),svychisq(~SEX+FTPTWK,lfs.srv.s,statistic="Wald"))
-cbind(round(100*prop.table(svytable(~SEX,lfs.srv)),1),round(100*prop.table(svytable(~SEX,lfs.srv.s)),1))
-#cbind(lfs.srv%>%filter(FTPTWK=="Full-time" | FTPTWK=="Part-time")%>%group_by(SEX,FTPTWK)%>%summarise(svymean(TTACHR)),lfs%>%filter(FTPTWK=="Full-time" | FTPTWK=="Part-time")%>%group_by(SEX,FTPTWK)%>%summarise(wtd.mean(TTACHR,PWT22.s)))
-
-cbind(svyby(~TTACHR,by=~SEX+FTPTWK,lfs.srv,svymean,vartype="ci"),svyby(~TTACHR,by=~SEX+FTPTWK,lfs.srv.s,svymean,vartype="ci")[,3:5])
-
-summary(svyglm(HOURPAY~SEX+FTPTWK+SEX*FTPTWK+URESMC,lfs.srv,family=gaussian()))
-summary(svyglm(HOURPAY~SEX+FTPTWK+SEX*FTPTWK+URESMC,lfs.srv.s,family=gaussian()))
-```
-
-And Now in Stata...
-```
-library(RStata)
-options("RStata.StataPath"="/usr/local/stata16/stata-se")
-options("RStata.StataVersion"=16)
-stata('set more off,permanently')
-stata("cd ~/Dropbox/work/UKDS/Weighting/")
-stata ("do stata_svy.do")
-
-```
--->
+@PierreWal : here too
 
 
 
@@ -905,54 +782,5 @@ GROSS4: person-level sampling weight; enables inferring population counts
 
 # 9. References
 
-<!--The summarize command
-It was intentional that summarize does not allow pweights. summarize’s purpose, as I see it, is to provide descriptive statistics for the sample, not to provide inferential statistics for the population. By this criterion, I argue that pweights do not belong here since pweights are used to provide estimates of the population parameter mu. https://www.stata.com/support/faqs/statistics/weights-and-summary-statistics/
-
-
-
-
-1. Types of weights -->
-
-
-<!-- 2. Weighted estimates -->
-<!-- The types of estimation determinates the weights, the relavance, and how they need to be used: estimating populatin totals; estimating proportions, means, variance. Whether the analysis is univariate or multivariate whether statistical testing is required -->
-
-
-<!--
-Although quick and easy this approach has the disadvantage of overlooking sample design, which is potentially misleading as it relies on the implicit assumption that the data was collected via  simple random sampling. Whether it is an non-ignorable issue or not is going to depend on the purpose of the analysis. It is generally safe to assume that for users only interested in producing point estimates that are not going to be published, this will not represent a major issue. On the other end users  aiming to publish their results and/or interested in the uncertainty of  their results will have to either:
-
-
-This is not strictly necessary and might appear to some as 'killing a fly with a bazooka', but is recommended for  users who are planning to undertake further analysis (see below), as they  will remain aware that inference with survey data require  attention to the survey design. 
-
-It is also more convenient for them to directly move to survey design based estimation rather than using one set of  procedures at  one stage of their analysis and switch to a new one later on. 
-This can be achieved either by:
-
---------------
-provide a brief discussion of the possible source of bias of the results (specifically under/over estimation of the uncertainty of the estimates)  
-
-Estimates of the precision on inference (ie confidence intervals, standard errors, statistical tests) based on  EUL data that do not include survey design information are likely to be biased, as  they will be computed by the software under the default assumption that data was collected under simple random sampling. 
-
-**Syntax using Stata**
-
-```
-tab uresmc [fw=pwt22]
-```
-**Syntax Using R** 
-The way weights are implemented in R is package- and therefore developer-specific. Simple weighted means, median and one way frequency tables,  can be obtained with `wtd.mean()`, `wtd.quantile()`, `wtd.table()` from the *Hmisc* package. It is also possible to obtain weighted frequencies and percentages for one- and two-way contingency tables with the `xtabs()` command from the stats package (part of R standard installation).   
-
-
-```
-xtabs(pwt22~uresmc,lfs)
-```
-
-**Syntax Using SPSS**
-```
-WEIGHT BY PWT22.
-FREQUENCIES uresmc.
-```
-
- Factors such as  the sensitivity of the analysis, the size of the groups studied and the  kind of statistical analysis  required, the type of license of the dataset held, the capabilities of the statistical software, as well as the sample design and the kind of weights provided should all be taken into consideration.
-
--->
-
+@PierreWal : and here
 
