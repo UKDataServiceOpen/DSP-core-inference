@@ -108,8 +108,7 @@ Common stratification characteristics used in UK surveys  are geographical (e.g.
 
 It is considered that overall stratification by improving the representativeness of potentially less represented or harder to reach groups increases the precision of  surveys.
 
-## 1.3 Proportionate vs  non proportionate stratification
-
+##1.3 Proportional vs  non proportional stratification
 In  simple random sample  each element drawn from the sampling frame have an equal selection probability, therefore the sampling fraction is $n/N$ with $n$ the sample size and N the population size. This can  either be achieved by directly selecting sample units at random or by choosing a random start and an interval.  
 
 In the context of stratified sampling  *proportionate stratification* refers to case where the same sampling fraction is used for elements within all stratum: ie $n_h/N_h$. We can see this in Figure 2  as the same proportion of units is selected for all strata with a sampling fraction of $1/4$.   
@@ -422,7 +421,7 @@ round(confint(svytotal(~uresmc.f,lfs.s)))
 
 In the above example, we are working with the  most commonly used flavour of the Labour Force Survey: the quarterly edition. The specific dataset used above is the April-July 2022 issue. Looking at the latest version of the documentation mentioned above -  Volume 1, Annex C, we can see a list of design effects for the number of employed respondents by Region of Usual Residence.  
 
-![Test](pics/lfs_vol1_SE.png)
+![Test](pics/lfs_vol1_SE)
 
 We can see that for some reason, the number regions has been reduced from the original 16 to 13. We therefore need to recode our original variable.
 
