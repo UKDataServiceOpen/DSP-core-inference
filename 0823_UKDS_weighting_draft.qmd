@@ -283,7 +283,7 @@ library(kableExtra) ### Survey design functions
 #setwd("C:/Users/mscsepw2/OneDrive - The University of Manchester/Surveyskills")
 setwd("~/Dropbox/work/UKDS/DSP/DSP-core-inference") ### Edit as appropriate
 
-bsa17<-read_spss("data/UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav")
+bsa17<-read_spss("~/Dropbox/work/UKDS/data/UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav")
 dim(bsa17)
 ```
 We can specify the survey design earlier identified in the data documentation: using `Spoint` as Primary Sampling Unit, `StratID` as strata, and `WtFactor` as weights. R does this by creating a `svydesign` object, ie a survey design informed version of the data, which will be used for  subsequent estimation.
@@ -412,7 +412,7 @@ The Office for National Statistics regularly publishes such tables for the LFS, 
 Let's see how this can be achieved. But first, let's produce uncorrected 'naive' estimates of the regional population.
     
 ```{r  5.9}
-lfs<-read_dta("/home/piet/Dropbox/work/UKDS/DSP/DSP-core-inference/data/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta")%>%select(PWT22,PIWT22,URESMC,ILODEFR)
+lfs<-read_dta("~/Dropbox/work/UKDS/data/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta")%>%select(PWT22,PIWT22,URESMC,ILODEFR)
 names(lfs)<-tolower(names(lfs))
 lfs$uresmc.f<-droplevels(as_factor(lfs$uresmc))
 lfs.s<-svydesign(ids=~1,weights=~piwt22,data=lfs%>%filter(ilodefr==1)) 
