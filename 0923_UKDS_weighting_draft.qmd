@@ -116,8 +116,6 @@ In the context of stratified sampling  *proportionate stratification* refers to 
 
 It is sometimes necessary to use  *disproportionate stratification* where the sampling fraction varies across strata. This method is used to increase the numbers of a specific group in the population and is useful when a sub-population of interest is numerically small, like less populated areas or ethnic minority groups. In such a case, $n_h/N_h>n_{h+1}/N_{h+1}$: the sampling fraction in stratum $h$ is larger ie we are proportionally drwing more units in that stratum relative to its size, than in stratum $h+1$. For example the British Election Study 2010 respondents from an ethnic minority background were  over-sampled as too little was known about ethnic minority voting behaviour.  Disproportionate stratification will mean some groups are over-represented in the sample.  
 
-@PierreWal: I think we should remove commented out content 
-
 
 # 2 Design-based inference from social surveys 
 
