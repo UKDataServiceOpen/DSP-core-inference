@@ -783,5 +783,3 @@ GROSS4: person-level sampling weight; enables inferring population counts
 
 # 9. References
 
-@PierreWal : and here
-
