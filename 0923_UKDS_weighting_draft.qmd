@@ -238,9 +238,6 @@ The UK Data Service does not recommend using command-specific or casual weightin
 In such cases,  it can be acceptable to compute point  estimates by applying weights to  commands that accepts them, without using survey design specific functions. Most of these will provide the correct point estimate. By default however, some statistical software will also provide an estimate of standard errors or confidence intervals, which is likely to be  misleading as they 'silently' assume simple random sampling, and in some cases will carry out computation with population (ie grossed)  totals, resulting in the incorrect values.
 
 
-@PierreWal : here too
-
-
 
 # 5. R examples
 
