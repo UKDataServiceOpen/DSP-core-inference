@@ -3,26 +3,27 @@ title: "Statistical inference  with weights and survey design"
 subtitle: A practical guide using  UKDS datasets
 author: Pierre Walthéry and Jennifer Buckley
 date: '`r format(Sys.Date(), "%d %B %Y")`'
-
 mainfont: Arial
 sansfont: Arial
 echo: true
-
 format:
   html:
     toc: true
     toc-location: left
-  pdf:
-    pdf-engine: lualatex
-    mainfont: Arial # {html, pdf, beamer} Font family for regular tex
-    monofont: "Courier New" # {html, pdf, beamer} Font family for code
-    monofontoptions: 
-      'Scale=0.85'
-    fontsize: "14"
-    papersize: A4
-  docx:
-    page-width: 8.27
-
+    toc-title: Content
+    embed-resources: true
+#    title-block-banner:  pics/UKDS_Logos_Col_Grey_300dpi.png
+  # pdf:
+  #   pdf-engine: lualatex
+  #   mainfont: Arial # {html, pdf, beamer} Font family for regular tex
+  #   monofont: "Courier New" # {html, pdf, beamer} Font family for code
+  #   monofontoptions: 
+  #     'Scale=0.85'
+  #   fontsize: "14"
+  #   papersize: A4
+  # docx:
+  #   page-width: 8.27
+#css: styles.css
 bibliography: weighting_refs.bib
 nocite: |
   @*
@@ -132,9 +133,9 @@ These components are sometimes labelled 'weights' in their own right, but in pra
 
 Survey weights may also be rescaled in order to inflate sample counts to population totals thus becoming *grossing weights* which enable estimating populations size. In that sense, the numerical values of the weights attached to observations are an indication of the number of units these observation ‘represent’ in the population. 
 
-Computation of weights rely on calibration algorithms that optimise the conditional distribution of the weighting variables given the sample size (for example the conditional distribution of people by age, gender and economic status) with a view to strike a balance between minimising standard errors and maximising representativeness. [reword - hard to understand]
+The computation of weights by survey designers rely on calibration algorithms that optimise the conditional distribution of sample observations across  categories of weighting variables  (for example  people of a certain age range, gender and economic status) with a view to strike a balance between minimising the standard errors (which depends on the number of observation in each such 'cell') and maximising representativeness (making sure that all cells have observations).
 
-*Survey design variables* typically consist of identifiers for the strata and/or clusters used when the sample was drawn, especially the Primary Sampling Units (PSU) used during the sampling process. Used in conjunction with weights, they enable researchers to produce more accurate estimates. However, whereas most surveys curated by the UK Data Service include weights, survey design variables are not always provided by data producers due to data protection concerns. [ I think this should be here, rather than at the start of the section of design effects]
+*Survey design variables* typically consist of identifiers for the strata and/or clusters used when the sample was drawn, especially the Primary Sampling Units (PSU) used during the sampling process. Used in conjunction with weights, they enable researchers to produce more accurate estimates. However, whereas most surveys curated by the UK Data Service include weights, survey design variables are not always provided by data producers due to data protection concerns.
 
 ## 2.2 Design effects and design factors 
 In the absence of survey design variables, *Design effects* (also know as DEFF or $D_{eff}$) and/or Design factors ($D_{eft}$) may provide a partial solution to the problem of how to account for survey design. $D_{eff}$ and $D_{eft}$ are two versions of a coefficient which attempts to measure the extent to which the standard error of an estimate given the current survey design differs from what it would have been under simple random sampling [@Kish1995]. They can therefore be used to broadly assess how sample design affect the precision of a particular set of estimates as well as enabling users to manually correct standard errors and confidence intervals produced under the assumption of simple random sampling. 
