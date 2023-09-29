@@ -123,7 +123,7 @@ Traditional textbooks or introductory courses tend to leave out this aspect, whi
 
 ## 2.1 Survey design variables
 
-*Weights* are a special type of numeric variable included in survey datasets, whose value tends to be the inverse of the relative 'importance' of sampled observations [reword]. They are designed to prevent estimates from being biased, that is  reflecting a value that is not representative of the population. They are usually made of at least two components:
+*Weights* are a special type of numeric variable included in survey datasets, whose value reflects the relative 'importance' of  observations in the sample. They are usually higher for observations from persons less likely to be part of the sample (for example for young men in urban areas), lower for those more likely to be part of the sample (for example women over 50). They are designed to prevent estimates from being biased, that is  reflecting a value that is not representative of the population. They are usually made of at least two components:
 
 - a *design* component that accounts for issues of unequal probability of selection of sample members resulting from survey design;
 
