@@ -39,12 +39,12 @@ This note aims at setting out guidelines for population inference using weights 
 
 Social surveys are data collection exercises that produce datasets enabling researchers and analysts to learn about the characteristics of human populations and societies. This is achieved by way of conducting statistical inference, the process through which unknown quantities (sometimes called parameters) of such ‘large’ populations are estimated with the help of  samples that are drawn from them. Estimation of population parameters traditionally consists of computing two pieces of information: a measure of a value of interest also known as point estimate, such as a mean or a median, together with an indication of its degree of uncertainty or precision (as standard error). Alternatively, one could also decide to represent likely values of population estimates explicitly as a range of values or interval. 
 
-It has been demonstrated that when certain conditions are met, such as when samples are randomly drawn and sample size is large enough, surveys and the parameter estimates inferred from them are representative of the corresponding population [@Lohr20192010]. Robust, unbiased estimates are estimates that are not only *representative* -- they reflect the characteristic of interest in the population, but also  *precise* enough for the inference to be meaningful. Unfortunately, in part as a result of design decisions, in part – and increasingly so – due to non response, raw, ie uncorrected, population estimates from real-world social surveys present some degree of bias.
+It has been demonstrated that when certain conditions are met, such as when samples are randomly drawn and sample size is large enough, surveys and the parameter estimates inferred from them are representative of the corresponding population [@Lohr20192010]. Robust, unbiased estimates are estimates that are not only *representative* -- they reflect the characteristic of interest in the population, but also  *precise* enough for the inference to be meaningful. Unfortunately, in part as a result of design decisions, in part – and increasingly so – due to non response, raw, i.e. uncorrected, population estimates from real-world social surveys present some degree of bias.
 
 It is usually considered that in order to produce robust population estimates from potentially biased samples, including as much of the survey design information as possible alongside (non response and sampling) weights is required.  Conversely, estimates computed without weights or accounting for survey design will at best present some degree of bias  or even might be altogether unreliable. Computing weighted estimates and accounting for survey design requires specific procedures that are not usually very well documented as  the relevant statistical techniques are more complex and overlooked in introductory  textbooks, and their practical implementation in statistical software may not always be clear. It is therefore necessary to add some clarity to this situation and provide  adequate guidelines in order for  users of UKDS data to properly implement  robust estimation strategies that are adapted to their needs, which is the purpose of this document. 
 
 # 1. Basics of Survey Design
-At the core of survey design are the strategies used to collect samples. Sample units can either be selected randomly, an approach also known as probability sampling, or not - for example when internet users are taking part to an online poll. Random sampling is usually preferred as it minimises the risk of obtaining non representative or biased samples - for example where certain groups of the population are under represented or altogether excluded. Statistical textbooks usually consider that simple random sampling - simply drawing population members at random - is the best way to obtain a random sample and avoid bias. This is however difficult to achieve in practice  with real life social surveys. Simple random sampling requires a sampling frame ie ideally a list of all members of the population of interest. In countries without a national register - a database of all residents - such a list does not exist and needs to be approximated by other means which may be costly to achieve. Simple random sampling can also not be optimal when groups within the population are known to have different probabilities of taking part in surveys.  
+At the core of survey design are the strategies used to collect samples. Sample units can either be selected randomly, an approach also known as probability sampling, or not - for example when internet users are taking part to an online poll. Random sampling is usually preferred as it minimises the risk of obtaining non representative or biased samples - for example where certain groups of the population are under represented or altogether excluded. Statistical textbooks usually consider that simple random sampling - simply drawing population members at random - is the best way to obtain a random sample and avoid bias. This is however difficult to achieve in practice  with real life social surveys. Simple random sampling requires a sampling frame i.e. ideally a list of all members of the population of interest. In countries without a national register - a database of all residents - such a list does not exist and needs to be approximated by other means which may be costly to achieve. Simple random sampling can also not be optimal when groups within the population are known to have different probabilities of taking part in surveys.  
 
 In practice designing surveys entails striking a balance between maximising representativeness as well as sample size (for greater precision of the results) while keeping costs down. For these reasons, large scale social surveys tend to produce random samples via other means than simple random sampling. Techniques are employed for example, to ensure each country  of the UK is correctly represented, which may might involve taking separate samples for England, Scotland, Wales and Northern Ireland, and that certain sub-groups, for example the ethnic minorities, are adequately represented.   
 
@@ -63,7 +63,7 @@ The  nature of the  PAF address structure easily enables geographical clustering
 ![Figure 1: Clustering in two stage sampling](pics/cluster.png)
 
 
-Figure 1 provides a simplified illustration of clustering with four districts as Primary Sampling Units (PSUs). The dotted lines indicate that districts 1 and 4 have been selected to be in the sample. A second stage of sampling follows, where households are samples from within the two sampled districts. As a result, of this design we obtain a sample of households but these households are clustered within a sample of districts. Subsequent drawing of either further clusters or final sample members takes place within the already selected clusters. These higher level clusters, ie those at which the first random draw happened as known as  Primary Sampling Units (PSUs). In large scale surveys the PSUs are often geographical areas. 
+Figure 1 provides a simplified illustration of clustering with four districts as Primary Sampling Units (PSUs). The dotted lines indicate that districts 1 and 4 have been selected to be in the sample. A second stage of sampling follows, where households are samples from within the two sampled districts. As a result, of this design we obtain a sample of households but these households are clustered within a sample of districts. Subsequent drawing of either further clusters or final sample members takes place within the already selected clusters. These higher level clusters, i.e. those at which the first random draw happened as known as  Primary Sampling Units (PSUs). In large scale surveys the PSUs are often geographical areas. 
 
 
 **Household level clustering**
@@ -109,9 +109,9 @@ It is considered that overall stratification, by improving the representativenes
 
 In  simple random sampling, each element drawn from the sampling frame has an equal selection probability, therefore the sampling fraction is $n/N$, with $n$ the sample size and N the population size. This can  either be achieved by directly selecting sample units at random or by choosing a random start and an interval.  
 
-In the context of stratified sampling,  *proportionate stratification* refers to a case where the same sampling fraction is used for elements within all stratum: ie $n_h/N_h$. We can see this in Figure 2  as the same proportion of units is selected for all strata with a sampling fraction of $1/4$.   
+In the context of stratified sampling,  *proportionate stratification* refers to a case where the same sampling fraction is used for elements within all stratum: i.e. $n_h/N_h$. We can see this in Figure 2  as the same proportion of units is selected for all strata with a sampling fraction of $1/4$.   
 
-It is sometimes necessary to use  *disproportionate stratification* where the sampling fraction varies across strata. This method is used to increase the numbers of a specific group in the population and is useful when a sub-population of interest is numerically small, like less populated areas or ethnic minority groups. In such a case, $n_h/N_h>n_{h+1}/N_{h+1}$: the sampling fraction in stratum $h$ is larger ie we are proportionally drawing more units in that stratum relative to its size, than in stratum $h+1$. For example, for the British Election Study 2010, respondents from an ethnic minority background were over-sampled as too little was known about ethnic minority voting behaviour.  Disproportionate stratification will mean some groups are over-represented in the sample.  
+It is sometimes necessary to use  *disproportionate stratification* where the sampling fraction varies across strata. This method is used to increase the numbers of a specific group in the population and is useful when a sub-population of interest is numerically small, like less populated areas or ethnic minority groups. In such a case, $n_h/N_h>n_{h+1}/N_{h+1}$: the sampling fraction in stratum $h$ is larger i.e. we are proportionally drawing more units in that stratum relative to its size, than in stratum $h+1$. For example, for the British Election Study 2010, respondents from an ethnic minority background were over-sampled as too little was known about ethnic minority voting behaviour.  Disproportionate stratification will mean some groups are over-represented in the sample.  
 
 
 # 2 Design-based inference from social surveys 
@@ -150,9 +150,9 @@ While the optimum approach to estimating population parameters from surveys reli
 
 ## 3.1 Data availability
 
-Most UK Data Service datasets are available under *End User License (EUL)*. This presents the advantage of  enabling  large numbers of users  to access data with a minimal level of formalities to go through but comes at the  significant cost  that    survey design variables are often not included by the data producer, due to concerns about the  risk of personal information disclosure. There are notable exceptions, such as for example the British Social Attitudes survey which does include survey design variables in some of its releases. 
+Most UK Data Service datasets are available under *End User License (EUL)*. This presents the advantage of  enabling  large numbers of users  to access data with a minimal level of formalities to go through but comes at the  significant cost  that    survey design variables are often not included by data producers, due to concerns about the  risk of personal information disclosure. There are notable exceptions, such as [Understanding Society](https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000053), the [Health Survey for England](https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000021) or the [British National Surveys of Sexual Attitudes and Lifestyles (NATSAL)](https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000036).  The [British Social Attitudes Survey](https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=200006)  does also include survey design variables in some of its releases. 
 
-For a number of key studies such as the Labour Force Survey or the Family Resources Survey,  users may apply for access to a version of the data that does include survey design information via the (virtual) SecureLab or at the UKDS Safe Room. Application for  access to these facilities can be a lengthy process, and not practically feasible for all researchers, in particular those outside academia or large organisations. More information is available on the [UK Data Service website](https://ukdataservice.ac.uk/help/access-policy/types-of-data-access/). There are also a large number of studies for which such controlled access is not available. The consequence is that in a significant number of cases, there will inevitably be limitations to the level of precision of the estimates most  will be able to produce.
+For a number of key studies such as the [Labour Force Survey](https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000026) or the [Family Resources Survey](https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=200017),  users may apply for access to a version of the data that does include survey design information via the (virtual) SecureLab or at the UKDS Safe Room. Application for  access to these facilities can be a lengthy process, and not practically feasible for all researchers, in particular those outside academia or large organisations. More information on [Types of data access](https://ukdataservice.ac.uk/help/access-policy/types-of-data-access) can be found on the UK Data Service website. There are also a large number of studies for which such controlled access is not available. The consequence is that in a significant number of cases, there will inevitably be limitations to the level of precision of the estimates most  will be able to produce.
 
 ## 3.2 Sensitivity of the analysis
 
@@ -162,7 +162,7 @@ Not all analyses necessarily require the highest degree of precision. Reflecting
 
 What an analysis actually entails will help determine whether accessing survey design variables is crucial or not. Estimation involving a small numbers of observations will be more at risk of providing incorrect estimates if survey design variables are not taken into account. Similarly, interest for specific subgroups of the population (also known as domains) rather than the population as a whole will involve more complex estimation techniques as domain estimation needs to account for the distribution of weights in the whole population, not just for the subgroup of interest.
 
-These analytical scenarios could be seen as lying on a continuum ranging from producing simple univariate descriptive estimates for the population as a whole to  complex  estimation  of small groups characteristics and/or multivariate analysis. The former is conceptually and practically more straightforward than the latter. In some cases the estimates of interest may already have been published by the data producer using the adequate estimation techniques and the full information available. Data producers may also have published *design factors* ie numbers allowing to adjust the precision of estimates produced without survey design variables. Examples of such design factors for the Labour Force Survey and the Family Resources Surveys are provided below.
+These analytical scenarios could be seen as lying on a continuum ranging from producing simple univariate descriptive estimates for the population as a whole to  complex  estimation  of small groups characteristics and/or multivariate analysis. The former is conceptually and practically more straightforward than the latter. In some cases the estimates of interest may already have been published by the data producer using the adequate estimation techniques and the full information available. Data producers may also have published *design factors* i.e. numbers allowing to adjust the precision of estimates produced without survey design variables. Examples of such design factors for the Labour Force Survey and the Family Resources Surveys are provided below.
 
 
 ## 3.4 Software issues
@@ -171,7 +171,7 @@ Most statistical analysis software include commands specifically designed to ana
 
 - Whereas weighted commands will most of the time compute the correct point estimates, they will  also silently produce biased estimates of their precision (standard errors or confidence intervals), based on the incorrect assumption that the sample was collect via simple random sampling. Depending on the survey design, this will lead to under- or over- estimation of standard errors and confidence intervals, and could affect the validity  of statistical tests, in particular if small groups within the population are involved.
 
-- In addition, there are  specific cases where estimation of standard errors and confidence intervals will be not just biased but wholly incorrect: the standard (ie command-based) weighting procedure  of SPSS and SAS relies on population rather than sample totals to compute them, which results in unrealistic values. 
+- In addition, there are  specific cases where estimation of standard errors and confidence intervals will be not just biased but wholly incorrect: the standard (i.e. command-based) weighting procedure  of SPSS and SAS relies on population rather than sample totals to compute them, which results in unrealistic values. 
 
 - Software such as Stata does not allow users to directly compute confidence intervals or use sampling weights outside of survey commands.  This may lead users to rely on 'quick and dirty' tricks that will help them quickly produce weighted point estimates, with incorrect standard errors.
 
@@ -196,11 +196,11 @@ This section  provides  practical recommendations for robust inference taking in
 
 *Strategy 1*, using weights alongside  survey design variables when conducting statistical inference is the statistically most robust way to compute population estimates with survey data and should be prioritised by users whenever possible. In real life research however, this option is not always available. Accessing survey design variables can prove challenging as they are not always provided by data producers or may require applying for a special version of the data, which may prove time consuming.
 
-In the absence of survey design information, *Strategy 2* should be considered the second best option. The value of point estimates are likely to be identical to those produced under Strategy 1, but the confidence intervals/standard errors will be biased -- ie too narrow or wide depending on the survey design, which should be explicitly mentioned alongside the results. The data documentation should provide information about how results may be affected. Using survey-specific  estimation commands even in the absence of survey design variables is a recommended option over simply applying weights to standard commands, as it will avoid getting incorrect estimates (SAS and SPSS), is the only option available for computation with survey weights or obtaining confidence intervals  (Stata), or coherent survey data analysis (R). In addition, it might be possible to correct 'by hand' biased standard errors or confidence interval using data producer-provided design factors. 
+In the absence of survey design information, *Strategy 2* should be considered the second best option. The value of point estimates are likely to be identical to those produced under Strategy 1, but the confidence intervals/standard errors will be biased -- i.e. too narrow or wide depending on the survey design, which should be explicitly mentioned alongside the results. The data documentation should provide information about how results may be affected. Using survey-specific  estimation commands even in the absence of survey design variables is a recommended option over simply applying weights to standard commands, as it will avoid getting incorrect estimates (SAS and SPSS), is the only option available for computation with survey weights or obtaining confidence intervals  (Stata), or coherent survey data analysis (R). In addition, it might be possible to correct 'by hand' biased standard errors or confidence interval using data producer-provided design factors. 
 
 It can be understandable that when survey design variables are not available some users privilege *Strategy 3* which tend to  focus on producing weighted estimates using standard commands and  give  little  consideration to the methodological implication of this approach. Whereas point estimates are likely to be identical to those produced under Strategy 1 and 2, SAS and SPSS users are likely to produce incorrect confidence intervals/standard errors. R and Stata users might get standard errors and confidence intervals that are close to those produced using Strategy 2, but there is no guarantee that this will be the case. Overall, the UK Data Service only recommend following this strategy in case of low sensitivity analysis.
 
-As population estimates produced without weights or survey design variables will almost certainly be unreliable *Strategy 4* should be discouraged except when data usage is purely descriptive. For example when teaching non-inferential (ie descriptive) statistical techniques. 
+As population estimates produced without weights or survey design variables will almost certainly be unreliable *Strategy 4* should be discouraged except when data usage is purely descriptive. For example when teaching non-inferential (i.e. descriptive) statistical techniques. 
 
 
 ## 4.1 Medium to high sensitivity analysis: workflow
@@ -230,14 +230,14 @@ Most of the time survey researchers or data analysts are required to produce a c
 
 - Documenting the resulting confidence interval for the estimate of interest or alternatively the point estimates *and* its standard error.
 
-- If no design factors are available for the estimates of interest, an explicit mention of the likely nature and cause of bias is good practice ie under estimation in case of cluster sampling, over estimation in case of stratified sample, usually available from the survey documentation. The wider the initial  confidence interval (ie computed under SRS assumptions) the larger the likely bias. Or from another perspective, the smaller the (sub)sample, the larger the likely bias. In cases of conducting significance testing with small subsample or groups, it would be a good practice to only consider test outcomes significant at P<.01 or p<.001.      
+- If no design factors are available for the estimates of interest, an explicit mention of the likely nature and cause of bias is good practice i.e. under estimation in case of cluster sampling, over estimation in case of stratified sample, usually available from the survey documentation. The wider the initial  confidence interval (i.e. computed under SRS assumptions) the larger the likely bias. Or from another perspective, the smaller the (sub)sample, the larger the likely bias. In cases of conducting significance testing with small subsample or groups, it would be a good practice to only consider test outcomes significant at P<.01 or p<.001.      
 
 4. Computing estimates for subpopulations (also known as 'domains') rather than for the population as a whole requires extra precautions.  This is the case for example when we are interested in the mean age by employment status, or some other categories, or alternatively, in analyses restricted to a subset of the population (for example only those in employment). The key difference is that when computing domain estimates we are in fact producing estimates about a group of the population whose size we also need to estimate. This requires ensuring that the whole distribution of weights in the sample is taken into account, not just the weight values for the groups we are interested in. Failure to do so might result in computing incorrect point estimates and standard errors/confidence intervals. Survey specific commands in statistical software are designed to tackle this potential issue.
 
 ## 4.2 Lower sensitivity analysis
-The UK Data Service does not recommend using command-specific or casual weighting for inferential analysis, but there are  circumstances where this will be the only option available to users. There are also cases when users are not interested in knowing about the uncertainty of their estimates (ie their confidence interval, standard errors of point estimates, or conduct statistical testing), for example because they are simply learning or teaching basic statistical concepts or how to use software. 
+The UK Data Service does not recommend using command-specific or casual weighting for inferential analysis, but there are  circumstances where this will be the only option available to users. There are also cases when users are not interested in knowing about the uncertainty of their estimates (i.e. their confidence interval, standard errors of point estimates, or conduct statistical testing), for example because they are simply learning or teaching basic statistical concepts or how to use software. 
 
-In such cases,  it can be acceptable to compute point  estimates by applying weights to  commands that accepts them, without using survey design specific functions. Most of these will provide the correct point estimate. By default however, some statistical software will also provide an estimate of standard errors or confidence intervals, which is likely to be  misleading as they 'silently' assume simple random sampling, and in some cases will carry out computation with population (ie grossed)  totals, resulting in incorrect values.
+In such cases,  it can be acceptable to compute point  estimates by applying weights to  commands that accepts them, without using survey design specific functions. Most of these will provide the correct point estimate. By default however, some statistical software will also provide an estimate of standard errors or confidence intervals, which is likely to be  misleading as they 'silently' assume simple random sampling, and in some cases will carry out computation with population (i.e. grossed)  totals, resulting in incorrect values.
 
 
 
@@ -253,7 +253,7 @@ In this example, we will  practice statistical inference with data from the  [20
 We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the `mrdoc/pdf` folder. 
 
 **Question 1**
-What is the design that was used in this survey (ie how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?
+What is the design that was used in this survey (i.e. how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?
 
 Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under `mrdoc/ukda_data_dictionaries.zip` The file may need to be decompressed  separately.
 
@@ -276,7 +276,7 @@ setwd("~/Dropbox/work/UKDS/DSP/DSP-core-inference") ### Edit as appropriate
 bsa17<-read_spss("~/Dropbox/work/UKDS/data/UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav")
 dim(bsa17)
 ```
-We can specify the survey design earlier identified in the data documentation: using `Spoint` as Primary Sampling Unit, `StratID` as strata, and `WtFactor` as weights. R does this by creating a `svydesign` object, ie a survey design informed version of the data, which will be used for  subsequent estimation.
+We can specify the survey design earlier identified in the data documentation: using `Spoint` as Primary Sampling Unit, `StratID` as strata, and `WtFactor` as weights. R does this by creating a `svydesign` object, i.e. a survey design informed version of the data, which will be used for  subsequent estimation.
 
 ```{r 5.2}
 bsa17.s<-svydesign(ids=~Spoint, strata=~StratID, weights=~WtFactor,data=bsa17)
@@ -284,7 +284,7 @@ class(bsa17.s)
 ```
 
 ## 5.3 Mean age and its 95% confidence interval
-We can now produce a first set of estimates using this information and compare them with those we would have got without accounting for  the survey design. We will compute the average (ie mean) age of respondents in the sample. We will need to use `svymean()`
+We can now produce a first set of estimates using this information and compare them with those we would have got without accounting for  the survey design. We will compute the average (i.e. mean) age of respondents in the sample. We will need to use `svymean()`
 ```{r mean}
 svymean(~RAgeE,bsa17.s)
 ```
@@ -324,7 +324,7 @@ round(100*prop.table(svytable(~(Politics==1 | Politics==2),bsa17.s)),1)
 Let us now compute the confidence intervals for  these proportions. Traditional statistical software compute these without giving us an idea of the underlying computations going on. 
 Doing this in R requires more coding, but also a better understanding of what is actually estimated. 
 
-Confidence intervals for proportions of categorical variables are usually computed as a sequence of binomial/dichotomic estimations -- ie one for each category. In R this needs to be specified explicitly via the `svyciprop()` and `I()` functions. The former actually computes the proportion and its confidence interval (by default 95%), whereas the latter allows us to define the category we are focusing on.
+Confidence intervals for proportions of categorical variables are usually computed as a sequence of binomial/dichotomic estimations -- i.e. one for each category. In R this needs to be specified explicitly via the `svyciprop()` and `I()` functions. The former actually computes the proportion and its confidence interval (by default 95%), whereas the latter allows us to define the category we are focusing on.
 
 ```{r 5.6}
 svyciprop(~I(Politics==1 | Politics==2),bsa17.s)
@@ -345,10 +345,10 @@ In R, the command that does this is `svyby()`
 
 For instance, if we would like to compute the mean age of BSA respondents by Government Office Regions, we need to specify:
 
-- The outcome variable whose estimate we want to compute: ie `RAgeE`
+- The outcome variable whose estimate we want to compute: i.e. `RAgeE`
 - The grouping variable(s) `GOR_ID`
 - The estimate function we are going to use here: `svymean`, the same as  we used before
-- And the type of type of variance estimation we would like to see displayed ie standard errors or confidence interval  
+- And the type of type of variance estimation we would like to see displayed i.e. standard errors or confidence interval  
 
 ```{r 5.7}
 round(
@@ -393,7 +393,7 @@ Using interest in politics as before, and three category age
 As a rule, EUL versions of the LFS do not include sample design variables. On the other hand they  come with  two weight variables:
 
 - `pwt22` for estimation with the whole sample
-- `piwt22` for estimation using  respondents currently in employment (typically used for earnings estimation) 
+- `piwt22` for estimation of income using  respondents currently in employment (and accounting for  the high level of non response for the earnings variables) 
 
 Estimation without  accounting for sample design will likely be biased and should be reported as such including warnings, even if the nature (over or underestimation of the precision) and and size are not known. An alternative is to look for   design effects tables published by the data producer which could be used to correct for the bias.
 
@@ -460,7 +460,7 @@ kable(round(tot[,c("2.5%","97.5%")]))
 ### Answers
 
 **Question 1**
-The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were  stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (ie number of addresses).
+The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were  stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e. number of addresses).
 
 **Question 2**
 From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by `Spoint` and the strata by `StratID`. The weights variable is `WtFactor`. Addresses are not provided but could be approximated with a household identifier. 
@@ -473,7 +473,7 @@ Not using weights would make us overestimate the mean age in the population (of 
 The proportion of 17-34 year old in the sample is `r round(100*as.numeric(svyciprop(~I(RAgecat5 == 1),bsa17.s)[1]),1)` and its 95% confidence interval `r round(100*attr(svyciprop(~I(RAgecat5 == 1),bsa17.s),"ci"),1)`
 
 **Question 5** 
-The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (ie the widest confidence interval) is Wales, with a  20  percentage point difference between the upper and lower bounds of the confidence interval.
+The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (i.e. the widest confidence interval) is Wales, with a  20  percentage point difference between the upper and lower bounds of the confidence interval.
 
 
 **Question 6**
@@ -498,7 +498,7 @@ The confidence interval for the proportion of men under 35 and women above 55 in
 
 
 # 6. SPSS Examples
-At the time of writing this document (September 2023) Standard editions of SPSS  did not include support for estimation with survey design variables, and only limited use of sampling weights. When using grossing weights -- ie weight that have been designed to enable computing population totals from sample data -- as is the case for instance with the Labour Force and Family Resources surveys, measures of dispersion and standard errors will not be adequately computed. It is therefore not recommended to attempt using the base version of SPSS with survey data beyond estimating point estimates. Significance testing, and standard errors will not reflect the correct values. Users wanting to use SPSS with survey data will need to acquire the Premium Edition or the Complex Samples add-on of the software.
+At the time of writing this document (September 2023) Standard editions of SPSS  did not include support for estimation with survey design variables, and only limited use of sampling weights. When using grossing weights -- i.e. weight that have been designed to enable computing population totals from sample data -- as is the case for instance with the Labour Force and Family Resources surveys, measures of dispersion and standard errors will not be adequately computed. It is therefore not recommended to attempt using the base version of SPSS with survey data beyond estimating point estimates. Significance testing, and standard errors will not reflect the correct values. Users wanting to use SPSS with survey data will need to acquire the Premium Edition or the Complex Samples add-on of the software.
 
 In this exercise, we will  practice statistical inference with data from the  [2017 British Social Attitudes Survey (BSA)](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450) taking into account weights and  survey design variables. Please note that at the time of writing this document only some of the BSA editions  include survey design variables.
 
@@ -508,7 +508,7 @@ In this exercise, we will  practice statistical inference with data from the  [2
 We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the ```mrdoc/pdf``` folder. 
 
 **Question 1**
-What is the design that was used in this survey (ie how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?
+What is the design that was used in this survey (i.e. how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?
 
 Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under ```mrdoc/ukda_data_dictionaries.zip``` You may need to decompress the file separately
 
@@ -524,7 +524,7 @@ CD 'C:\Users\mscsepw2\OneDrive - The University of Manchester\Surveyskills'.
     FILE=' BSA\UKDA-8450-spss\spss\spss25\bsa2017_for_ukda.sav'.
 ```
 
-In principle, we should  tell SPSS that we are working with a three stage stratified cluster sample. In practice however, we only have information about the initial ie primary sampling units.  
+In principle, we should  tell SPSS that we are working with a three stage stratified cluster sample. In practice however, we only have information about the initial i.e. primary sampling units.  
 This is achieved with the ```CSPLAN``` command through we create a plan file which contains the survey design information.
 
 
@@ -539,7 +539,7 @@ CSPLAN ANALYSIS
 ```
 
 ## 6.3 Mean age and its 95% confidence interval
-We can now produce a first set of estimates using this design and compare them with those we would have got without accounting for  it. We will compute the average (ie mean) age of respondents in the sample, as well as the proportion of male and female respondents aged over 55. We will need to use ```/CSDESCRIPTIVES```
+We can now produce a first set of estimates using this design and compare them with those we would have got without accounting for  it. We will compute the average (i.e. mean) age of respondents in the sample, as well as the proportion of male and female respondents aged over 55. We will need to use ```/CSDESCRIPTIVES```
 ```
 DATASET ACTIVATE DataSet1.
 * Complex Samples Descriptives.
@@ -626,14 +626,14 @@ CSTABULATE
 **Question 4**
 What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use ```RAgecat5```
 
-## 6.5 Domain (ie subpopulation) estimates
+## 6.5 Domain (i.e. subpopulation) estimates
 Although computing estimates for specific groups (for example the average age of people who report being interested in politics) is not conceptually different from doing it for the sample as a whole, doing it with weights as part of an inferential analysis requires some caution. Calculating weighted estimates  for  a subpopulation while the rest of the sample is left out of the analysis might  yield incorrect results. This is why using survey design informed functions  is particularly recommended when doing such analyses.
 
 The SPSS command `CSDESCRIPTIVES` that we used above makes such domain estimation relatively straightforward. If we would like to compute the mean age of BSA respondents by government office regions, we need to specify:
 
-- The outcome variable whose estimate we want to compute: ie ```RAgeE```
+- The outcome variable whose estimate we want to compute: i.e. ```RAgeE```
 - The grouping variable(s) ```GOR_ID```
-- And the type of type of variance estimation we would like to see displayed ie standard errors or confidence interval  
+- And the type of type of variance estimation we would like to see displayed i.e. standard errors or confidence interval  
 
 
 ```{r bygor2,echo=F, include=F}
@@ -705,7 +705,7 @@ CSTABULATE
 ### Answers
 
 **Question 1**
-The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were  stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (ie number of addresses).
+The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were  stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e. number of addresses).
 
 **Question 2**
 From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by ```Spoint``` and the strata by ```StratID```. The weights variable is ```WtFactor```. Addresses are not provided but could be approximated with a household identifier. 
@@ -718,7 +718,7 @@ Not using weights would make us overestimate the mean age in the population (of 
 The proportion of 17-34 year old in the sample is `r round(100*as.numeric(svyciprop(~I(RAgecat5 == 1),bsa17.s)[1]),1)` and its 95% confidence interval `r round(100*attr(svyciprop(~I(RAgecat5 == 1),bsa17.s),"ci"),1)`
 
 **Question 5** 
-The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (ie the widest confidence interval) is Wales, with a  20  percentage point difference between the upper and lower bounds of the confidence interval.
+The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (i.e. the widest confidence interval) is Wales, with a  20  percentage point difference between the upper and lower bounds of the confidence interval.
 
 
 **Question 6**
@@ -740,9 +740,9 @@ Stata provides comprehensive support for computing estimates from survey data. U
 
  These differences impact on the way standard errors are computed during estimation. In most cases, social survey weights from UKDS datasets should be treated as probability weights. A number of of basic estimation commands, such as *summarise* do not allow using probability weights. This is an explicit features of Stata, meant to nudge users of survey data to prioritise the survey commands rather than 'casual' weighting.
 
-Using standalone weight specification  (ie not using survey design functions). In Stata it consists in the weighting variable being specified between square brackets. Stata defines four kind of weights:
+Using standalone weight specification  (i.e. not using survey design functions). In Stata it consists in the weighting variable being specified between square brackets. Stata defines four kind of weights:
 
-Only probability weights (abbreviated as `pw` in most Stata commands) should be used with survey data. However, Stata does not allow using them with its main commands, for the reason highlighted above ie in order for users not overlook survey design issues in their data. Therefore, one has to specify instead the wrong frequency weights (`fw`) if one does not wish to use the survey design functions.
+Only probability weights (abbreviated as `pw` in most Stata commands) should be used with survey data. However, Stata does not allow using them with its main commands, for the reason highlighted above i.e. in order for users not overlook survey design issues in their data. Therefore, one has to specify instead the wrong frequency weights (`fw`) if one does not wish to use the survey design functions.
 
 
 
@@ -750,16 +750,16 @@ Only probability weights (abbreviated as `pw` in most Stata commands) should be 
 # 8. Appendix: Study-specific weighting and sample design information
 
 ## 8.1 British Social Attitudes Survey
-The  BSA is a three stage stratified random survey, with postcode sectors, addresses and individuals as the units selected at each stage. Primary sampling units were furthermore stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (ie number of addresses).
+The  BSA is a three stage stratified random survey, with postcode sectors, addresses and individuals as the units selected at each stage. Primary sampling units were furthermore stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e. number of addresses).
 Some issues of the BSA such as the 2017 include survey design information.
 The 2017 issue included information about Primary Smapling Units (`Spoint`), strata (`StratID`). Weights are called `WtFactor`.
 
 
 ## 8.2 Labour Force Survey 
 The LFS is a geographically stratified random survey. For the main part  Primary sampling units are addresses within postcode sectors, drawn from the  Small Users Postcode Address File (PAF). The small users PAF is limited to addresses which receive, fewer than 50 items of post per day. In a small number of cases a second stage sampling occurs where several households exist at a given address. A clustering effect is also present to the extent that units of observations are individuals within households, and that some groups are clustered within these, typically ethnicity.
-LFS weights:
-- PWTxx – person level sampling weight; enables inferring population counts
-- IWTxx - Person-level  sampling weight for income analysis (ie subsample of people in paid work)
+LFS weights (all of these include a grossing component that enables estimation of population counts):
+- PWTxx – person level sampling weight; 
+- PIWTxx - person-level  sampling weight for income analysis (i.e. subsample of people in paid work)
 - PHHWTxx - Household-level  sampling weight (for household-level analysis)
 
 ## 8.3 Family Resources Survey 
