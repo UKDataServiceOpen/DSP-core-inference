@@ -3,27 +3,27 @@ title: "Statistical inference  with weights and survey design"
 subtitle: A practical guide using  UKDS datasets
 author: Pierre Walthéry and Jennifer Buckley
 date: '`r format(Sys.Date(), "%d %B %Y")`'
-mainfont: Arial
-sansfont: Arial
-echo: true
+mainfont: "Open Sans"
+title-block: "plain"
+title-block-banner: "white"
 format:
   html:
-    toc: true
-    toc-location: left
-    toc-title: Content
-    embed-resources: true
+   toc: true
+   smooth-scroll: true
+   toc-location: left
+
 #    title-block-banner:  pics/UKDS_Logos_Col_Grey_300dpi.png
-  pdf:
-     pdf-engine: lualatex
-     mainfont: Arial # {html, pdf, beamer} Font family for regular tex
-     monofont: "Courier New" # {html, pdf, beamer} Font family for code
-     monofontoptions: 
-       'Scale=0.85'
-     fontsize: "14"
-     papersize: A4
-  docx:
-     page-width: 8.27
-#css: styles.css
+  # pdf:
+  #    pdf-engine: lualatex
+  #    mainfont: Arial # {html, pdf, beamer} Font family for regular tex
+  #    monofont: "Courier New" # {html, pdf, beamer} Font family for code
+  #    monofontoptions: 
+  #      'Scale=0.85'
+  #    fontsize: "14"
+  #    papersize: A4
+  # docx:
+  #    page-width: 8.27
+css: bsa.css
 bibliography: weighting_refs.bib
 nocite: |
   @*
