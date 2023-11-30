@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Pierre Walthéry and Jennifer Buckley">
+<meta name="dcterms.date" content="2023-11-30">
+
+<title>Statistical inference with weights and survey design variables</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: white;
+      }
+</style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="bsa.css">
+</head>
+
+<body class="floating">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Statistical inference with weights and survey design variables</h1>
+            <p class="subtitle lead">Practical guidelines using UKDS datasets</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Pierre Walthéry and Jennifer Buckley </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 30, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#basics-of-survey-design" id="toc-basics-of-survey-design" class="nav-link" data-scroll-target="#basics-of-survey-design">1. Basics of Survey Design</a>
+  <ul class="collapse">
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering">1.1 Clustering</a></li>
+  <li><a href="#stratification" id="toc-stratification" class="nav-link" data-scroll-target="#stratification">1.2 Stratification</a></li>
+  <li><a href="#proportionate-vs-non-proportionate-stratification" id="toc-proportionate-vs-non-proportionate-stratification" class="nav-link" data-scroll-target="#proportionate-vs-non-proportionate-stratification">1.3 Proportionate vs non proportionate stratification</a></li>
+  </ul></li>
+  <li><a href="#design-based-inference-from-social-surveys" id="toc-design-based-inference-from-social-surveys" class="nav-link" data-scroll-target="#design-based-inference-from-social-surveys">2 Design-based inference from social surveys</a>
+  <ul class="collapse">
+  <li><a href="#survey-design-variables" id="toc-survey-design-variables" class="nav-link" data-scroll-target="#survey-design-variables">2.1 Survey design variables</a></li>
+  <li><a href="#design-effects-and-design-factors" id="toc-design-effects-and-design-factors" class="nav-link" data-scroll-target="#design-effects-and-design-factors">2.2 Design effects and design factors</a></li>
+  </ul></li>
+  <li><a href="#the-practice-of-inference-things-to-keep-in-mind" id="toc-the-practice-of-inference-things-to-keep-in-mind" class="nav-link" data-scroll-target="#the-practice-of-inference-things-to-keep-in-mind">3. The practice of inference: things to keep in mind</a>
+  <ul class="collapse">
+  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability">3.1 Data availability</a></li>
+  <li><a href="#sensitivity-of-the-analysis" id="toc-sensitivity-of-the-analysis" class="nav-link" data-scroll-target="#sensitivity-of-the-analysis">3.2 Sensitivity of the analysis</a></li>
+  <li><a href="#complexity-of-the-analysis" id="toc-complexity-of-the-analysis" class="nav-link" data-scroll-target="#complexity-of-the-analysis">3.3 Complexity of the analysis</a></li>
+  <li><a href="#software-issues" id="toc-software-issues" class="nav-link" data-scroll-target="#software-issues">3.4 Software issues</a></li>
+  <li><a href="#what-are-we-in-fact-estimating" id="toc-what-are-we-in-fact-estimating" class="nav-link" data-scroll-target="#what-are-we-in-fact-estimating">3.5 What are we in fact estimating?</a></li>
+  </ul></li>
+  <li><a href="#statistical-inference-from-survey-data-in-practice" id="toc-statistical-inference-from-survey-data-in-practice" class="nav-link" data-scroll-target="#statistical-inference-from-survey-data-in-practice">4. Statistical inference from survey data in practice</a>
+  <ul class="collapse">
+  <li><a href="#medium-to-high-sensitivity-analysis-workflow" id="toc-medium-to-high-sensitivity-analysis-workflow" class="nav-link" data-scroll-target="#medium-to-high-sensitivity-analysis-workflow">4.1 Medium to high sensitivity analysis: workflow</a></li>
+  <li><a href="#lower-sensitivity-analysis" id="toc-lower-sensitivity-analysis" class="nav-link" data-scroll-target="#lower-sensitivity-analysis">4.2 Lower sensitivity analysis</a></li>
+  </ul></li>
+  <li><a href="#r-examples" id="toc-r-examples" class="nav-link" data-scroll-target="#r-examples">5. R examples</a>
+  <ul class="collapse">
+  <li><a href="#identifying-the-survey-design-and-variables" id="toc-identifying-the-survey-design-and-variables" class="nav-link" data-scroll-target="#identifying-the-survey-design-and-variables">5.1 Identifying the survey design and variables</a></li>
+  <li><a href="#specifying-the-survey-design" id="toc-specifying-the-survey-design" class="nav-link" data-scroll-target="#specifying-the-survey-design">5.2 Specifying the survey design</a></li>
+  <li><a href="#mean-age-and-its-95-confidence-interval" id="toc-mean-age-and-its-95-confidence-interval" class="nav-link" data-scroll-target="#mean-age-and-its-95-confidence-interval">5.3 Mean age and its 95% confidence interval</a></li>
+  <li><a href="#computing-a-proportion-and-its-95-confidence-interval" id="toc-computing-a-proportion-and-its-95-confidence-interval" class="nav-link" data-scroll-target="#computing-a-proportion-and-its-95-confidence-interval">5.4 Computing a proportion and its 95% confidence interval</a></li>
+  <li><a href="#computing-domain-estimates" id="toc-computing-domain-estimates" class="nav-link" data-scroll-target="#computing-domain-estimates">5.5 Computing domain estimates</a></li>
+  <li><a href="#inference-without-survey-design-variables-using-r" id="toc-inference-without-survey-design-variables-using-r" class="nav-link" data-scroll-target="#inference-without-survey-design-variables-using-r">5.6 Inference without survey design variables using R</a>
+  <ul class="collapse">
+  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers">Answers</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#spss-examples" id="toc-spss-examples" class="nav-link" data-scroll-target="#spss-examples">6. SPSS Examples</a>
+  <ul class="collapse">
+  <li><a href="#identifying-the-survey-design-and-variables-1" id="toc-identifying-the-survey-design-and-variables-1" class="nav-link" data-scroll-target="#identifying-the-survey-design-and-variables-1">6.1 Identifying the survey design and variables</a></li>
+  <li><a href="#specifying-the-survey-design-1" id="toc-specifying-the-survey-design-1" class="nav-link" data-scroll-target="#specifying-the-survey-design-1">6.2 Specifying the survey design</a></li>
+  <li><a href="#mean-age-and-its-95-confidence-interval-1" id="toc-mean-age-and-its-95-confidence-interval-1" class="nav-link" data-scroll-target="#mean-age-and-its-95-confidence-interval-1">6.3 Mean age and its 95% confidence interval</a></li>
+  <li><a href="#computing-a-proportion-and-its-95-confidence-interval-1" id="toc-computing-a-proportion-and-its-95-confidence-interval-1" class="nav-link" data-scroll-target="#computing-a-proportion-and-its-95-confidence-interval-1">6.4 Computing a proportion and its 95% confidence interval</a></li>
+  <li><a href="#domain-i.e.-subpopulation-estimates" id="toc-domain-i.e.-subpopulation-estimates" class="nav-link" data-scroll-target="#domain-i.e.-subpopulation-estimates">6.5 Domain (i.e.&nbsp;subpopulation) estimates</a>
+  <ul class="collapse">
+  <li><a href="#answers-1" id="toc-answers-1" class="nav-link" data-scroll-target="#answers-1">Answers</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#stata-examples" id="toc-stata-examples" class="nav-link" data-scroll-target="#stata-examples">7 Stata examples</a></li>
+  <li><a href="#appendix-study-specific-weighting-and-sample-design-information" id="toc-appendix-study-specific-weighting-and-sample-design-information" class="nav-link" data-scroll-target="#appendix-study-specific-weighting-and-sample-design-information">8. Appendix: Study-specific weighting and sample design information</a>
+  <ul class="collapse">
+  <li><a href="#british-social-attitudes-survey" id="toc-british-social-attitudes-survey" class="nav-link" data-scroll-target="#british-social-attitudes-survey">8.1 British Social Attitudes Survey</a></li>
+  <li><a href="#labour-force-survey" id="toc-labour-force-survey" class="nav-link" data-scroll-target="#labour-force-survey">8.2 Labour Force Survey</a></li>
+  <li><a href="#family-resources-survey" id="toc-family-resources-survey" class="nav-link" data-scroll-target="#family-resources-survey">8.3 Family Resources Survey</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">9. References</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level1 unnumbered">
+<h1 class="unnumbered">Introduction</h1>
+<p>This note aims at setting out guidelines for population inference using weights and design variables with UK Data Service social surveys. It focuses on providing users with practical procedures for reliable estimation and only discuss the theoretical underpinnings of the survey design with respect to the sampling or estimation using weighted survey data. The content is based on technical documents by data producers such as the Office for National Statistics as well as the relevant statistical literature. Examples are currently drawn from the UK Labour Force Survey, the Family Expenditure Survey and the British Social Attitudes survey and will gradually be expanded. A list of key references and online tutorials is provided in the bibliography.</p>
+<p>Social surveys are data collection exercises that produce datasets enabling researchers and analysts to learn about the characteristics of human populations and societies. This is achieved by way of conducting statistical inference, the process through which unknown quantities (sometimes called parameters) of such ‘large’ populations are estimated with the help of samples that are drawn from them. Estimation of population parameters traditionally consists of computing two pieces of information: a measure of a value of interest also known as the point estimate, such as a mean or a median, together with an indication of its degree of uncertainty or precision (their standard error). Alternatively, one may also want to represent population estimates directly as a range or interval of likely values.</p>
+<p>It has been demonstrated that when certain conditions are met, such as when samples are randomly drawn and the sample size is large enough, surveys and the parameter estimates inferred from them are representative of the corresponding target population <span class="citation" data-cites="Lohr20192010">(<a href="#ref-Lohr20192010" role="doc-biblioref">Lohr 2019 - 2010</a>)</span>. Robust, unbiased estimates are estimates that are not only <em>representative</em> – they reflect the characteristic of interest in the population, but also <em>precise enough</em> for the inference to be meaningful. Unfortunately, in part as a result of design decisions, in part – and increasingly so – due to non response, estimates of population parameters from real-world social surveys based on the raw and unadjusted data present some degree of bias.</p>
+<p>It is usually considered that in order to produce robust population estimates from samples, including as much of the survey design information as possible alongside the survey weights is required as these are typically calculated to compensate for the survey design and non-response and coverage errors. Conversely, estimates computed without survey weights or accounting for the survey design will at best present some degree of bias or might even be altogether unreliable. Computing weighted estimates and accounting for survey design requires specific procedures that are not usually very well documented as the relevant statistical techniques are more complex. They are therefore often overlooked in introductory textbooks, and their practical implementation in statistical software not always clear. It is therefore necessary to add some clarity to this situation and provide adequate guidelines in order for users of UKDS data to properly implement robust estimation strategies that are adapted to their needs. This document sets out these guidelines.</p>
+</section>
+<section id="basics-of-survey-design" class="level1">
+<h1>1. Basics of Survey Design</h1>
+<p>At the core of survey design are the strategies used to collect samples. Sample members can either be selected randomly (every individual in the target population has a non-zero chance of selection), an approach also known as probability sampling, or are selected purposively, for example when internet users are self-selecting to take part in an online poll. Random sampling is usually preferred as it minimises the risk of obtaining non representative samples and biased estimates - for example where certain groups of the population are under represented or altogether excluded. Statistical textbooks usually consider that simple random sampling - directly drawing elements at random from a sampling frame – a list of all individual members of the target population - is the best way to allow inference and avoid bias.</p>
+<p>This is however difficult to achieve in practice with real life social surveys where no list of the population exists as obtained for example from a national population register. Therefore, in countries without a national population register, other sampling designs can be employed where the sample frame includes alternative units of measurement, such as addressees or schools. In addition, simple random sampling may not be optimal when groups within the population are known to have different probabilities of taking part in surveys or when certain groups need to be over-represented to obtain more reliable and precise statistics.</p>
+<p>In summary, designing surveys entails striking a balance between maximising representativeness as well as sample size (for greater precision of the results) while keeping costs down. For these reasons, large scale social surveys tend to produce random samples via other means than simple random sampling. Techniques are employed for example, to ensure each country of the UK is correctly represented, which may involve taking separate samples for England, Scotland, Wales and Northern Ireland to improve precision. Another example is when the survey aims to produce estimates for certain sub-groups, for example the ethnic minorities, and each group needs to be adequately represented.</p>
+<p>Two common survey design techniques employed are <em>clustering</em> and <em>stratification</em>.</p>
+<section id="clustering" class="level2">
+<h2 class="anchored" data-anchor-id="clustering">1.1 Clustering</h2>
+<p>Clustering usually goes hand in hand with multistage sampling, that is drawing sample units in several stages rather than all at once. It consists of dividing the population into groups that are as internally heterogeneous as possible - one could think of them as ‘mini populations’, some of which are then randomly selected while others are left out.</p>
+<p><strong>The UK context</strong></p>
+<p>In Great-Britain, the closest to a population register that can be used as a sampling frame is a list of addresses kept by Royal Mail, also know as the Postcode Address File (PAF). For Northern Ireland the most commonly used is the Land and Property Services Agency’s (LPSA). As a list of addresses, the PAF cannot be used to draw a simple random sample of either households or individuals as the number of dwellings, households and individuals at each address in not indicated.</p>
+<p>The nature of the PAF address structure easily enables geographical clustering in UK surveys. Addresses, or ’delivery points’ cluster into larger units, for example the post code M13 9PL is embedded within the the M13 ‘post code district’ and the M13 9 ‘postcode sector’. Survey designs often use either postcode sectors or districts as Primary Sampling Units (PSUs) to reduce fieldwork costs and time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/cluster.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 1: Clustering in two stage sampling</figcaption>
+</figure>
+</div>
+<p>Figure 1 provides a simplified illustration of clustering with four districts. The higher level clusters, i.e.&nbsp;those at which the first random draw happened, are denoted the Primary Sampling Units (PSUs). The dotted lines indicate that districts 1 and 4 have been selected to be in the sample. A second stage of sampling follows, where addresses are sampled from within the two sampled districts and each address may contain one or more households. As a result, of this design we obtain a sample of addresses but these addresses are clustered within a sample of districts. Subsequent drawing of either further clusters, for example, households or drawing final individual sample members, takes place within the already selected PSUs. In large scale surveys the PSUs are often geographical areas.</p>
+<p><strong>Household level clustering</strong></p>
+<p>A lesser discussed aspect of clustering arises if all individuals at a sampled household are selected. This is the case for our large-scale household surveys in the UK such as the Labour Force Survey. Imagine we are estimating the proportion of individuals who are born outside the UK from a population of 100 people who live in 50 households. We would expect people who are born outside the UK to be more likely to live together than if they were scattered randomly across all households. Instead, we will find them ‘clustered’ within households, with some households being wholly overseas born, some mixed and most wholly UK born.</p>
+<p>e.g.&nbsp;</p>
+<pre><code>Household 1: 1 UK born individuals 
+Household 2: 3 UK born 
+Household 3: 2 Overseas born 
+Household 4: 6 UK born 
+Household 5: 1 Overseas born, 1 UK born 
+Household 6: 2 UK born 
+Household 7: 1 UK born 
+Household 8: 1 UK born 
+Household 9: 5 Overseas born 
+Household 10: 3 UK born </code></pre>
+<p>And so on…</p>
+<p>And so on… This clustering within households means that if we are selecting only one in ten of the households for our sample we might expect the sample to be less accurate in predicting the proportion of our population who were born outside the UK than if we had sampled individuals at random.</p>
+<p>More generally, using clustering comes at the cost of making the sampling coarser in the sense that we are shrinking the size of the population from which it is going to be drawn - reducing its diversity - which in turn makes the estimates produced from the resulting data less precise. We will come back to this in the next section.</p>
+</section>
+<section id="stratification" class="level2">
+<h2 class="anchored" data-anchor-id="stratification">1.2 Stratification</h2>
+<p>In stratified sampling, the population is divided into groups, or strata, and a sample of units is selected from each strata. Stratified sampling ensures that the sample includes a certain proportion of units from the selected groups that may have been missed otherwise. By contrast with clustering, strata are constructed so as to maximise their internal homogeneity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/strata.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure 2: An example of stratified sampling</figcaption>
+</figure>
+</div>
+<p>Figure 2 provides a simplified example where the population is divided into four strata: North, South, East and West. Within each strata five sampling units (represented by addresses) are selected.</p>
+<p>Common stratification characteristics used in UK surveys are geographical (e.g.&nbsp;Government Office Regions); socio-economic (e.g.&nbsp;proportion of people in the area in certain occupations; car ownership) or demographic (e.g.&nbsp;proportion of people who are pensioners, population density). Such information is usually obtained from Census data.</p>
+<p>It is considered that overall stratification increases the precision of survey estimates, by improving the representativeness of potentially less represented or harder to reach groups.</p>
+</section>
+<section id="proportionate-vs-non-proportionate-stratification" class="level2">
+<h2 class="anchored" data-anchor-id="proportionate-vs-non-proportionate-stratification">1.3 Proportionate vs non proportionate stratification</h2>
+<p>In simple random sampling, each element drawn from the sampling frame has an equal selection probability, therefore the sampling fraction is <span class="math inline">\(n/N\)</span>, with <span class="math inline">\(n\)</span> the sample size and N the population size. This can either be achieved by directly selecting sample units at random or by choosing a random start and sampling at pre-specified intervals – also known as systematic sampling.</p>
+<p>In the context of stratified sampling, <em>proportionate stratification</em> refers to cases where the same sampling fraction is used for elements within all stratum: i.e.&nbsp;<span class="math inline">\(n_h/N_h\)</span> where h represents the strata <span class="math inline">\(n_h\)</span> the sample size in strata <span class="math inline">\(h\)</span> and <span class="math inline">\(N_h\)</span> the population in strata <span class="math inline">\(h\)</span>. We can see this in Figure 2 as the same proportion of units is selected for all strata with a sampling fraction of <span class="math inline">\(1/4\)</span>.</p>
+<p>It is sometimes necessary to use <em>disproportionate stratification</em> where the sampling fraction varies across strata. This method is used to increase the numbers of a specific group in the population and is useful when a sub-population of interest is numerically small, like less populated areas or ethnic minority groups. In such a case, <span class="math inline">\(n_h/N_h&gt;n_{h+1}/N_{h+1}\)</span>: the sampling fraction in stratum <span class="math inline">\(h\)</span> is larger i.e.&nbsp;we are proportionally drawing more units in that stratum relative to its size, than in stratum <span class="math inline">\(h+1\)</span>.</p>
+<p>For example, for the British Election Study 2010, respondents from an ethnic minority background were over-sampled as too little was known about ethnic minority voting behaviour. Disproportionate stratification will mean some groups are over-represented in the sample and therefore adjustments are needed before we can analyse the data and this is through the survey weights. Survey weights are also needed to compensate for non-response or when sample frames do not cover exactly the target population of inference. Survey weights are described in the next section.</p>
+</section>
+</section>
+<section id="design-based-inference-from-social-surveys" class="level1">
+<h1>2 Design-based inference from social surveys</h1>
+<p>As we have just seen, collecting data about people at random is not necessarily straightforward to achieve. There is no such thing as a sampling frame - a list of all UK residents to pick from - and even if there were one, some people would be less likely to take part to survey than others. As a result most UK social surveys rely on sampling techniques such as multi-stage clustering and stratification, alongside sampling proportionate to size where large PSUs are oversampled compared to small PSUs but the large PSUs have a small proportion of secondary sample units whilst the small PSUs have higher proportions of secondary sample units. This strategy can ensure equal probabilities of selection in a large-scale survey even though the survey is carried out in a multi-stage (clustering) design. Overall, these design techniques are used to strike a compromise between issues such as tackling non response, unequal probability of selection, improving the representativeness of hard to reach groups while keeping fieldwork costs down.</p>
+<p>Conducting inference consists of estimating parameters of interest based on the survey data, whether point estimates such as means or median and/or measures of their degree of precision such as confidence intervals or standard errors. Both are potentially affected by the sample design that was implemented during data collection, and need to be adapted accordingly. It is generally accepted that by increasing the sampling fraction for harder to reach groups, stratification improves the precision of estimates, whereas by in effect removing part of the population from the sample, clustering will negatively impact precision. Since most surveys use a combination of both, the impact of survey design will depend on the quantity estimated and the subgroups of the population, if any. Furthermore using survey weights to reflect non-response or unequal probability of selection also affects the precision of estimations - often negatively - and this should ideally be also taken into account when computing estimates of parameters.</p>
+<p>Traditional textbooks or introductory courses tend to leave out this aspect, which may give a false impression of simplicity to users. There are traditionally two main ways to produce population estimates from surveys while accounting for the survey design: either by directly using methods that correct estimates for the characteristics of the sample - also known as a <em>design-based estimation</em> - or by modelling the effect of the survey design - the <em>model-based approach</em>. Both have advantages and downsides, but for now we will only focus on the design based approach as it tends to be more straightforward to use for estimating population parameters of interest such as means, medians and totals.</p>
+<section id="survey-design-variables" class="level2">
+<h2 class="anchored" data-anchor-id="survey-design-variables">2.1 Survey design variables</h2>
+<p><em>Survey Weights</em> are a special type of numeric variable included in survey datasets, whose value reflects the relative ‘importance’ of observations in the sample. They are usually higher for observations from persons less likely to be part of the sample (for example for young men in urban areas), lower for those more likely to be part of the sample (for example women over 50). They are designed to prevent estimates from being biased, that is reflecting a value that is not representative of the population. They are usually made of at least three components:</p>
+<pre><code>- a *design* component that accounts for issues of unequal probability of selection of sample members resulting from survey design;
+- a *non-response* component, correcting for (known) lower propensity to take part to surveys among certain categories of respondents.
+- A *calibrating* or benchmarking component that ensures that weighted demographic variables, such as age, sex and geography, match the current ONS population estimates.</code></pre>
+<p>These components are sometimes individually called ‘weights’ in their own right, but in practice they are usually merged into a single variable. Survey weights may also be rescaled in order to inflate sample counts to population totals thus becoming grossing weights which enables estimation of population size. In that sense, the numerical values of the weights attached to observations are an indication of the number of units these observations ‘represent’ in the population.</p>
+<p>The computation of weights by survey designers rely on calibration algorithms that optimise the conditional distribution of sample observations across categories of the weighting variables (for example people of a certain age range, gender and economic status) with a view to strike a balance between minimising the standard errors (which depends on the number of observation in each such ‘cell’) and maximising representativeness (making sure that all cells have observations).</p>
+<p>Survey design variables typically consist of identifiers for the strata and/or clusters used during the sampling process, especially the <em>Primary Sampling Units</em> (PSU), that is clusters that were drawn during the first stage of sampling. Used in conjunction with weights, they enable researchers to produce more accurate estimates (with the help of dedicated survey estimation functions in statistical packages) than would be the case if solely survey weights had been used. However, whereas most surveys curated by the UK Data Service include survey weights, survey design variables are not always provided by data producers due to data protection concerns.</p>
+</section>
+<section id="design-effects-and-design-factors" class="level2">
+<h2 class="anchored" data-anchor-id="design-effects-and-design-factors">2.2 Design effects and design factors</h2>
+<p>In the absence of survey design variables, <em>Design effects</em> (also know as DEFF or <span class="math inline">\(D_{eff}\)</span> ) and/or Design factors (<span class="math inline">\(D_{eft}\)</span>) may provide a partial solution to the problem of how to account for survey design. <span class="math inline">\(D_{eff}\)</span> and <span class="math inline">\(D_{eft}\)</span> are two versions of a coefficient which attempts to measure the extent to which the standard error of an estimate given the current survey design differs from what it would have been under simple random sampling <span class="citation" data-cites="Kish1995">(<a href="#ref-Kish1995" role="doc-biblioref">Kish 1995</a>)</span>. They can therefore be used to broadly assess how sample design affects the precision of a particular set of estimates as well as enabling users to manually correct standard errors and confidence intervals produced under the assumption of simple random sampling.</p>
+<p>formally, the <span class="math inline">\(D_{eff}\)</span> is defined as the ratio of the variance of an estimated parameter of interest to the same variance computed under the assumption of simple random sampling.The <span class="math inline">\(D_{eft}\)</span> by contrast is the square root of the Design effect. A <span class="math inline">\(D_{eff}\)</span> with a value <span class="math inline">\(&lt;1\)</span> indicates a smaller variance than under SRS, therefore an improvement in precision, whereas a value <span class="math inline">\(&gt;1\)</span> indicates a loss of precision. Data producers sometimes provide Design factor estimates that can be used to correct standard error or confidence intervals that are biased due to having been computed under an assumption of simple random sampling - that is without using survey design information.</p>
+</section>
+</section>
+<section id="the-practice-of-inference-things-to-keep-in-mind" class="level1">
+<h1>3. The practice of inference: things to keep in mind</h1>
+<p>While the optimum approach to estimating population parameters from surveys relies on using both survey weights and survey design variables, this is not always possible. In practice, trade-offs have to be made depending on several factors. Let us briefly consider them.</p>
+<section id="data-availability" class="level2">
+<h2 class="anchored" data-anchor-id="data-availability">3.1 Data availability</h2>
+<p>Most UK Data Service datasets are available under <em>End User License (EUL)</em>. This presents the advantage of enabling large numbers of users to access data with a minimal level of formalities to go through but comes at the significant cost that survey design variables are often not included by data producers, due to concerns about the risk of personal information disclosure. There are notable exceptions, such as <a href="https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000053">Understanding Society</a>, the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000021">Health Survey for England</a> or the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000036">British National Surveys of Sexual Attitudes and Lifestyles (NATSAL)</a>. The <a href="https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=200006">British Social Attitudes Survey</a> does also include survey design variables in some of its releases.</p>
+<p>For a number of key studies such as the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=2000026">Labour Force Survey</a> or the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/series/series?id=200017">Family Resources Survey</a>, users may apply for access to a version of the data that does include survey design information via the (virtual) SecureLab or at the UKDS Safe Room. Application for access to these facilities can be a lengthy process, and not practically feasible for all researchers, in particular those outside academia or large organisations. More information on <a href="https://ukdataservice.ac.uk/help/access-policy/types-of-data-access">Types of data access</a> can be found on the UK Data Service website. There are also a large number of studies for which such controlled access is not available. The consequence is that in a significant number of cases, there will inevitably be limitations to the level of precision of the estimates most will be able to produce.</p>
+</section>
+<section id="sensitivity-of-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-of-the-analysis">3.2 Sensitivity of the analysis</h2>
+<p>Not all analyses necessarily require the highest degree of precision. Reflecting on the stakes of their intended analysis will help users decide how important it is to strive to use the most robust estimation technique available or instead to settle for one that is ‘good enough’. Typical usages of survey data could be seen as lying on a continuum ranging from ‘playing with the data’ to producing numbers that will be subject to public scrutiny, or that will be used in policymaking. The latter require such a degree of precision – for example when publishing official population estimates or writing a research article, other less so – for instance when exploring data or preparing examples for teaching. In the former cases, users may simply need to get a rough idea of a population estimate or the interval within which it may lie.</p>
+</section>
+<section id="complexity-of-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-of-the-analysis">3.3 Complexity of the analysis</h2>
+<p>What an analysis actually entails will help determine whether accessing survey design variables is crucial or not. Estimation involving a small numbers of observations will be more at risk of providing incorrect estimates if survey design variables are not taken into account. Similarly, interest for specific subgroups of the population (also known as domains) rather than the population as a whole will involve more complex estimation techniques as domain estimation needs to account for the distribution of weights in the whole population, not just for the subgroup of interest.</p>
+<p>Again, these analytical scenarios could be seen as lying on a continuum ranging from producing simple univariate descriptive estimates for the population as a whole to complex estimation of small groups characteristics and/or multivariate analysis. The former is conceptually and practically more straightforward than the latter. In some cases the estimates of interest may already have been published by the data producer using the adequate estimation techniques and the full information available. Data producers may also have published <em>design factors</em> i.e.&nbsp;numbers allowing to adjust the precision of estimates produced without survey design variables. Examples of such design factors for the Labour Force Survey and the Family Resources Surveys are provided below.</p>
+</section>
+<section id="software-issues" class="level2">
+<h2 class="anchored" data-anchor-id="software-issues">3.4 Software issues</h2>
+<p>Most statistical analysis software include functions specifically designed to analyse survey data: such is the case of the R <em>Survey</em> package, the SPSS <em>Complex Survey</em> add-on and Stata’s <em>svy:</em> set of commands. However, most statistical software also have options for directly weighting estimation commands outside of procedures accounting for survey design. Solely relying on weighted commands without explicitly declaring the survey design, potentially raises the following issues:</p>
+<ul>
+<li>Whereas weighted commands will most of the time compute the correct point estimates, they will also silently produce biased estimates of their precision (standard errors or confidence intervals), based on the incorrect assumption that the sample was collect via simple random sampling. Depending on the survey design, this will lead to under- or over- estimation of standard errors and confidence intervals, and could affect the validity of statistical tests, in particular if small groups within the population are involved.</li>
+<li>In addition, there are specific cases where estimation of standard errors and confidence intervals will be not just biased but wholly incorrect: the standard (i.e.&nbsp;command-based) weighting procedure of SPSS and SAS relies on population rather than sample totals to compute them, which results in unrealistic values.</li>
+<li>Software such as Stata does not allow users to directly compute confidence intervals or use sampling weights outside of survey commands. This may lead users to rely on ‘quick and dirty’ tricks that will help them quickly produce weighted point estimates, with incorrect standard errors.</li>
+</ul>
+</section>
+<section id="what-are-we-in-fact-estimating" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-we-in-fact-estimating">3.5 What are we in fact estimating?</h2>
+<p>Users can choose to prioritise producing weighted point estimates over estimating their precision and the factors that influence it - chiefly survey design variables. It can be tempting to consider that the goal of statistical inference mainly consists in producing ‘representative’ point estimates of a quantity of interest such as the ‘mean weight of adult males’, the ‘median poverty rate’, or the value of some regression coefficient in a multivariate study with estimates of their precision a secondary consideration, or a qualifier of the point estimate.</p>
+<p>This is potentially risky. Point estimates can be at the same time representative and imprecise, and therefore carry little practical meaning. It could also be argued that focusing too narrowly on single value population estimates implicitly entertains the idea that such unique, ‘true’ value exist. As these in fact constantly vary, different surveys will return inevitably different estimates.</p>
+<p>Instead, conceiving from the start these two aspects as a single reality – a range of plausible values we think a parameter of interest can take in the population, with a certain degree of confidence – could help alleviate such a risk and most importantly provide a more accurate reflection of the reality we seek to describe. Striving to produce confidence intervals whenever it makes sense to do so will help the notion that precision and therefore inevitably survey design are key to robust estimation.</p>
+</section>
+</section>
+<section id="statistical-inference-from-survey-data-in-practice" class="level1">
+<h1>4. Statistical inference from survey data in practice</h1>
+<p><em>Ultimately there will be a flowchart here or in the next section</em></p>
+<p>This section provides practical recommendations for robust inference taking into account the factors highlighted in Section 3. In general, four strategies are available when conducting population inference from survey data. They are listed below by order of recommendation by the UK Data Service:</p>
+<pre><code>1. Estimation accounting for survey weights and survey design variables using survey-specific commands
+2. Estimation accounting for  survey weights only using survey-specific commands
+3. Estimation using weighted standard commands
+4. (Unweighted estimation)</code></pre>
+<p><em>Strategy 1</em>, using survey weights alongside survey design variables when conducting statistical inference is the statistically most robust way to compute population estimates with survey data and should be prioritised by users whenever possible. In real life research however, this option is not always available. Accessing survey design variables can prove challenging as they are not always provided by data producers or may require applying for a special version of the data, which may prove time consuming.</p>
+<p>In the absence of survey design information, <em>Strategy 2</em> should be considered the second best option. The value of point estimates are likely to be identical to those produced under <em>Strategy 1</em>, but the confidence intervals/standard errors will be biased – i.e.&nbsp;too narrow or wide depending on the survey design, which should be explicitly mentioned alongside the results. The data documentation should provide information about how results may be affected. Using survey-specific estimation commands even in the absence of survey design variables is a recommended option over simply applying survey weights to standard commands, as it will avoid getting incorrect estimates (SAS and SPSS), is the only option available for computation with survey weights or obtaining confidence intervals (Stata), or coherent survey data analysis (R). In addition, it might be possible to correct ‘by hand’ biased standard errors or confidence interval using data producer-provided Design Effects.</p>
+<p>It can be understandable that when survey design variables are not available some users privilege <em>Strategy 3</em> which tend to focus on producing weighted estimates using standard commands and give little consideration to the methodological implication of this approach. Whereas point estimates are likely to be identical to those produced under Strategy 1 and 2, SAS and SPSS users are likely to produce incorrect confidence intervals/standard errors. R and Stata users might get standard errors and confidence intervals that are close to those produced using Strategy 2, but there is no guarantee that this will be the case. Overall, the UK Data Service only recommends following this strategy in case of low sensitivity analysis. Here as well, it might be possible to improve the robustness of standard errors and confidence interval using Design factors provided by the data producers.</p>
+<p>As population estimates produced without survey weights or survey design variables will almost certainly be unreliable Strategy 4 should be discouraged except when data usage is purely descriptive. For example when teaching non-inferential (i.e.&nbsp;descriptive) statistical techniques.</p>
+<section id="medium-to-high-sensitivity-analysis-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="medium-to-high-sensitivity-analysis-workflow">4.1 Medium to high sensitivity analysis: workflow</h2>
+<p>Most of the time survey researchers or data analysts are required to produce a confidence interval or provide an indication of the degree of precision of their point estimate, usually with standard errors, whose correct estimation depends on the amount of information held about the survey design.</p>
+<ol type="1">
+<li><p><em>If survey design variables are available</em> a typical workflow (see examples in Section 5) could involve :</p>
+<ul>
+<li>Finding out about the survey design and identify the relevant weights and survey design variables using the data documentation</li>
+<li>Declaring the survey design using software-specific commands</li>
+<li>Producing the estimates of interest, using survey design specific estimation commands available</li>
+<li>Documenting the confidence interval for the estimate of interest or alternatively the point estimates and its standard error.</li>
+<li>If required, provide a brief discussion of the possible source of bias of the results (specifically under/over estimation of the uncertainty of the estimates)</li>
+</ul></li>
+<li><p>If the <em>survey design variables are not included</em> in the EUL version of the data but are available under controlled access: perform a cost vs benefits analysis of applying for controlled access for instance via the UKDS SecureLab, a process that can take some time. Information about how to apply for Secure Lab Access is available on the UKDS website.</p></li>
+<li><p>If the survey design variables such as strata, cluster, or primary sampling unit <em>are not available</em> an alternative workflow could consist of:</p>
+<ul>
+<li>If the user is interested in overall population characteristics, checking whether the estimates of interest may already have been published by the data producer, in which case they may be directly cited instead of computed from data.</li>
+<li>Finding out about the survey design in the data documentation and identify the survey weights variable</li>
+<li>Declaring the survey design as simple random sampling using software-specific commands</li>
+<li>Producing the estimates of interest, using survey design specific estimation commands available</li>
+<li>Checking whether the data producer has published design effects that could be used to remedy biased confidence intervals/ standards errors computed without survey design variables (for example design effects computed for the same population at another point in time). A design effect is a number by which to multiply standard errors estimated under the assumption of simple random sampling, that will adjust it for survey design characteristics.</li>
+<li>Documenting the resulting confidence interval for the estimate of interest or alternatively the point estimates and its standard error.</li>
+<li>If no design effects are available for the estimates of interest, an explicit mention of the likely nature and cause of bias is good practice i.e.&nbsp;under estimation in case of cluster sampling, over estimation in case of stratified sample, usually available from the survey documentation. The wider the initial confidence interval (i.e.&nbsp;computed under SRS assumptions) the larger the likely bias. Or from another perspective, the smaller the (sub)sample, the larger the likely bias. In cases of conducting significance testing with small subsample or groups, it would be a good practice to only consider test outcomes significant at or .</li>
+</ul></li>
+<li><p>Computing estimates for <em>subpopulations</em> (also known as ‘domains’) rather than for the population as a whole requires extra precautions. This is the case for example when we are interested in the mean age by employment status, or some other categories, or alternatively, in analyses restricted to a subset of the population (for example only those in employment). The key difference is that when computing domain estimates we are in fact producing estimates about a group of the population whose size we also need to estimate. This requires ensuring that the whole distribution of weights in the sample is taken into account, not just the weight values for the groups we are interested in. Failure to do so might result in computing incorrect point estimates and standard errors/confidence intervals. Survey specific commands in statistical software are designed to tackle this potential issue.</p></li>
+</ol>
+</section>
+<section id="lower-sensitivity-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="lower-sensitivity-analysis">4.2 Lower sensitivity analysis</h2>
+<p>The UK Data Service does not recommend using command-specific or casual weighting for inferential analysis, but there are circumstances where this will be the only option available to users. There are also cases when users are not interested in knowing about the uncertainty of their estimates (i.e.&nbsp;their confidence interval, standard errors of point estimates, or conduct statistical testing), for example because they are simply learning or teaching basic statistical concepts or how to use software.</p>
+<p>In such cases, it can be acceptable to compute point estimates by applying weights to commands that accepts them, without using survey design specific functions. Most of these will provide the correct point estimate. By default however, some statistical software will also provide an estimate of standard errors or confidence intervals, which is likely to be misleading as they ‘silently’ assume simple random sampling, and in some cases will carry out computation with population (i.e.&nbsp;grossed) totals, resulting in incorrect values.</p>
+</section>
+</section>
+<section id="r-examples" class="level1">
+<h1>5. R examples</h1>
+<p>The R <em>Survey</em> package <span class="citation" data-cites="Lumley2023">(<a href="#ref-Lumley2023" role="doc-biblioref">Lumley 2023</a>)</span> provides a comprehensive set of functions for computing point and variance estimates from survey data. At the same time, R Base does not provide a unified sets of commands or syntax for computing weighted estimates. Implementation of statistical theory may vary between packages, but algorithms are usually described in detail in the package documentation.</p>
+<p>In this example, we will practice statistical inference with data from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450">2017 British Social Attitudes Survey (BSA)</a> taking into account weights and survey design variables. Please note that at the time of writing this document only some issues of the BSA include survey design variables.</p>
+<section id="identifying-the-survey-design-and-variables" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-the-survey-design-and-variables">5.1 Identifying the survey design and variables</h2>
+<p>We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the <code>mrdoc/pdf</code> folder.</p>
+<p><strong>Question 1</strong> What is the design that was used in this survey (i.e.&nbsp;how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?</p>
+<p>Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under <code>mrdoc/ukda_data_dictionaries.zip</code> The file may need to be decompressed separately.</p>
+<p><strong>Question 2</strong> What survey design variables are available? Are there any ones that are missing – if so which ones? What is the name of the weights variables?</p>
+</section>
+<section id="specifying-the-survey-design" class="level2">
+<h2 class="anchored" data-anchor-id="specifying-the-survey-design">5.2 Specifying the survey design</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="do">### Data manipulation functions</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="do">### Importing stata/SPSS files</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc) <span class="do">### Extra statistical functions</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Survey design functions</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="do">### Survey design functions</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>bsa17<span class="ot">&lt;-</span><span class="fu">read_spss</span>(<span class="st">"~/Dropbox/work/UKDS/data/UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bsa17)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3988  580</code></pre>
+</div>
+</div>
+<p>We can specify the survey design earlier identified in the data documentation: using <code>Spoint</code> as Primary Sampling Unit, <code>StratID</code> as strata, and <code>WtFactor</code> as weights. R does this by creating a <code>svydesign</code> object, i.e.&nbsp;a survey design informed version of the data, which will be used for subsequent estimation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bsa17.s<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids=</span><span class="sc">~</span>Spoint, <span class="at">strata=</span><span class="sc">~</span>StratID, <span class="at">weights=</span><span class="sc">~</span>WtFactor,<span class="at">data=</span>bsa17)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa17.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "survey.design2" "survey.design" </code></pre>
+</div>
+</div>
+</section>
+<section id="mean-age-and-its-95-confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval">5.3 Mean age and its 95% confidence interval</h2>
+<p>We can now produce a first set of estimates using this information and compare them with those we would have got without accounting for the survey design. We will compute the average (i.e.&nbsp;mean) age of respondents in the sample. We will need to use <code>svymean()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        mean     SE
+RAgeE 48.313 0.4236</code></pre>
+</div>
+</div>
+<p>By default <code>svymean()</code> computes the standard error of the mean. We need to<br>
+embed it within <code>confint()</code> in order to get a confidence interval.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s)) <span class="do">### Just the confidence interval...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         2.5 %  97.5 %
+RAgeE 47.48289 49.1433</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>)<span class="do">### Estimate and CI, rounded</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RAgeE             
+ 48.3  47.5  49.1 </code></pre>
+</div>
+</div>
+<p><strong>Question 3</strong> What would be the consequences of weighing but not accounting for the sample design; not using weights and accounting for the sample design when:</p>
+<ul>
+<li>inferring the mean value of the population age?</li>
+<li>inferring the uncertainty of our estimate of the population age?</li>
+</ul>
+</section>
+<section id="computing-a-proportion-and-its-95-confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="computing-a-proportion-and-its-95-confidence-interval">5.4 Computing a proportion and its 95% confidence interval</h2>
+<p>We can now similarly compute the distribution of a categorical variable in the population by estimating proportions (or percentages), for instance, the proportion of people who declare that they are interested in politics. This is the <code>Politics</code> variable in the BSA. It has five categories ranging from 1 ‘A great deal’ to 5- ‘Not at all’. We could recode 1 and 2 - <code>quite a lot</code> into ‘Significantly’, but since we are only interested in estimating the confidence intervals, we will select the relevant values ‘on the go’.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(bsa17<span class="sc">$</span>Politics,<span class="st">"label"</span>)     <span class="do">### Phrasing of the question</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "How much interest do you have in politics?"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(bsa17<span class="sc">$</span>Politics,<span class="st">"labels"</span>)     <span class="do">### Value labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>skip, version off route     Item not applicable       ... a great deal, 
+                     -2                      -1                       1 
+           quite a lot,                   some,          not very much, 
+                      2                       3                       4 
+       or, none at all?              Don`t know                 Refusal 
+                      5                       8                       9 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa17<span class="sc">$</span>Politics)) <span class="do">### Sample distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+skip, version off route     Item not applicable       ... a great deal, 
+                      0                       0                     739 
+           quite a lot,                   some,          not very much, 
+                    982                    1179                     708 
+       or, none at all?              Don`t know                 Refusal 
+                    379                       1                       0 </code></pre>
+</div>
+</div>
+<p><strong>Note</strong>: Changes in a data frame are not automatically transferred into <code>svydesign</code> objects used for inferences. We therefore need to recreate it each time we create or recode a variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">svytable</span>(<span class="sc">~</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s)),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Politics == 1 | Politics == 2
+FALSE  TRUE 
+   57    43 </code></pre>
+</div>
+</div>
+<p>Let us now compute the confidence intervals for these proportions. Traditional statistical software compute these without giving us an idea of the underlying computations going on. Doing this in R requires more coding, but also a better understanding of what is actually estimated.</p>
+<p>Confidence intervals for proportions of categorical variables are usually computed as a sequence of binomial/dichotomic estimations – i.e.&nbsp;one for each category. In R this needs to be specified explicitly via the <code>svyciprop()</code> and <code>I()</code> functions. The former actually computes the proportion and its confidence interval (by default 95%), whereas the latter allows us to define the category we are focusing on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyciprop</span>(<span class="sc">~</span><span class="fu">I</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                        2.5% 97.5%
+I(Politics == 1 | Politics == 2) 0.430 0.411  0.45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="fu">prop.table</span>(<span class="fu">svytable</span>(<span class="sc">~</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s))[<span class="dv">2</span>],</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(<span class="fu">svyciprop</span>(<span class="sc">~</span><span class="fu">I</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s),<span class="st">"ci"</span>)),<span class="dv">1</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> TRUE  2.5% 97.5% 
+ 43.0  41.1  44.9 </code></pre>
+</div>
+</div>
+<p><strong>Question 4</strong> What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use <code>RAgecat5</code></p>
+</section>
+<section id="computing-domain-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="computing-domain-estimates">5.5 Computing domain estimates</h2>
+<p>Computing domain estimates, that is estimates for subgroups adds a layer of complexity to the above example. They key point is that as weights were designed using the whole of the sample, computing estimates, in particular confidence intervals or standard errors for part of the sample, therefore using a fraction of these weights may affect the estimates. Instead, it is recommended to use commands that take into account the entire distribution of the weights.</p>
+<p>In R, the command that does this is <code>svyby()</code></p>
+<p>For instance, if we would like to compute the mean age of BSA respondents by Government Office Regions, we need to specify:</p>
+<ul>
+<li>The outcome variable whose estimate we want to compute: i.e.&nbsp;<code>RAgeE</code></li>
+<li>The grouping variable(s) <code>GOR_ID</code></li>
+<li>The estimate function we are going to use here: <code>svymean</code>, the same as we used before</li>
+<li>And the type of type of variance estimation we would like to see displayed i.e.&nbsp;standard errors or confidence interval</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">svyby</span>(<span class="sc">~</span>RAgeE,<span class="at">by=</span><span class="sc">~</span><span class="fu">as_factor</span>(GOR_ID),svymean,<span class="at">design=</span>bsa17.s,<span class="at">vartype =</span> <span class="st">"ci"</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>      ,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           RAgeE ci_l ci_u
+A North East                46.1 43.6 48.6
+B North West                49.6 47.3 52.0
+D Yorkshire and The Humber  48.0 45.2 50.8
+E East Midlands             48.6 45.9 51.3
+F West Midlands             48.1 45.0 51.2
+G East of England           49.0 46.0 52.0
+H London                    45.0 43.0 46.9
+J South East                48.0 45.1 50.8
+K South West                53.4 51.5 55.2
+L Wales                     49.1 45.1 53.1
+M Scotland                  47.3 44.7 50.0</code></pre>
+</div>
+</div>
+<p><em>Note:</em> we used <code>[-1]</code> from the object created by <code>svyby()</code> in order to remove a column with alphanumeric values (the region names), so that we could round the results without getting an error.</p>
+<p>Our inference seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the oldest – their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the South East for example, as the CIs partially overlap.</p>
+<p>We can follow a similar approach with proportions: we just need to specify the category of the variable we are interested in as an outcome, for instance respondents who are significantly interested in politics, and replace <code>svymean</code> by <code>svyciprop</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>      <span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">svyby</span>(<span class="sc">~</span><span class="fu">I</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">by=</span><span class="sc">~</span><span class="fu">as_factor</span>(GOR_ID),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>            svyciprop,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">design=</span>bsa17.s,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">vartype =</span> <span class="st">"ci"</span>)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           I(Politics == 1 | Politics == 2) ci_l ci_u
+A North East                                           33.4 26.6 40.9
+B North West                                           41.9 36.1 48.0
+D Yorkshire and The Humber                             35.6 29.1 42.6
+E East Midlands                                        36.9 32.9 41.1
+F West Midlands                                        36.3 31.5 41.5
+G East of England                                      47.2 41.4 53.1
+H London                                               54.2 47.2 61.1
+J South East                                           44.6 38.7 50.8
+K South West                                           46.5 39.4 53.8
+L Wales                                                38.6 27.7 50.7
+M Scotland                                             42.7 36.0 49.8</code></pre>
+</div>
+</div>
+<p><strong>Question 5</strong> What is the 95% confidence interval for the proportion of people interested in politics in the South West? Is the proportion likely to be different in London? In what way? What is the region of the UK for which the precision of the estimates is likely to be the smallest?</p>
+<p><strong>Question 6</strong> Using interest in politics as before, and three category age <code>RAgecat5</code>:</p>
+<ul>
+<li><p>Produce a table of results showing the proportion of respondents significantly interested in Politics by age group and gender</p></li>
+<li><p>Assess whether the age difference in interest for politics is similar for each gender?</p></li>
+<li><p>Based on the data, is it fair to say that men aged under 35 tend to be more likely to declare themselves interested in politics than women aged 55 and above?</p></li>
+</ul>
+</section>
+<section id="inference-without-survey-design-variables-using-r" class="level2">
+<h2 class="anchored" data-anchor-id="inference-without-survey-design-variables-using-r">5.6 Inference without survey design variables using R</h2>
+<p><em>Example: count and proportion of the regional population of the UK using the LFS with End User License (EUL)</em></p>
+<p>As a rule, EUL versions of the LFS do not include sample design variables. On the other hand they come with two weight variables:</p>
+<ul>
+<li><code>pwt22</code> for estimation with the whole sample</li>
+<li><code>piwt22</code> for estimation of income using respondents currently in employment (and accounting for the high level of non response for the earnings variables)</li>
+</ul>
+<p>Estimation without accounting for sample design will likely be biased and should be reported as such including warnings, even if the nature (over or underestimation of the precision) and and size are not known. An alternative is to look for design effects tables published by the data producer which could be used to correct for the bias.</p>
+<p>The Office for National Statistics regularly publishes such tables for the LFS, albeit mostly for their headline statistics. Obtaining further design effects for subpopulations might not be straighforward. The overall methodology is described <a href="https://www.ons.gov.uk/methodology/methodologicalpublications/generalmethodology/onsworkingpaperseries/onsmethodologyworkingpaperseriesno9guidetocalculatingstandarderrorsforonssocialsurveys#annex-a-labour-force-survey-standard-errors-january-to-march-2015-united-kingdom">in this note</a>, and updated tables are provided <a href="Volume 1: Background and methodology (PDF, 1.2MB)">on this page</a>.</p>
+<p>Let’s see how this can be achieved. But first, let’s produce uncorrected ‘naive’ estimates of the regional population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lfs<span class="ot">&lt;-</span><span class="fu">read_dta</span>(<span class="st">"~/Dropbox/work/UKDS/data/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta"</span>)<span class="sc">%&gt;%</span><span class="fu">select</span>(PWT22,PIWT22,URESMC,ILODEFR)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lfs)<span class="ot">&lt;-</span><span class="fu">tolower</span>(<span class="fu">names</span>(lfs))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>lfs<span class="sc">$</span>uresmc.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(lfs<span class="sc">$</span>uresmc))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>lfs.s<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>piwt22,<span class="at">data=</span>lfs<span class="sc">%&gt;%</span><span class="fu">filter</span>(ilodefr<span class="sc">==</span><span class="dv">1</span>)) </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">confint</span>(<span class="fu">svytotal</span>(<span class="sc">~</span>uresmc.f,lfs.s)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                     2.5 %  97.5 %
+uresmc.fTyne &amp; Wear                 375843  544677
+uresmc.fRest of Northern region     679067  875001
+uresmc.fSouth Yorkshire             361987  542893
+uresmc.fWest Yorkshire              892298 1139996
+uresmc.fRest of Yorks &amp; Humberside  688398  901578
+uresmc.fEast Midlands              1884931 2240257
+uresmc.fEast Anglia                1018147 1293525
+uresmc.fInner London               1403277 1950147
+uresmc.fOuter London               2061142 2573440
+uresmc.fRest of South East         5133587 5816347
+uresmc.fSouth West                 2150551 2532611
+uresmc.fWest Midlands (met county)  921916 1255744
+uresmc.fRest of West Midlands      1249939 1571219
+uresmc.fGreater Manchester         1041396 1341426
+uresmc.fMerseyside                  473854  749424
+uresmc.fRest of North West          929920 1205848
+uresmc.fWales                      1101246 1410746
+uresmc.fStrathclyde                 722247 1020673
+uresmc.fRest of Scotland           1356361 1750183
+uresmc.fNorthern Ireland            689076  803340</code></pre>
+</div>
+</div>
+<p>In the above example, we are working with the most commonly used flavour of the Labour Force Survey: the quarterly edition. The specific dataset used above is the April-July 2022 issue. Looking at the latest version of the documentation mentioned above - Volume 1, Annex C, we can see a list of design effects for the number of employed respondents by Region of Usual Residence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/lfs_vol1_SE.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Test</figcaption>
+</figure>
+</div>
+<p>We can see that for some reason, the number of regions has been reduced from the original 16 to 13. We therefore need to recode our original variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>lfs<span class="ot">&lt;-</span>lfs<span class="sc">%&gt;%</span><span class="fu">mutate</span>(<span class="at">uresmc.fn=</span><span class="fu">case_when</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>          lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Tyne &amp; Wear"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of Northern region"</span><span class="sc">~</span><span class="st">"North East"</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>          lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"South Yorkshire"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"West Yorkshire"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of Yorks &amp; Humberside"</span> <span class="sc">~</span><span class="st">"Yorkshire &amp; Humberside"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>          lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Inner London"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Outer London"</span><span class="sc">~</span><span class="st">"London"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>          lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"West Midlands (met county)"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of West Midlands"</span><span class="sc">~</span><span class="st">"West Midlands"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>          lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Greater Manchester"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of North West"</span><span class="sc">~</span><span class="st">"North West"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>          lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Strathclyde"</span> <span class="sc">|</span> lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of Scotland"</span><span class="sc">~</span><span class="st">"Scotland"</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">.default=</span>uresmc.f</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>          ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For convenience, reorder the factor levels in order to match the ONS ordering:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lfs<span class="sc">$</span>uresmc.fn<span class="ot">&lt;-</span><span class="fu">as.factor</span>(lfs<span class="sc">$</span>uresmc.fn)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>lfs<span class="sc">$</span>uresmc.fn<span class="ot">&lt;-</span><span class="fu">factor</span>(lfs<span class="sc">$</span>uresmc.fn,<span class="at">levels =</span> <span class="fu">levels</span>(lfs<span class="sc">$</span>uresmc.fn)[<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">13</span>,<span class="dv">2</span>,<span class="dv">12</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">7</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let us now check the results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lfs.s<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>piwt22,<span class="at">data=</span>lfs<span class="sc">%&gt;%</span><span class="fu">filter</span>(ilodefr<span class="sc">==</span><span class="dv">1</span>)) </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">confint</span>(<span class="fu">svytotal</span>(<span class="sc">~</span>uresmc.fn,lfs.s)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                  2.5 %  97.5 %
+uresmc.fnNorth East             1108265 1366323
+uresmc.fnNorth West             2056142 2462448
+uresmc.fnMerseyside              473854  749424
+uresmc.fnYorkshire &amp; Humberside 2077728 2449422
+uresmc.fnEast Midlands          1884931 2240257
+uresmc.fnWest Midlands          2268450 2730368
+uresmc.fnEast Anglia            1018147 1293525
+uresmc.fnLondon                 3620425 4367581
+uresmc.fnRest of South East     5133587 5816347
+uresmc.fnSouth West             2150551 2532611
+uresmc.fnWales                  1101246 1410746
+uresmc.fnScotland               2178250 2671214
+uresmc.fnNorthern Ireland        689076  803340</code></pre>
+</div>
+</div>
+<p>We can now import the design factors from the LFS documentation. This has to be done by hand, by directly copying the relevant numbers from the LFS.</p>
+<p>While we are at it we can also improve the original table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>tot<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">svytotal</span>(<span class="sc">~</span>uresmc.fn,lfs.s))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>tot<span class="sc">$</span>deft<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.8712</span>,<span class="fl">1.0857</span>,<span class="fl">1.3655</span>,<span class="fl">1.0051</span>,<span class="fl">0.9634</span>,<span class="fl">1.0382</span>,<span class="fl">0.8936</span>,<span class="fl">1.3272</span>,<span class="fl">0.9677</span>,<span class="fl">0.9137</span>,<span class="fl">1.0012</span>,<span class="fl">1.0437</span>,<span class="fl">0.7113</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>tot[<span class="st">"2.5%"</span>]<span class="ot">&lt;-</span>tot<span class="sc">$</span>total<span class="sc">-</span>(<span class="fl">1.96</span><span class="sc">*</span>tot<span class="sc">$</span>SE<span class="sc">*</span>tot<span class="sc">$</span>deft)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>tot[<span class="st">"97.5%"</span>]<span class="ot">&lt;-</span>tot<span class="sc">$</span>total<span class="sc">+</span>(<span class="fl">1.96</span><span class="sc">*</span>tot<span class="sc">$</span>SE<span class="sc">*</span>tot<span class="sc">$</span>deft)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tot)<span class="ot">&lt;-</span><span class="fu">substr</span>(<span class="fu">rownames</span>(tot),<span class="dv">10</span>,<span class="fu">nchar</span>(<span class="fu">rownames</span>(tot)))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">round</span>(tot[,<span class="fu">c</span>(<span class="st">"2.5%"</span>,<span class="st">"97.5%"</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">2.5%</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">97.5%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">North East</td>
+<td style="text-align: right;">1124882</td>
+<td style="text-align: right;">1349706</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">North West</td>
+<td style="text-align: right;">2038728</td>
+<td style="text-align: right;">2479862</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Merseyside</td>
+<td style="text-align: right;">423490</td>
+<td style="text-align: right;">799788</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yorkshire &amp; Humberside</td>
+<td style="text-align: right;">2076776</td>
+<td style="text-align: right;">2450374</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">East Midlands</td>
+<td style="text-align: right;">1891430</td>
+<td style="text-align: right;">2233758</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">West Midlands</td>
+<td style="text-align: right;">2259623</td>
+<td style="text-align: right;">2739195</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">East Anglia</td>
+<td style="text-align: right;">1032794</td>
+<td style="text-align: right;">1278878</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">London</td>
+<td style="text-align: right;">3498181</td>
+<td style="text-align: right;">4489825</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rest of South East</td>
+<td style="text-align: right;">5144607</td>
+<td style="text-align: right;">5805327</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South West</td>
+<td style="text-align: right;">2167034</td>
+<td style="text-align: right;">2516128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wales</td>
+<td style="text-align: right;">1101057</td>
+<td style="text-align: right;">1410935</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scotland</td>
+<td style="text-align: right;">2167474</td>
+<td style="text-align: right;">2681990</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Northern Ireland</td>
+<td style="text-align: right;">705569</td>
+<td style="text-align: right;">786847</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<section id="answers" class="level3">
+<h3 class="anchored" data-anchor-id="answers">Answers</h3>
+<p><strong>Question 1</strong> The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e.&nbsp;number of addresses).</p>
+<p><strong>Question 2</strong> From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by <code>Spoint</code> and the strata by <code>StratID</code>. The weights variable is <code>WtFactor</code>. Addresses are not provided but could be approximated with a household identifier.</p>
+<p><strong>Question 3</strong> Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys. Using survey design variables does not alter the value of the estimated population mean. However, not accounting for it would lead us to overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval – by about plus or minus 3 months.</p>
+<p><strong>Question 4</strong> The proportion of 17-34 year old in the sample is 28.5 and its 95% confidence interval 26.5, 30.6</p>
+<p><strong>Question 5</strong> The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (i.e.&nbsp;the widest confidence interval) is Wales, with a 20 percentage point difference between the upper and lower bounds of the confidence interval.</p>
+<p><strong>Question 6</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             I(Politics.s == "Significantly") ci_l ci_u
+17-34.Male                               42.9 37.7 48.2
+35-54.Male                               50.8 46.6 54.9
+55+.Male                                 57.8 53.9 61.6
+17-34.Female                             26.3 22.0 31.1
+35-54.Female                             34.1 30.6 37.8
+55+.Female                               43.0 39.6 46.5</code></pre>
+</div>
+</div>
+<p>Older respondents both male and female tend to be more involved in politics than younger ones.</p>
+<p>The confidence interval for the proportion of men under 35 and women above 55 interested in politics overlaps; it is unlikely that they differ in the population.</p>
+</section>
+</section>
+</section>
+<section id="spss-examples" class="level1">
+<h1>6. SPSS Examples</h1>
+<p>At the time of writing this document (September 2023) Standard editions of SPSS did not include support for estimation with survey design variables, and only limited use of sampling weights. When using grossing weights – i.e.&nbsp;weight that have been designed to enable computing population totals from sample data – as is the case for instance with the Labour Force and Family Resources surveys, measures of dispersion and standard errors will not be adequately computed. It is therefore not recommended to attempt using the base version of SPSS with survey data beyond estimating point estimates. Significance testing, and standard errors will not reflect the correct values. Users wanting to use SPSS with survey data will need to acquire the Premium Edition or the Complex Samples add-on of the software.</p>
+<p>In this exercise, we will practice statistical inference with data from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450">2017 British Social Attitudes Survey (BSA)</a> taking into account weights and survey design variables. Please note that at the time of writing this document only some of the BSA editions include survey design variables.</p>
+<section id="identifying-the-survey-design-and-variables-1" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-the-survey-design-and-variables-1">6.1 Identifying the survey design and variables</h2>
+<p>We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the <code>mrdoc/pdf</code> folder.</p>
+<p><strong>Question 1</strong> What is the design that was used in this survey (i.e.&nbsp;how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?</p>
+<p>Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under <code>mrdoc/ukda_data_dictionaries.zip</code> You may need to decompress the file separately</p>
+<p><strong>Question 2</strong> What survey design variables are available? Are there any ones that are missing – if so which ones? What is the name of the weights variables?</p>
+</section>
+<section id="specifying-the-survey-design-1" class="level2">
+<h2 class="anchored" data-anchor-id="specifying-the-survey-design-1">6.2 Specifying the survey design</h2>
+<p>Let us first open the 2017 BSA dataset.</p>
+<pre><code>CD 'C:\Users\mscsepw2\OneDrive - The University of Manchester\Surveyskills'.
+  GET 
+    FILE=' BSA\UKDA-8450-spss\spss\spss25\bsa2017_for_ukda.sav'.</code></pre>
+<p>In principle, we should tell SPSS that we are working with a three stage stratified cluster sample. In practice however, we only have information about the initial i.e.&nbsp;primary sampling units.<br>
+This is achieved with the <code>CSPLAN</code> command through we create a plan file which contains the survey design information.</p>
+<pre><code>CSPLAN ANALYSIS
+  /PLAN FILE='bsa17_SPSS_design.csaplan'
+  /PLANVARS ANALYSISWEIGHT=WtFactor       
+  /SRSESTIMATOR TYPE=WOR
+  /PRINT PLAN
+  /DESIGN STAGELABEL='S1' STRATA=StratID CLUSTER=Spoint 
+  /ESTIMATOR TYPE=WR.</code></pre>
+</section>
+<section id="mean-age-and-its-95-confidence-interval-1" class="level2">
+<h2 class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval-1">6.3 Mean age and its 95% confidence interval</h2>
+<p>We can now produce a first set of estimates using this design and compare them with those we would have got without accounting for it. We will compute the average (i.e.&nbsp;mean) age of respondents in the sample, as well as the proportion of male and female respondents aged over 55. We will need to use <code>/CSDESCRIPTIVES</code></p>
+<pre><code>DATASET ACTIVATE DataSet1.
+* Complex Samples Descriptives.
+CSDESCRIPTIVES
+  /PLAN FILE='bsa17_SPSS_design.csaplan'
+  /SUMMARY VARIABLES=RAgeE
+  /MEAN
+  /STATISTICS SE CIN(95)
+  /MISSING SCOPE=ANALYSIS CLASSMISSING=EXCLUDE.
+</code></pre>
+<p>Under the <code>/STATISTICS</code> command we can request either or both the standard error of the mean and its 95% confidence interval.</p>
+<p>What difference would it make to the estimates and 95% CI to compute respectively, an unweighted mean, as well as a weighted mean without accounting for the survey design?</p>
+<p><strong>Unweighted means and CI</strong></p>
+<pre><code>DESCRIPTIVES VARIABLES=RAgeE
+  /STATISTICS=MEAN SEMEAN.</code></pre>
+<p>SPSS does not provide an option for computing confidence intervals in this case, but we know that a 95% confidence interval is the sample mean respectively minus and plus 1.96 times its standard error. Using the SPSS output, we can compute it ourselves as 1.96*.2872=about .56 years, that is close to 7 months.</p>
+<p><strong>Weighted means and CI without survey design</strong></p>
+<pre><code>WEIGHT BY WtFactor.
+DESCRIPTIVES VARIABLES=RAgeE
+  /STATISTICS=MEAN SEMEAN.
+WEIGHT OFF.</code></pre>
+<p><strong>Question 3</strong> What would be the consequences of weighting but not accounting for the sample design; not using weights and accounting for the sample design when:</p>
+<ul>
+<li>inferring the mean value of the population age?</li>
+<li>inferring the uncertainty of our estimate of the population age?</li>
+</ul>
+</section>
+<section id="computing-a-proportion-and-its-95-confidence-interval-1" class="level2">
+<h2 class="anchored" data-anchor-id="computing-a-proportion-and-its-95-confidence-interval-1">6.4 Computing a proportion and its 95% confidence interval</h2>
+<p>We can now similarly compute an estimate of a proportion (or percentage) of a categorical variable in the population. For instance, the proportion of people who declare themselves interested in politics. This is the <code>Politics</code> variable. It has five categories that we are going to recode into ‘Significantly’ (interested) and ‘Not’ (significantly) in order to simplify the analysis.</p>
+<pre><code>FREQUENCIES VARIABLES=Politics
+  /ORDER=ANALYSIS.
+
+RECODE Politics (9=SYSMIS) (1 thru 2=1) (3 thru 5=2) INTO Politics.s.
+EXECUTE.
+
+VARIABLE LABELS
+Politics.s   "Whether significantly interested in politics".
+VALUE LABELS
+Politics.s
+1  "Significant"
+2  "Not significant". 
+EXECUTE.
+
+FREQUENCIES VARIABLES=Politics.s
+  /ORDER=ANALYSIS.
+
+WEIGHT BY WtFactor.
+FREQUENCIES VARIABLES=Politics.s
+  /ORDER=ANALYSIS.
+WEIGHT OFF.</code></pre>
+<p>As with the mean of age earlier, we can see that the weighted and unweighted point estimates of the proportion of respondents significantly interested in politics change, even if slightly, and that they remain the same when survey design is accounted for.</p>
+<p>With the help of <code>CSTABULATE</code> we can examine frequencies, proportions and confidence intervals of these proportions accounting for the survey design. As before, the point estimates do not further change once survey design is accounted for.</p>
+<pre><code>* Complex Samples Frequencies.
+CSTABULATE
+  /PLAN FILE='bsa17_SPSS_design.csaplan'
+  /TABLES VARIABLES=Politics.s
+  /CELLS POPSIZE TABLEPCT
+  /STATISTICS CIN(95) 
+  /MISSING SCOPE=TABLE CLASSMISSING=EXCLUDE.</code></pre>
+<p><strong>Question 4</strong> What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use <code>RAgecat5</code></p>
+</section>
+<section id="domain-i.e.-subpopulation-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="domain-i.e.-subpopulation-estimates">6.5 Domain (i.e.&nbsp;subpopulation) estimates</h2>
+<p>Although computing estimates for specific groups (for example the average age of people who report being interested in politics) is not conceptually different from doing it for the sample as a whole, doing it with weights as part of an inferential analysis requires some caution. Calculating weighted estimates for a subpopulation while the rest of the sample is left out of the analysis might yield incorrect results. This is why using survey design informed functions is particularly recommended when doing such analyses.</p>
+<p>The SPSS command <code>CSDESCRIPTIVES</code> that we used above makes such domain estimation relatively straightforward. If we would like to compute the mean age of BSA respondents by government office regions, we need to specify:</p>
+<ul>
+<li>The outcome variable whose estimate we want to compute: i.e.&nbsp;<code>RAgeE</code></li>
+<li>The grouping variable(s) <code>GOR_ID</code></li>
+<li>And the type of type of variance estimation we would like to see displayed i.e.&nbsp;standard errors or confidence interval</li>
+</ul>
+<pre><code> * Complex Samples Descriptives.
+CSDESCRIPTIVES
+  /PLAN FILE='bsa17_SPSS_design.csaplan'
+  /SUMMARY VARIABLES=RAgeE
+  /SUBPOP TABLE=GOR_ID DISPLAY=LAYERED
+  /MEAN
+  /STATISTICS CIN(95)
+  /MISSING SCOPE=ANALYSIS CLASSMISSING=EXCLUDE.
+</code></pre>
+<p>Our inference seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the oldest – their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the South East for example, as the CIs partially overlap.</p>
+<p>We can also examine proportions for subpopulations. In order to do this, we need to specify the category of the variable we are interested in as an outcome. For instance, the syntax below uses respondents who are significantly interested in politics:</p>
+<pre><code>* Complex Samples Frequencies.
+CSTABULATE
+  /PLAN FILE='bsa17_SPSS_design.csaplan'
+  /TABLES VARIABLES=Politics.s
+  /SUBPOP TABLE=GOR_ID DISPLAY=LAYERED
+  /CELLS TABLEPCT
+  /STATISTICS CIN(95) 
+  /MISSING SCOPE=TABLE CLASSMISSING=EXCLUDE.</code></pre>
+<p><strong>Question 5</strong> What is the 95% confidence interval for the proportion of people interested in politics in the South West? Is the proportion likely to be different in London? In what way? What is the region of the UK for which the precision of the estimates is likely to be the smallest?</p>
+<p>When using <code>CSTABULATE</code>, we can define domains or subpopulations with several variables, not just one. For example, we could look at gender differences in political affiliations by regions. However, as the size of subgroups decrease, so does the precision of the estimates as their confidence interval widens, to a point where their substantive interest is not meaningful anymore.</p>
+<p><strong>Question 6</strong> Using interest in politics as before, and three category age <code>RAgecat5</code>:</p>
+<ul>
+<li><p>Produce a table of results showing the proportion of respondents significantly interested in Politics by age group and gender</p></li>
+<li><p>Assess whether the age difference in interest for politics is similar for each gender?</p></li>
+<li><p>Based on the data, is it fair to say that men aged under 35 tend to be more likely to declare themselves interested in politics than women aged 55 and above?</p></li>
+</ul>
+<pre><code>CSTABULATE
+  /PLAN FILE='bsa17_SPSS_design.csaplan'
+  /TABLES VARIABLES=Politics.s
+  /SUBPOP TABLE=Rsex BY RAgecat5 DISPLAY=LAYERED
+  /CELLS TABLEPCT
+  /STATISTICS CIN(95) 
+  /MISSING SCOPE=TABLE CLASSMISSING=EXCLUDE.</code></pre>
+<section id="answers-1" class="level3">
+<h3 class="anchored" data-anchor-id="answers-1">Answers</h3>
+<p><strong>Question 1</strong> The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e.&nbsp;number of addresses).</p>
+<p><strong>Question 2</strong> From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by <code>Spoint</code> and the strata by <code>StratID</code>. The weights variable is <code>WtFactor</code>. Addresses are not provided but could be approximated with a household identifier.</p>
+<p><strong>Question 3</strong> Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys. Using survey design variables does not alter the value of the estimated population mean. However, not accounting for it would lead us to overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval – by about plus or minus 3 months.</p>
+<p><strong>Question 4</strong> The proportion of 17-34 year old in the sample is 28.5 and its 95% confidence interval 26.5, 30.6</p>
+<p><strong>Question 5</strong> The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (i.e.&nbsp;the widest confidence interval) is Wales, with a 20 percentage point difference between the upper and lower bounds of the confidence interval.</p>
+<p><strong>Question 6</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             I(Politics.s == "Significantly") ci_l ci_u
+17-34.Male                               42.9 37.7 48.2
+35-54.Male                               50.8 46.6 54.9
+55+.Male                                 57.8 53.9 61.6
+17-34.Female                             26.3 22.0 31.1
+35-54.Female                             34.1 30.6 37.8
+55+.Female                               43.0 39.6 46.5</code></pre>
+</div>
+</div>
+<p>Older respondents both male and female tend to be more involved in politics than younger ones.</p>
+<p>The confidence interval for the proportion of men under 35 and women above 55 interested in politics overlaps; it is unlikely that they differ in the population.</p>
+</section>
+</section>
+</section>
+<section id="stata-examples" class="level1">
+<h1>7 Stata examples</h1>
+<p>Stata provides comprehensive support for computing estimates from survey data. Users may either opt to add sampling weights to the standard estimation commands, or use survey-specific commands. The latter is recommended when knowledge of estimate precision is required. Stata provides a conceptual distinction between four types of weights:</p>
+<ul>
+<li>frequency weights (<code>fweight</code>),</li>
+<li>analytical weights (<code>aweight</code>),</li>
+<li>importance weights (<code>iweight</code>) and</li>
+<li>probability weights (<code>pweight</code>).</li>
+</ul>
+<p>These differences impact on the way standard errors are computed during estimation. In most cases, social survey weights from UKDS datasets should be treated as probability weights. A number of of basic estimation commands, such as <em>summarise</em> do not allow using probability weights. This is an explicit features of Stata, meant to nudge users of survey data to prioritise the survey commands rather than ‘casual’ weighting.</p>
+<p>Using standalone weight specification (i.e.&nbsp;not using survey design functions). In Stata it consists in the weighting variable being specified between square brackets. Stata defines four kind of weights:</p>
+<p>Only probability weights (abbreviated as <code>pw</code> in most Stata commands) should be used with survey data. However, Stata does not allow using them with its main commands, for the reason highlighted above i.e.&nbsp;in order for users not overlook survey design issues in their data. Therefore, one has to specify instead the wrong frequency weights (<code>fw</code>) if one does not wish to use the survey design functions.</p>
+</section>
+<section id="appendix-study-specific-weighting-and-sample-design-information" class="level1">
+<h1>8. Appendix: Study-specific weighting and sample design information</h1>
+<section id="british-social-attitudes-survey" class="level2">
+<h2 class="anchored" data-anchor-id="british-social-attitudes-survey">8.1 British Social Attitudes Survey</h2>
+<p>The BSA is a three stage stratified random survey, with postcode sectors, addresses and individuals as the units selected at each stage. Primary sampling units were furthermore stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e.&nbsp;number of addresses). Some issues of the BSA such as the 2017 include survey design information. The 2017 issue included information about Primary Smapling Units (<code>Spoint</code>), strata (<code>StratID</code>). Weights are called <code>WtFactor</code>.</p>
+</section>
+<section id="labour-force-survey" class="level2">
+<h2 class="anchored" data-anchor-id="labour-force-survey">8.2 Labour Force Survey</h2>
+<p>The LFS is a geographically stratified random survey. For the main part Primary sampling units are addresses within postcode sectors, drawn from the Small Users Postcode Address File (PAF). The small users PAF is limited to addresses which receive, fewer than 50 items of post per day. In a small number of cases a second stage sampling occurs where several households exist at a given address. A clustering effect is also present to the extent that units of observations are individuals within households, and that some groups are clustered within these, typically ethnicity. LFS weights (all of these include a grossing component that enables estimation of population counts): - PWTxx – person level sampling weight; - PIWTxx - person-level sampling weight for income analysis (i.e.&nbsp;subsample of people in paid work) - PHHWTxx - Household-level sampling weight (for household-level analysis)</p>
+</section>
+<section id="family-resources-survey" class="level2">
+<h2 class="anchored" data-anchor-id="family-resources-survey">8.3 Family Resources Survey</h2>
+<p>The FRS is a stratified clustered random survey, with survey design differing slightly between countries of the UK. In Great Britain, Primary sampling units are postcode sectors, drawn from the Small Users Postcode Address File (PAF). Before being selected, PSUs are stratified according to geography, proportion of household reference persons from higher social classes in the area, proportion of economically active respondents in the area, and proportion of economically active men who are unemployed. In Northern Ireland, the sample is a systematic random sample of addresses.</p>
+<p>Information about Design Effects in the Family Resources Survey series is available <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/972808/Ch1_Methodology_and_Standard_Errors.xlsx">here</a></p>
+<p>FRS weights: GROSS4: person-level sampling weight; enables inferring population counts</p>
+</section>
+</section>
+<section id="references" class="level1">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">9. References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Blair2014" class="csl-entry" role="listitem">
+Blair, Johnny. 2014. <em>Designing Surveys : A Guide to Decisions and Procedures.</em> 3rd edition / Johnny Blair, Ronald F. Czaja, Edward A. Blair. Los Angeles: SAGE.
+</div>
+<div id="ref-DWP2014" class="csl-entry" role="listitem">
+DWP. 2014. <span>“Uncertainty in Family Resources Survey-Based Analysis. Guidance on Estimating Uncertainty in Family Resources Survey-Based Analysis.”</span> Edited by Department for Work and Pensions. 2014. <a href="https://www.gov.uk/government/publications/uncertainty-in-family-resources-survey-based-analysis">https://www.gov.uk/government/publications/uncertainty-in-family-resources-survey-based-analysis</a>.
+</div>
+<div id="ref-IBM2020" class="csl-entry" role="listitem">
+IBM Support. 2020. <span>“Inconsistency in the Output When Using Weighting Procedure. IBM Support Document Number 419449.”</span> 2020. <a href="https://www.ibm.com/support/pages/inconsistency-output-when-using-weighting-procedure">https://www.ibm.com/support/pages/inconsistency-output-when-using-weighting-procedure</a>.
+</div>
+<div id="ref-Kish1995" class="csl-entry" role="listitem">
+Kish, Leslie. 1995. <em>Survey Sampling</em>. Wiley Classics Library. New York: Wiley.
+</div>
+<div id="ref-Lohr20192010" class="csl-entry" role="listitem">
+Lohr, Sharon L. 2019 - 2010. <em>Sampling : Design and Analysis</em>. Second edition. Texts in Statistical Science. Boca Raton, FL: CRC Press.
+</div>
+<div id="ref-Lumley2023" class="csl-entry" role="listitem">
+Lumley, Thomas. 2023. <span>“Survey: Analysis of Complex Survey Samples.”</span>
+</div>
+<div id="ref-ONS2022" class="csl-entry" role="listitem">
+ONS. 2022. <span>“Family Resources Survey, 2020/21 Methodology and Standard Error Tables.”</span> Edited by Office for National Statistics. 2022. <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1065513/Ch1_Methodology_and_Standard_Errors.ods">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1065513/Ch1_Methodology_and_Standard_Errors.ods</a>.
+</div>
+<div id="ref-Curran2016" class="csl-entry" role="listitem">
+P, Curran. 2016. <span>“Complex Survey Designs and Weighting Using Stata: Part 1-3.”</span> 2016. <a href="https://www.youtube.com/watch?v=oOpJdC_oeKY">https://www.youtube.com/watch?v=oOpJdC_oeKY</a>.
+</div>
+<div id="ref-UKDS2018" class="csl-entry" role="listitem">
+UKDS. 2018. <span>“Data Skills Modules: Applying Weights to Survey Data.”</span> Edited by UK Data Service. 2018. <a href="https://www.youtube.com/watch?v=TIad5__WP8g">https://www.youtube.com/watch?v=TIad5__WP8g</a>.
+</div>
+<div id="ref-UKDS2019" class="csl-entry" role="listitem">
+———. 2019. <span>“Weights in Social Surveys: An Introduction:”</span> Edited by UK Data Service. 2019. <a href="https://www.youtube.com/watch?v=Vllr4olp3N4&amp;t=39s">https://www.youtube.com/watch?v=Vllr4olp3N4&amp;t=39s</a>.
+</div>
+<div id="ref-Wallrich2019" class="csl-entry" role="listitem">
+Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edited by Goldsmiths Core Quantitative Methods Series. 2019. <a href="https://www.youtube.com/watch?v=brxx81U6N1o">https://www.youtube.com/watch?v=brxx81U6N1o</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
