@@ -6,6 +6,7 @@ date: '`r format(Sys.Date(), "%d %B %Y")`'
 mainfont: "Arial"
 title-block: "plain"
 title-block-banner: "white"
+title-block-banner-color: "#742082"
 format:
   html:
    toc: true
