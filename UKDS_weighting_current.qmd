@@ -118,9 +118,9 @@ Traditional textbooks or introductory courses tend to leave out this aspect, whi
 
 *Survey Weights* are a special type of numeric variable included in survey datasets, whose value reflects the relative ‘importance’ of observations in the sample. They are usually higher for observations from persons less likely to be part of the sample (for example for young men in urban areas), lower for those more likely to be part of the sample (for example women over 50). They are designed to prevent estimates from being biased, that is reflecting a value that is not representative of the population. They are usually made of at least three components:
 
-    - a *design* component that accounts for issues of unequal probability of selection of sample members resulting from survey design;
-    - a *non-response* component, correcting for (known) lower propensity to take part to surveys among certain categories of respondents.
-    - A *calibrating* or benchmarking component that ensures that weighted demographic variables, such as age, sex and geography, match the current ONS population estimates.
+- a *design* component that accounts for issues of unequal probability of selection of sample members resulting from survey design;
+- a *non-response* component, correcting for (known) lower propensity to take part to surveys among certain categories of respondents.
+- A *calibrating* or benchmarking component that ensures that weighted demographic variables, such as age, sex and geography, match the current ONS population estimates.
 
 These components are sometimes individually called ‘weights’ in their own right, but in practice they are usually merged into a single variable. Survey weights may also be rescaled in order to inflate sample counts to population totals thus becoming grossing weights which enables estimation of population size. In that sense, the numerical values of the weights attached to observations are an indication of the number of units these observations ‘represent’ in the population.
 
@@ -178,10 +178,10 @@ Instead, conceiving from the start these two aspects as a single reality – a r
 
 This section provides practical recommendations for robust inference taking into account the factors highlighted in Section 3. In general, four strategies are available when conducting population inference from survey data. They are listed below by order of recommendation by the UK Data Service:
 
-    1. Estimation accounting for survey weights and survey design variables using survey-specific commands
-    2. Estimation accounting for  survey weights only using survey-specific commands
-    3. Estimation using weighted standard commands
-    4. (Unweighted estimation)
+1. Estimation accounting for survey weights and survey design variables using survey-specific commands
+2. Estimation accounting for  survey weights only using survey-specific commands
+3. Estimation using weighted standard commands
+4. (Unweighted estimation)
 
 *Strategy 1*, using survey weights alongside survey design variables when conducting statistical inference is the statistically most robust way to compute population estimates with survey data and should be prioritised by users whenever possible. In real life research however, this option is not always available. Accessing survey design variables can prove challenging as they are not always provided by data producers or may require applying for a special version of the data, which may prove time consuming.
 
@@ -253,8 +253,8 @@ library(kableExtra) ### Survey design functions
 
 #setwd("C:/Users/mscsepw2/OneDrive - The University of Manchester/Surveyskills")
 setwd("~/Dropbox/work/UKDS/DSP/DSP-core-inference") ### Edit as appropriate
-
-bsa17<-read_spss("~/Dropbox/work/UKDS/data/UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav")
+datadir<-"~/Dropbox/work/UKDS/data/"                ### Edit as appropriate
+bsa17<-read_spss(paste0(datadir,"UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav"))
 dim(bsa17)
 ```
 We can specify the survey design earlier identified in the data documentation: using `Spoint` as Primary Sampling Unit, `StratID` as strata, and `WtFactor` as weights. R does this by creating a `svydesign` object, i.e. a survey design informed version of the data, which will be used for  subsequent estimation.
@@ -383,7 +383,8 @@ The Office for National Statistics regularly publishes such tables for the LFS, 
 Let's see how this can be achieved. But first, let's produce uncorrected 'naive' estimates of the regional population.
     
 ```{r  5.9}
-lfs<-read_dta("~/Dropbox/work/UKDS/data/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta")%>%select(PWT22,PIWT22,URESMC,ILODEFR)
+lfs<-read_dta((paste0(datadir,"UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta")))%>%
+     select(PWT22,PIWT22,URESMC,ILODEFR)
 names(lfs)<-tolower(names(lfs))
 lfs$uresmc.f<-droplevels(as_factor(lfs$uresmc))
 lfs.s<-svydesign(ids=~1,weights=~piwt22,data=lfs%>%filter(ilodefr==1)) 
@@ -398,12 +399,19 @@ We can see that for some reason, the number of regions has been reduced from the
 
 ```{r 5.10}
 lfs<-lfs%>%mutate(uresmc.fn=case_when(
-          lfs$uresmc.f=="Tyne & Wear" | lfs$uresmc.f== "Rest of Northern region"~"North East",
-          lfs$uresmc.f=="South Yorkshire" | lfs$uresmc.f== "West Yorkshire" | lfs$uresmc.f== "Rest of Yorks & Humberside" ~"Yorkshire & Humberside",
-          lfs$uresmc.f=="Inner London" | lfs$uresmc.f== "Outer London"~"London",
-          lfs$uresmc.f=="West Midlands (met county)" | lfs$uresmc.f== "Rest of West Midlands"~"West Midlands",
-          lfs$uresmc.f=="Greater Manchester" | lfs$uresmc.f== "Rest of North West"~"North West",
-          lfs$uresmc.f=="Strathclyde" | lfs$uresmc.f== "Rest of Scotland"~"Scotland",
+          lfs$uresmc.f=="Tyne & Wear" | 
+          lfs$uresmc.f== "Rest of Northern region" ~ "North East",
+          lfs$uresmc.f=="South Yorkshire" |
+          lfs$uresmc.f== "West Yorkshire" | 
+          lfs$uresmc.f== "Rest of Yorks & Humberside" ~ "Yorkshire & Humberside",
+          lfs$uresmc.f=="Inner London" | 
+          lfs$uresmc.f== "Outer London"~"London",
+          lfs$uresmc.f=="West Midlands (met county)" |
+          lfs$uresmc.f== "Rest of West Midlands"~"West Midlands",
+          lfs$uresmc.f=="Greater Manchester" |
+          lfs$uresmc.f== "Rest of North West" ~ "North West",
+          lfs$uresmc.f=="Strathclyde" |
+           lfs$uresmc.f== "Rest of Scotland"~"Scotland",
           .default=uresmc.f
           ))
 ```
@@ -412,7 +420,9 @@ For convenience,  reorder the factor levels in order to match the ONS ordering:
 ```{r 5.11}
 
 lfs$uresmc.fn<-as.factor(lfs$uresmc.fn)
-lfs$uresmc.fn<-factor(lfs$uresmc.fn,levels = levels(lfs$uresmc.fn)[c(5,6,4,13,2,12,1,3,8,10,11,9,7)])
+lfs$uresmc.fn<-factor(
+              lfs$uresmc.fn,
+              levels = levels(lfs$uresmc.fn)[c(5,6,4,13,2,12,1,3,8,10,11,9,7)])
 ```
 
 Let us now check the results:
@@ -428,7 +438,9 @@ We can now import the design factors from the LFS documentation. This has to be 
 While we are at it we can also improve the original table:
 ```{r 5.13}
 tot<-data.frame(svytotal(~uresmc.fn,lfs.s))
-tot$deft<-c(0.8712,1.0857,1.3655,1.0051,0.9634,1.0382,0.8936,1.3272,0.9677,0.9137,1.0012,1.0437,0.7113)
+tot$deft<-c(0.8712,1.0857,1.3655,1.0051,0.9634,
+            1.0382,0.8936,1.3272,0.9677,0.9137,
+            1.0012,1.0437,0.7113)
 tot["2.5%"]<-tot$total-(1.96*tot$SE*tot$deft)
 tot["97.5%"]<-tot$total+(1.96*tot$SE*tot$deft)
 rownames(tot)<-substr(rownames(tot),10,nchar(rownames(tot)))
@@ -460,16 +472,28 @@ The 95% confidence interval for the proportion of people interested in politics 
 **Question 6**
 
 ```{r 5.14,echo=F}
-bsa17$Politics.s<-ifelse(bsa17$Politics==1 | bsa17$Politics==2,"Significantly",NA)
-bsa17$Politics.s<-ifelse(bsa17$Politics>=3 & bsa17$Politics<=5,"Not Interested",bsa17$Politics.s)
+bsa17$Politics.s<-ifelse(bsa17$Politics==1 |
+                         bsa17$Politics==2,"Significantly",NA)
+bsa17$Politics.s<-ifelse(bsa17$Politics>=3 &
+                         bsa17$Politics<=5,"Not Interested",bsa17$Politics.s)
 bsa17$Politics.s<-as.factor(bsa17$Politics.s)
 
 bsa17$RAgecat5.f<-as_factor(bsa17$RAgecat5)
 bsa17$Rsex.f<-as_factor(bsa17$Rsex)
 
-bsa17.s<-svydesign(ids=~Spoint+Sserial, strata=~StratID, weights=~WtFactor,data=bsa17)
+bsa17.s<-svydesign(ids=~Spoint+Sserial, 
+                   strata=~StratID, 
+                   weights=~WtFactor,
+                   data=bsa17)
 
-round(100*svyby(~I(Politics.s=="Significantly"),by=~RAgecat5.f+Rsex.f,svyciprop,design=bsa17.s,vartype = "ci")[c(-8,-4),c(-2,-1)],1)
+round(
+  100*svyby(
+    ~I(Politics.s=="Significantly"),
+    by=~RAgecat5.f+Rsex.f,
+    svyciprop,
+    design=bsa17.s,
+    vartype = "ci")[c(-8,-4),c(-2,-1)]
+  ,1)
 ``` 
 Older respondents both male and female tend to be more involved in politics than younger ones.
 
