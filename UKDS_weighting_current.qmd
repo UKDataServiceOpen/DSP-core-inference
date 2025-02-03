@@ -3,7 +3,8 @@ title: "Statistical inference  with weights and survey design variables"
 subtitle: Practical guidelines using  UKDS datasets
 author: Pierre Walthéry and Jennifer Buckley
 date: '`r format(Sys.Date(), "%d %B %Y")`'
-mainfont: "Arial"
+date-format: "MMMM YYYY"
+mainfont: "Open Sans"
 title-block: "plain"
 title-block-banner: "white"
 title-block-banner-color: "#742082"
@@ -12,7 +13,7 @@ format:
    toc: true
    smooth-scroll: true
    toc-location: left
-css: bsa.css
+   css: ukds.css
 execute:
   warning: false
 bibliography: weighting_refs.bib
