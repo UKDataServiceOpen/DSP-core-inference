@@ -33,7 +33,7 @@ book:
 
   sidebar:
     logo: "pics/UKDS_Logos_Col_Grey_300dpi.png"
-    logo-href: http:// ukdataservice.ac.uk
+    logo-href: https://ukdataservice.ac.uk
     logo-alt: "UKDS homepage"
     style: "floating"
     
