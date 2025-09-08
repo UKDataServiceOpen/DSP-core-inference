@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Real world population inference: things to keep in mind – Statistical inference  with weights and survey design variables</title>
+<title>3&nbsp; Real world population inference: things to keep in mind – Statistical inference  with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,7 +106,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_Real_world.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_Real_world.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -143,43 +143,43 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_Basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. Basics of Survey Design</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basics of Survey Design</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03_Real_world.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_Statistical_Inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07_Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -191,7 +191,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
   </div>
 </li>
     </ul>
@@ -204,14 +204,14 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-availability" id="toc-data-availability" class="nav-link active" data-scroll-target="#data-availability"><span class="header-section-number">2.1</span> Data Availability</a></li>
-  <li><a href="#sensitivity-of-the-analysis" id="toc-sensitivity-of-the-analysis" class="nav-link" data-scroll-target="#sensitivity-of-the-analysis"><span class="header-section-number">2.2</span> Sensitivity of the analysis</a></li>
-  <li><a href="#complexity-of-the-analysis" id="toc-complexity-of-the-analysis" class="nav-link" data-scroll-target="#complexity-of-the-analysis"><span class="header-section-number">2.3</span> Complexity of the analysis</a></li>
-  <li><a href="#software-issues" id="toc-software-issues" class="nav-link" data-scroll-target="#software-issues"><span class="header-section-number">2.4</span> Software issues</a>
+  <li><a href="#data-availability" id="toc-data-availability" class="nav-link active" data-scroll-target="#data-availability"><span class="header-section-number">3.1</span> Data Availability</a></li>
+  <li><a href="#sensitivity-of-the-analysis" id="toc-sensitivity-of-the-analysis" class="nav-link" data-scroll-target="#sensitivity-of-the-analysis"><span class="header-section-number">3.2</span> Sensitivity of the analysis</a></li>
+  <li><a href="#complexity-of-the-analysis" id="toc-complexity-of-the-analysis" class="nav-link" data-scroll-target="#complexity-of-the-analysis"><span class="header-section-number">3.3</span> Complexity of the analysis</a></li>
+  <li><a href="#software-issues" id="toc-software-issues" class="nav-link" data-scroll-target="#software-issues"><span class="header-section-number">3.4</span> Software issues</a>
   <ul class="collapse">
-  <li><a href="#common-issues-with-directon-the-fly-weighting" id="toc-common-issues-with-directon-the-fly-weighting" class="nav-link" data-scroll-target="#common-issues-with-directon-the-fly-weighting"><span class="header-section-number">2.4.1</span> Common issues with direct/on the fly weighting:</a></li>
+  <li><a href="#common-issues-with-directon-the-fly-weighting" id="toc-common-issues-with-directon-the-fly-weighting" class="nav-link" data-scroll-target="#common-issues-with-directon-the-fly-weighting"><span class="header-section-number">3.4.1</span> Common issues with direct/on the fly weighting:</a></li>
   </ul></li>
-  <li><a href="#what-are-we-actually-estimating" id="toc-what-are-we-actually-estimating" class="nav-link" data-scroll-target="#what-are-we-actually-estimating"><span class="header-section-number">2.5</span> What are we actually estimating?</a></li>
+  <li><a href="#what-are-we-actually-estimating" id="toc-what-are-we-actually-estimating" class="nav-link" data-scroll-target="#what-are-we-actually-estimating"><span class="header-section-number">3.5</span> What are we actually estimating?</a></li>
   </ul>
 </nav>
     </div>
@@ -220,7 +220,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></h1>
 </div>
 
 
@@ -238,8 +238,8 @@ div.csl-indent {
 
 
 <p>The best way to estimate population characteristics from surveys requires using both <strong>survey weights</strong> and <strong>survey design variables</strong>. However, this is not always possible. In real-world research, trade-offs often need to be made depending on the circumstances. Below are some key considerations.</p>
-<section id="data-availability" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="data-availability"><span class="header-section-number">2.1</span> Data Availability</h2>
+<section id="data-availability" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-availability"><span class="header-section-number">3.1</span> Data Availability</h2>
 <p>Most datasets provided by the <strong>UK Data Service</strong> (UKDS) are available as <a href="https://ukdataservice.ac.uk/help/access-policy/types-of-data-access/"><strong>Safeguarded data</strong></a> provided under the <strong>End User Licence (EUL)</strong>. This makes access easier for many users, with minimal formalities. However, a key limitation is that <strong>survey design variables</strong> are often not included as data producers sometimes leave them out due to concerns about the perceived risk of personal information disclosure.</p>
 <p>Some datasets do include design variables. Notable examples are:</p>
 <ul>
@@ -253,8 +253,8 @@ div.csl-indent {
 <p>However, applying for access to these facilities can be time-consuming and may not be practical for all researchers, especially those outside academia or large organisations. More information on <a href="https://ukdataservice.ac.uk/help/access-policy/types-of-data-access">Types of data access</a> can be found on the UK Data Service website.</p>
 <p>Many surveys also do not offer this kind of controlled access at all. As a result, users of these datasets may be limited in the level of precision they can achieve when producing estimates.</p>
 </section>
-<section id="sensitivity-of-the-analysis" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="sensitivity-of-the-analysis"><span class="header-section-number">2.2</span> Sensitivity of the analysis</h2>
+<section id="sensitivity-of-the-analysis" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sensitivity-of-the-analysis"><span class="header-section-number">3.2</span> Sensitivity of the analysis</h2>
 <p>Not every analysis needs to be highly precise. It’s important to think about the <strong>purpose</strong> of your analysis and what is actually at stake. This will help you decide whether it’s necessary to use the most robust estimation method available or whether a simpler approach that is ‘good enough’ is acceptable.</p>
 <p>Survey analysis can be thought of as existing on a <strong>spectrum</strong>:</p>
 <ul>
@@ -263,8 +263,8 @@ div.csl-indent {
 </ul>
 <p>For official statistics or academic publications, robust estimation methods should be used. But for less formal uses, it may be enough to produce rough estimates or a general idea of the likely range.</p>
 </section>
-<section id="complexity-of-the-analysis" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="complexity-of-the-analysis"><span class="header-section-number">2.3</span> Complexity of the analysis</h2>
+<section id="complexity-of-the-analysis" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="complexity-of-the-analysis"><span class="header-section-number">3.3</span> Complexity of the analysis</h2>
 <p>The complexity of your analysis will also affect whether how crucial it is to use survey design variables.</p>
 <p>For example:</p>
 <ul>
@@ -280,8 +280,8 @@ div.csl-indent {
 <p>In some cases, the estimates you need may already have been published by the data producer using appropriate methods. In other cases, the data producer may supply <strong>design factors</strong>—pre-calculated numbers to help adjust standard errors when design variables are not available.</p>
 <p>Examples are available below for the <strong>Labour Force Survey</strong> and the <strong>Family Resources Survey</strong>.</p>
 </section>
-<section id="software-issues" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="software-issues"><span class="header-section-number">2.4</span> Software issues</h2>
+<section id="software-issues" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="software-issues"><span class="header-section-number">3.4</span> Software issues</h2>
 <p>Most statistical software supports survey data analysis for population inference:</p>
 <ul>
 <li><strong>R</strong> has the <code>survey</code> package</li>
@@ -289,8 +289,8 @@ div.csl-indent {
 <li><strong>Stata</strong> uses the <code>svy:</code> prefix for survey commands</li>
 </ul>
 <p>However, all major packages also allow <strong>weights to be applied directly</strong> without accounting for survey design. Using weights without specifying the survey design can lead to problems.</p>
-<section id="common-issues-with-directon-the-fly-weighting" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="common-issues-with-directon-the-fly-weighting"><span class="header-section-number">2.4.1</span> Common issues with direct/on the fly weighting:</h3>
+<section id="common-issues-with-directon-the-fly-weighting" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="common-issues-with-directon-the-fly-weighting"><span class="header-section-number">3.4.1</span> Common issues with direct/on the fly weighting:</h3>
 <ul>
 <li><strong>Point estimates</strong> (like means or proportions) will usually be correct.</li>
 <li>But <strong>standard errors and confidence intervals</strong> will often be incorrect because by default the software assumes that the data was collected <strong>simple random sampling</strong>.</li>
@@ -300,8 +300,8 @@ div.csl-indent {
 <p>Other software, like <strong>Stata</strong>, won’t allow confidence intervals or weights to be used correctly unless you use the proper survey commands. This can push users to use <strong>‘quick and dirty’ shortcuts</strong> that give correct-looking point estimates but incorrect measures of precision.</p>
 </section>
 </section>
-<section id="what-are-we-actually-estimating" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="what-are-we-actually-estimating"><span class="header-section-number">2.5</span> What are we actually estimating?</h2>
+<section id="what-are-we-actually-estimating" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="what-are-we-actually-estimating"><span class="header-section-number">3.5</span> What are we actually estimating?</h2>
 <p>It’s easy to focus mainly on producing <strong>point estimates</strong> – single values like the average income, a poverty rate, or a regression coefficient. These also tend to be preferred when communicating results to non expert audiences or the media with estimates of their precision a secondary consideration, or a mere qualifier of the point estimate.</p>
 <p>But it’s important not to treat these values as absolute truths.</p>
 <ul>
@@ -784,12 +784,12 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./02_Design-Based_Inference.html" class="pagination-link" aria-label="Design-Based Inference from Social Surveys">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./04_Statistical_Inference.html" class="pagination-link" aria-label="Statistical Inference from Survey Data in Practice">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

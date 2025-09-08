@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Statistical Inference from Survey Data in Practice – Statistical inference  with weights and survey design variables</title>
+<title>4&nbsp; Statistical Inference from Survey Data in Practice – Statistical inference  with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,7 +135,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_Statistical_Inference.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_Statistical_Inference.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,43 +172,43 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_Basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. Basics of Survey Design</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basics of Survey Design</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03_Real_world.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_Statistical_Inference.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07_Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -220,7 +220,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
   </div>
 </li>
     </ul>
@@ -233,16 +233,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#recommended-strategies" id="toc-recommended-strategies" class="nav-link active" data-scroll-target="#recommended-strategies"><span class="header-section-number">3.1</span> Recommended Strategies</a></li>
-  <li><a href="#flowchart-choosing-the-right-estimation-strategy" id="toc-flowchart-choosing-the-right-estimation-strategy" class="nav-link" data-scroll-target="#flowchart-choosing-the-right-estimation-strategy"><span class="header-section-number">3.2</span> Flowchart: Choosing the right estimation strategy</a></li>
-  <li><a href="#medium-to-high-sensitivity-analysis-workflow" id="toc-medium-to-high-sensitivity-analysis-workflow" class="nav-link" data-scroll-target="#medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">3.3</span> Medium to high sensitivity analysis: workflow</a>
+  <li><a href="#recommended-strategies" id="toc-recommended-strategies" class="nav-link active" data-scroll-target="#recommended-strategies"><span class="header-section-number">4.1</span> Recommended Strategies</a></li>
+  <li><a href="#flowchart-choosing-the-right-estimation-strategy" id="toc-flowchart-choosing-the-right-estimation-strategy" class="nav-link" data-scroll-target="#flowchart-choosing-the-right-estimation-strategy"><span class="header-section-number">4.2</span> Flowchart: Choosing the right estimation strategy</a></li>
+  <li><a href="#medium-to-high-sensitivity-analysis-workflow" id="toc-medium-to-high-sensitivity-analysis-workflow" class="nav-link" data-scroll-target="#medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">4.3</span> Medium to high sensitivity analysis: workflow</a>
   <ul class="collapse">
-  <li><a href="#if-survey-design-variables-are-available" id="toc-if-survey-design-variables-are-available" class="nav-link" data-scroll-target="#if-survey-design-variables-are-available"><span class="header-section-number">3.3.1</span> If survey design variables are available</a></li>
-  <li><a href="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" id="toc-if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="nav-link" data-scroll-target="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">3.3.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</a></li>
-  <li><a href="#if-design-variables-are-not-available-at-all" id="toc-if-design-variables-are-not-available-at-all" class="nav-link" data-scroll-target="#if-design-variables-are-not-available-at-all"><span class="header-section-number">3.3.3</span> If design variables are not available at all</a></li>
-  <li><a href="#for-subpopulation-domain-estimates" id="toc-for-subpopulation-domain-estimates" class="nav-link" data-scroll-target="#for-subpopulation-domain-estimates"><span class="header-section-number">3.3.4</span> For subpopulation (domain) estimates</a></li>
+  <li><a href="#if-survey-design-variables-are-available" id="toc-if-survey-design-variables-are-available" class="nav-link" data-scroll-target="#if-survey-design-variables-are-available"><span class="header-section-number">4.3.1</span> If survey design variables are available</a></li>
+  <li><a href="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" id="toc-if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="nav-link" data-scroll-target="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">4.3.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</a></li>
+  <li><a href="#if-design-variables-are-not-available-at-all" id="toc-if-design-variables-are-not-available-at-all" class="nav-link" data-scroll-target="#if-design-variables-are-not-available-at-all"><span class="header-section-number">4.3.3</span> If design variables are not available at all</a></li>
+  <li><a href="#for-subpopulation-domain-estimates" id="toc-for-subpopulation-domain-estimates" class="nav-link" data-scroll-target="#for-subpopulation-domain-estimates"><span class="header-section-number">4.3.4</span> For subpopulation (domain) estimates</a></li>
   </ul></li>
-  <li><a href="#lower-sensitivity-analysis" id="toc-lower-sensitivity-analysis" class="nav-link" data-scroll-target="#lower-sensitivity-analysis"><span class="header-section-number">3.4</span> Lower Sensitivity Analysis</a></li>
+  <li><a href="#lower-sensitivity-analysis" id="toc-lower-sensitivity-analysis" class="nav-link" data-scroll-target="#lower-sensitivity-analysis"><span class="header-section-number">4.4</span> Lower Sensitivity Analysis</a></li>
   </ul>
 </nav>
     </div>
@@ -251,7 +251,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></h1>
 </div>
 
 
@@ -280,8 +280,8 @@ window.Quarto = {
 <li>Estimation without weights (unweighted)</li>
 </ol>
 <hr>
-<section id="recommended-strategies" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="recommended-strategies"><span class="header-section-number">3.1</span> Recommended Strategies</h2>
+<section id="recommended-strategies" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="recommended-strategies"><span class="header-section-number">4.1</span> Recommended Strategies</h2>
 <ul>
 <li><p><strong>Strategy 1</strong>: The most robust approach is to use <strong>both weights and survey design variables</strong> with survey-specific commands. This should always be the first choice. In practice, though, design variables may not be available, or access to them may require applying for special versions of the data, which can be time-consuming.</p></li>
 <li><p><strong>Strategy 2</strong>: If design variables are not available, the next best option is to use <strong>weights with survey-specific commands</strong>. Point estimates will be the same as in Strategy 1, but confidence intervals and standard errors may be biased (too narrow or too wide depending on the design). In these cases, it is important to acknowledge the limitation in reporting results. Sometimes, design effects provided in the documentation can help correct standard errors.</p></li>
@@ -290,8 +290,8 @@ window.Quarto = {
 </ul>
 <hr>
 </section>
-<section id="flowchart-choosing-the-right-estimation-strategy" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="flowchart-choosing-the-right-estimation-strategy"><span class="header-section-number">3.2</span> Flowchart: Choosing the right estimation strategy</h2>
+<section id="flowchart-choosing-the-right-estimation-strategy" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="flowchart-choosing-the-right-estimation-strategy"><span class="header-section-number">4.2</span> Flowchart: Choosing the right estimation strategy</h2>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -311,11 +311,11 @@ D --&gt;|Low sensitivity analysis| F[Strategy 3 &lt;br&gt; Use weighted   &lt;br
 </div>
 </div>
 </section>
-<section id="medium-to-high-sensitivity-analysis-workflow" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">3.3</span> Medium to high sensitivity analysis: workflow</h2>
+<section id="medium-to-high-sensitivity-analysis-workflow" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">4.3</span> Medium to high sensitivity analysis: workflow</h2>
 <p>In most cases, researchers need not only point estimates but also measures of precision, such as confidence intervals or standard errors. The correct estimation of these depends on how much survey design information is available.</p>
-<section id="if-survey-design-variables-are-available" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="if-survey-design-variables-are-available"><span class="header-section-number">3.3.1</span> If survey design variables are available</h3>
+<section id="if-survey-design-variables-are-available" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="if-survey-design-variables-are-available"><span class="header-section-number">4.3.1</span> If survey design variables are available</h3>
 <ul>
 <li>Identify relevant weights and design variables (see data documentation)</li>
 <li>Declare the design in your software using survey commands</li>
@@ -324,8 +324,8 @@ D --&gt;|Low sensitivity analysis| F[Strategy 3 &lt;br&gt; Use weighted   &lt;br
 <li>Discuss possible sources of bias (e.g.&nbsp;under/over-estimation of precision)</li>
 </ul>
 </section>
-<section id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">3.3.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</h3>
+<section id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">4.3.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</h3>
 <ul>
 <li>Consider whether applying for SecureLab access is worth the time and effort given the sensitivity / importance of the project</li>
 <li>Information about applying of SecureLab access is available on the <a href="https://ukdataservice.ac.uk/find-data/access-conditions/secure-application-requirements/">UKDS website</a></li>
@@ -349,8 +349,8 @@ B --&gt;|No| F[Proceed without design vars &lt;br/&gt; → follow 4.3.3]
 </div>
 </div>
 </section>
-<section id="if-design-variables-are-not-available-at-all" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="if-design-variables-are-not-available-at-all"><span class="header-section-number">3.3.3</span> If design variables are not available at all</h3>
+<section id="if-design-variables-are-not-available-at-all" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="if-design-variables-are-not-available-at-all"><span class="header-section-number">4.3.3</span> If design variables are not available at all</h3>
 <ul>
 <li>Check whether the data producer has already published the estimates you need</li>
 <li>Use the available weights and declare a simple random sampling design in your software</li>
@@ -380,8 +380,8 @@ H --&gt; I[For small sub-samples: &lt;br/&gt; use stricter significance level;&l
 </div>
 </div>
 </section>
-<section id="for-subpopulation-domain-estimates" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="for-subpopulation-domain-estimates"><span class="header-section-number">3.3.4</span> For subpopulation (domain) estimates</h3>
+<section id="for-subpopulation-domain-estimates" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="for-subpopulation-domain-estimates"><span class="header-section-number">4.3.4</span> For subpopulation (domain) estimates</h3>
 <ul>
 <li>Extra care is needed when analysing subsets (e.g.&nbsp;employed people, ethnic groups)</li>
 <li>Domain estimation requires using the <strong>entire distribution of weights</strong>, not just subgroup weights</li>
@@ -408,8 +408,8 @@ G --&gt; H[Document limitations and &lt;br/&gt; any design-factor adjustments]
 </div>
 </section>
 </section>
-<section id="lower-sensitivity-analysis" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="lower-sensitivity-analysis"><span class="header-section-number">3.4</span> Lower Sensitivity Analysis</h2>
+<section id="lower-sensitivity-analysis" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="lower-sensitivity-analysis"><span class="header-section-number">4.4</span> Lower Sensitivity Analysis</h2>
 <p>Sometimes users are not aiming to conduct formal inference. This may be the case in:</p>
 <ul>
 <li><p>Teaching or learning basic statistical concepts</p></li>
@@ -864,12 +864,12 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./03_Real_world.html" class="pagination-link" aria-label="Real world population inference: things to keep in mind">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./05_R.html" class="pagination-link" aria-label="R examples">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R examples</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
