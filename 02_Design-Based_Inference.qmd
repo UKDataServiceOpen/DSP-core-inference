@@ -1,0 +1,122 @@
+# Design-Based Inference from Social Surveys
+
+Conducting *inference* from surveys involves estimating population
+parameters (like means or medians) sometimes also called *point
+estimates* and measuring their precision (e.g. confidence intervals or
+                                          standard errors). Both the estimates and their precision can be affected
+by the sampling design.
+
+-   **Stratification** improves precision by increasing sample size in
+key subgroups.
+-   **Clustering** typically reduces precision by lowering sample
+diversity.
+-   **Survey weights**—used to correct for unequal selection or
+non-response—can also affect precision, often negatively.
+
+Because most surveys combine these methods, the impact on precision
+depends on what is being estimated and for which subgroup.
+
+There are two main ways to produce design-adjusted population estimates:
+  
+1.  **Design-based estimation**: directly accounts for sampling design.
+2.  **Model-based estimation**: models the effects of the survey design.
+
+This guide focuses on the **design-based approach**, which is more
+straightforward for estimating means, medians, and totals.
+
+------------------------------------------------------------------------
+  
+## Survey Design Variables
+  
+  **Survey weights** are special variables in survey datasets. Roughly
+speaking, they indicate how many people or units each observation
+represents in the population. Weights are usually:
+  
+  -   **Higher** for people less likely to be sampled (e.g. young men in
+                                                       cities)
+-   **Lower** for people more likely to be sampled (e.g. older women)
+
+Survey weights are usually made up of three components:
+  
+  -   **Design weight**: adjusts for unequal selection probabilities.
+-   **Non-response weight**: corrects for groups with lower response
+rates.
+-   **Calibration weight**: aligns the sample with population estimates
+(e.g. by age, sex, or region from census data).
+
+These components are often combined into a single weight variable. When
+weights are scaled to population totals, they are sometimes called
+**grossing weights**.
+
+> The value of a weight shows how many people in the population the
+> observation stands for.
+
+------------------------------------------------------------------------
+  
+  **How are weights computed?**
+  
+  Survey designers use *calibration algorithms* to adjust the distribution
+of observations so they match known population totals across variables
+like age, gender, and employment. The goal is to:
+  
+  -   Keep standard errors low by avoiding small sample sizes in cells
+-   Improve representativeness across key categories
+
+------------------------------------------------------------------------
+  
+  **Survey design variables** usually include:
+  
+  -   **Strata identifiers**
+  -   **Cluster identifiers**, especially the *Primary Sampling Units*
+  (PSUs)
+
+When used alongside survey weights, design variables allow analysts to
+produce more accurate estimates using survey-specific functions in
+statistical software. When they are not included, most statistical
+software will compute standard errors/confidence intervals based on the
+incorrect assumption of simple random sampling.
+
+> Note: While most UK Data Service datasets include survey weights, not
+> all provide design variables due to data protection concerns.
+
+------------------------------------------------------------------------
+  
+## Design Effects and Design Factors
+  
+  When survey design variables are missing, users can still account for
+complex sampling using:
+  
+  -   **Design effects** (DEFF or $D_{eff}$)
+-   **Design factors** ($D_{eft}$)
+
+These measure how much the **standard error** of an estimate differs
+from what it would be under simple random sampling (SRS) [@Kish1995],
+and are sometimes published by data producers.
+
+------------------------------------------------------------------------
+  
+  ### Definitions
+  
+  -   The **Design effect (**$D_{eff}$) is the ratio of the actual
+variance of an estimate to the variance under SRS:
+  
+  $D_{eff} =\frac{Var_{design}(\hat{\theta})}{Var_{SRS}(\hat{\theta})}$
+  
+  -   The **Design factor (**$D_eft$) is the square root of the
+design effect:
+  
+  $D_{eft} = \sqrt{D_{eff}}$
+  
+  ------------------------------------------------------------------------
+  
+  ### Interpretation
+  
+  -   If $D_{eff} < 1$: the sample design improves precision.
+-   If $D_{eff} > 1$: the sample design reduces precision.
+
+Data providers sometimes include estimates of $D_{eff}$ or
+$D_{eft}$ so users can *adjust standard errors or confidence
+intervals* that were incorrectly computed under SRS assumptions.
+
+------------------------------------------------------------------------
+  

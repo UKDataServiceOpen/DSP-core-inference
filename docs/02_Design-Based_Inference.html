@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical inference with weights and survey design variables</title>
+<title>1&nbsp; Design-Based Inference from Social Surveys – Statistical inference  with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_Basics.html" rel="next">
+<link href="./03_Real_world.html" rel="next">
+<link href="./01_Basics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,10 +90,36 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -105,7 +132,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_Design-Based_Inference.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +162,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -147,7 +174,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link">
+  <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
   </div>
 </li>
@@ -203,7 +230,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#survey-design-variables" id="toc-survey-design-variables" class="nav-link active" data-scroll-target="#survey-design-variables"><span class="header-section-number">1.1</span> Survey Design Variables</a></li>
+  <li><a href="#design-effects-and-design-factors" id="toc-design-effects-and-design-factors" class="nav-link" data-scroll-target="#design-effects-and-design-factors"><span class="header-section-number">1.2</span> Design Effects and Design Factors</a></li>
   </ul>
 </nav>
     </div>
@@ -212,8 +240,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistical inference with weights and survey design variables</h1>
-<p class="subtitle lead">Practical guidelines using UKDS datasets</p>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></h1>
 </div>
 
 
@@ -230,51 +257,82 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>This guide discusses the practical steps required to produce reliable population estimates with survey data curated by the UK Data Service. It focuses on how and when to use survey weights and design variables, and is aimed at users unfamiliar with the technical aspects of sample theory and survey design.</p>
-<p><em>Robust ie reliable population inference draws is a complex topic</em></p>
-<p>Population inference from survey data requires drawing from four domains: statistical theory (sampling distributions, parameter estimation, design effects, weighting), study-specific design issues (stratification, clustering, non-response), software estimation procedures and functions (inconsistent implementation, unclear documentation), and the secondary researcher/user’s own sets of circumstances (ie what they can hope to produce given available data and time/resources constraints).</p>
-<p><em>Teaching gaps</em></p>
-<p>Producing weighted survey estimates is routinely excluded from introductory methods courses due to time constraints, resource limitations, and perceived complexity. This leaves researchers and analysts with significant knowledge gaps in their survey analysis skills.</p>
-<p><em>Problematic Research Practices</em></p>
-<p>This gap potentially results in two problematic outcomes. Some researchers may be tempted to rely on undocumented, “quick and dirty” approaches to population inference, sometimes not giving enough consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses limit effective use of valuabl-e social research infrastructure .</p>
-<p><em>Purpose of these guidelines</em></p>
-<p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys data available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with currently examples in R and Stata. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[Target Population] --&gt; B[Survey Sample]
-    B --&gt; C{Raw Data Analysis}
-    B --&gt; D{Weighted Analysis}
-    
-    C --&gt; E[Biased Estimates]
-    D --&gt; F[Robust Estimates]
-    
-    G[Survey Design Effects] --&gt; H[Survey Weights]
-    I[Non-response] --&gt; H
-    J[Coverage Errors] --&gt; H
-    
-    H --&gt; D
-    K[Design Variables] --&gt; D
-    
-    E --&gt; L[❌ Unreliable Inference]
-    F --&gt; M[✅ Valid Population Inference]
-    
-    style A fill:#e1f5fe
-    style F fill:#c8e6c9
-    style E fill:#ffcdd2
-    style M fill:#c8e6c9
-    style L fill:#ffcdd2
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+<p>Conducting <em>inference</em> from surveys involves estimating population parameters (like means or medians) sometimes also called <em>point estimates</em> and measuring their precision (e.g.&nbsp;confidence intervals or standard errors). Both the estimates and their precision can be affected by the sampling design.</p>
+<ul>
+<li><strong>Stratification</strong> improves precision by increasing sample size in key subgroups.</li>
+<li><strong>Clustering</strong> typically reduces precision by lowering sample diversity.</li>
+<li><strong>Survey weights</strong>—used to correct for unequal selection or non-response—can also affect precision, often negatively.</li>
+</ul>
+<p>Because most surveys combine these methods, the impact on precision depends on what is being estimated and for which subgroup.</p>
+<p>There are two main ways to produce design-adjusted population estimates:</p>
+<ol type="1">
+<li><strong>Design-based estimation</strong>: directly accounts for sampling design.</li>
+<li><strong>Model-based estimation</strong>: models the effects of the survey design.</li>
+</ol>
+<p>This guide focuses on the <strong>design-based approach</strong>, which is more straightforward for estimating means, medians, and totals.</p>
+<hr>
+<section id="survey-design-variables" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="survey-design-variables"><span class="header-section-number">1.1</span> Survey Design Variables</h2>
+<p><strong>Survey weights</strong> are special variables in survey datasets. Roughly speaking, they indicate how many people or units each observation represents in the population. Weights are usually:</p>
+<ul>
+<li><strong>Higher</strong> for people less likely to be sampled (e.g.&nbsp;young men in cities)</li>
+<li><strong>Lower</strong> for people more likely to be sampled (e.g.&nbsp;older women)</li>
+</ul>
+<p>Survey weights are usually made up of three components:</p>
+<ul>
+<li><strong>Design weight</strong>: adjusts for unequal selection probabilities.</li>
+<li><strong>Non-response weight</strong>: corrects for groups with lower response rates.</li>
+<li><strong>Calibration weight</strong>: aligns the sample with population estimates (e.g.&nbsp;by age, sex, or region from census data).</li>
+</ul>
+<p>These components are often combined into a single weight variable. When weights are scaled to population totals, they are sometimes called <strong>grossing weights</strong>.</p>
+<blockquote class="blockquote">
+<p>The value of a weight shows how many people in the population the observation stands for.</p>
+</blockquote>
+<hr>
+<p><strong>How are weights computed?</strong></p>
+<p>Survey designers use <em>calibration algorithms</em> to adjust the distribution of observations so they match known population totals across variables like age, gender, and employment. The goal is to:</p>
+<ul>
+<li>Keep standard errors low by avoiding small sample sizes in cells</li>
+<li>Improve representativeness across key categories</li>
+</ul>
+<hr>
+<p><strong>Survey design variables</strong> usually include:</p>
+<ul>
+<li><strong>Strata identifiers</strong></li>
+<li><strong>Cluster identifiers</strong>, especially the <em>Primary Sampling Units</em> (PSUs)</li>
+</ul>
+<p>When used alongside survey weights, design variables allow analysts to produce more accurate estimates using survey-specific functions in statistical software. When they are not included, most statistical software will compute standard errors/confidence intervals based on the incorrect assumption of simple random sampling.</p>
+<blockquote class="blockquote">
+<p>Note: While most UK Data Service datasets include survey weights, not all provide design variables due to data protection concerns.</p>
+</blockquote>
+<hr>
+</section>
+<section id="design-effects-and-design-factors" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="design-effects-and-design-factors"><span class="header-section-number">1.2</span> Design Effects and Design Factors</h2>
+<p>When survey design variables are missing, users can still account for complex sampling using:</p>
+<ul>
+<li><strong>Design effects</strong> (DEFF or <span class="math inline">\(D_{eff}\)</span>)</li>
+<li><strong>Design factors</strong> (<span class="math inline">\(D_{eft}\)</span>)</li>
+</ul>
+<p>These measure how much the <strong>standard error</strong> of an estimate differs from what it would be under simple random sampling (SRS) <span class="citation" data-cites="Kish1995">(<a href="09_References.html#ref-Kish1995" role="doc-biblioref">Kish 1995</a>)</span>, and are sometimes published by data producers.</p>
+<hr>
+<p>### Definitions</p>
+<ul>
+<li>The <strong>Design effect (</strong><span class="math inline">\(D_{eff}\)</span>) is the ratio of the actual variance of an estimate to the variance under SRS:</li>
+</ul>
+<p><span class="math inline">\(D_{eff} =\frac{Var_{design}(\hat{\theta})}{Var_{SRS}(\hat{\theta})}\)</span></p>
+<ul>
+<li>The <strong>Design factor (</strong><span class="math inline">\(D_eft\)</span>) is the square root of the design effect:</li>
+</ul>
+<p><span class="math inline">\(D_{eft} = \sqrt{D_{eff}}\)</span></p>
+<hr>
+<p>### Interpretation</p>
+<ul>
+<li>If <span class="math inline">\(D_{eff} &lt; 1\)</span>: the sample design improves precision.</li>
+<li>If <span class="math inline">\(D_{eff} &gt; 1\)</span>: the sample design reduces precision.</li>
+</ul>
+<p>Data providers sometimes include estimates of <span class="math inline">\(D_{eff}\)</span> or <span class="math inline">\(D_{eft}\)</span> so users can <em>adjust standard errors or confidence intervals</em> that were incorrectly computed under SRS assumptions.</p>
+<hr>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -721,10 +779,13 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
   </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
+      <a href="./01_Basics.html" class="pagination-link" aria-label="1. Basics of Survey Design">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Basics of Survey Design</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_Basics.html" class="pagination-link" aria-label="1. Basics of Survey Design">
-        <span class="nav-page-text">1. Basics of Survey Design</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03_Real_world.html" class="pagination-link" aria-label="Real world population inference: things to keep in mind">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Real world population inference: things to keep in mind</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

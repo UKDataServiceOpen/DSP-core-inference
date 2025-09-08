@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical inference with weights and survey design variables</title>
+<title>5&nbsp; SPSS Examples – Statistical inference  with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_Basics.html" rel="next">
+<link href="./07_Stata.html" rel="next">
+<link href="./05_R.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,9 +90,6 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -105,7 +103,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_SPSS.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SPSS Examples</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +133,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -171,7 +169,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link">
+  <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
   </div>
 </li>
@@ -203,7 +201,12 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#identifying-the-survey-design-and-variables" id="toc-identifying-the-survey-design-and-variables" class="nav-link active" data-scroll-target="#identifying-the-survey-design-and-variables"><span class="header-section-number">5.1</span> Identifying the survey design and variables</a></li>
+  <li><a href="#mean-age-and-its-95-confidence-interval" id="toc-mean-age-and-its-95-confidence-interval" class="nav-link" data-scroll-target="#mean-age-and-its-95-confidence-interval"><span class="header-section-number">5.2</span> Mean age and its 95% confidence interval</a></li>
+  <li><a href="#domain-i.e.-subpopulation-estimates" id="toc-domain-i.e.-subpopulation-estimates" class="nav-link" data-scroll-target="#domain-i.e.-subpopulation-estimates"><span class="header-section-number">5.3</span> Domain (i.e.&nbsp;subpopulation) estimates</a>
+  <ul class="collapse">
+  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers"><span class="header-section-number">5.3.1</span> Answers</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,8 +215,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistical inference with weights and survey design variables</h1>
-<p class="subtitle lead">Practical guidelines using UKDS datasets</p>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SPSS Examples</span></h1>
 </div>
 
 
@@ -230,51 +232,153 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>This guide discusses the practical steps required to produce reliable population estimates with survey data curated by the UK Data Service. It focuses on how and when to use survey weights and design variables, and is aimed at users unfamiliar with the technical aspects of sample theory and survey design.</p>
-<p><em>Robust ie reliable population inference draws is a complex topic</em></p>
-<p>Population inference from survey data requires drawing from four domains: statistical theory (sampling distributions, parameter estimation, design effects, weighting), study-specific design issues (stratification, clustering, non-response), software estimation procedures and functions (inconsistent implementation, unclear documentation), and the secondary researcher/user’s own sets of circumstances (ie what they can hope to produce given available data and time/resources constraints).</p>
-<p><em>Teaching gaps</em></p>
-<p>Producing weighted survey estimates is routinely excluded from introductory methods courses due to time constraints, resource limitations, and perceived complexity. This leaves researchers and analysts with significant knowledge gaps in their survey analysis skills.</p>
-<p><em>Problematic Research Practices</em></p>
-<p>This gap potentially results in two problematic outcomes. Some researchers may be tempted to rely on undocumented, “quick and dirty” approaches to population inference, sometimes not giving enough consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses limit effective use of valuabl-e social research infrastructure .</p>
-<p><em>Purpose of these guidelines</em></p>
-<p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys data available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with currently examples in R and Stata. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[Target Population] --&gt; B[Survey Sample]
-    B --&gt; C{Raw Data Analysis}
-    B --&gt; D{Weighted Analysis}
-    
-    C --&gt; E[Biased Estimates]
-    D --&gt; F[Robust Estimates]
-    
-    G[Survey Design Effects] --&gt; H[Survey Weights]
-    I[Non-response] --&gt; H
-    J[Coverage Errors] --&gt; H
-    
-    H --&gt; D
-    K[Design Variables] --&gt; D
-    
-    E --&gt; L[❌ Unreliable Inference]
-    F --&gt; M[✅ Valid Population Inference]
-    
-    style A fill:#e1f5fe
-    style F fill:#c8e6c9
-    style E fill:#ffcdd2
-    style M fill:#c8e6c9
-    style L fill:#ffcdd2
-</pre>
+<p>At the time of writing this document (September 2023) Standard editions of SPSS did not include support for estimation with survey design variables, and only limited use of sampling weights. When using grossing weights – i.e.&nbsp;weight that have been designed to enable computing population totals from sample data – as is the case for instance with the Labour Force and Family Resources surveys, measures of dispersion and standard errors will not be adequately computed. It is therefore not recommended to attempt using the base version of SPSS with survey data beyond estimating point estimates. Significance testing, and standard errors will not reflect the correct values. Users wanting to use SPSS with survey data will need to acquire the Premium Edition or the Complex Samples add-on of the software.</p>
+<p>In this exercise, we will practice statistical inference with data from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450">2017 British Social Attitudes Survey (BSA)</a> taking into account weights and survey design variables. Please note that at the time of writing this document only some of the BSA editions include survey design variables.</p>
+<section id="identifying-the-survey-design-and-variables" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="identifying-the-survey-design-and-variables"><span class="header-section-number">5.1</span> Identifying the survey design and variables</h2>
+<p>We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the <code>mrdoc/pdf</code> folder.</p>
+<p><strong>Question 1</strong> What is the design that was used in this survey (i.e.&nbsp;how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?</p>
+<p>Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under <code>mrdoc/ukda_data_dictionaries.zip</code> You may need to decompress the file separately</p>
+<p><strong>Question 2</strong> What survey design variables are available? Are there any ones that are missing – if so which ones? What is the name of the weights variables?</p>
+<p>## Specifying the survey design</p>
+<p>Let us first open the 2017 BSA dataset.</p>
+<pre><code>CD 'C:\Users\mscsepw2\OneDrive - The University of Manchester\Surveyskills'.
+GET 
+FILE=' BSA\UKDA-8450-spss\spss\spss25\bsa2017_for_ukda.sav'.</code></pre>
+<p>In principle, we should tell SPSS that we are working with a three stage stratified cluster sample. In practice however, we only have information about the initial i.e.&nbsp;primary sampling units.<br>
+This is achieved with the <code>CSPLAN</code> command through we create a plan file which contains the survey design information.</p>
+<pre><code>CSPLAN ANALYSIS
+/PLAN FILE='bsa17_SPSS_design.csaplan'
+/PLANVARS ANALYSISWEIGHT=WtFactor       
+/SRSESTIMATOR TYPE=WOR
+/PRINT PLAN
+/DESIGN STAGELABEL='S1' STRATA=StratID CLUSTER=Spoint 
+/ESTIMATOR TYPE=WR.</code></pre>
+</section>
+<section id="mean-age-and-its-95-confidence-interval" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval"><span class="header-section-number">5.2</span> Mean age and its 95% confidence interval</h2>
+<p>We can now produce a first set of estimates using this design and compare them with those we would have got without accounting for it. We will compute the average (i.e.&nbsp;mean) age of respondents in the sample, as well as the proportion of male and female respondents aged over 55. We will need to use <code>/CSDESCRIPTIVES</code></p>
+<pre><code>DATASET ACTIVATE DataSet1.
+* Complex Samples Descriptives.
+CSDESCRIPTIVES
+/PLAN FILE='bsa17_SPSS_design.csaplan'
+/SUMMARY VARIABLES=RAgeE
+/MEAN
+/STATISTICS SE CIN(95)
+/MISSING SCOPE=ANALYSIS CLASSMISSING=EXCLUDE.</code></pre>
+<p>Under the <code>/STATISTICS</code> command we can request either or both the standard error of the mean and its 95% confidence interval.</p>
+<p>What difference would it make to the estimates and 95% CI to compute respectively, an unweighted mean, as well as a weighted mean without accounting for the survey design?</p>
+<p><strong>Unweighted means and CI</strong></p>
+<pre><code>DESCRIPTIVES VARIABLES=RAgeE
+/STATISTICS=MEAN SEMEAN.</code></pre>
+<p>SPSS does not provide an option for computing confidence intervals in this case, but we know that a 95% confidence interval is the sample mean respectively minus and plus 1.96 times its standard error. Using the SPSS output, we can compute it ourselves as 1.96*.2872=about .56 years, that is close to 7 months.</p>
+<p><strong>Weighted means and CI without survey design</strong></p>
+<pre><code>WEIGHT BY WtFactor.
+DESCRIPTIVES VARIABLES=RAgeE
+/STATISTICS=MEAN SEMEAN.
+WEIGHT OFF.</code></pre>
+<p><strong>Question 3</strong> What would be the consequences of weighting but not accounting for the sample design; not using weights and accounting for the sample design when:</p>
+<ul>
+<li>inferring the mean value of the population age?</li>
+<li>inferring the uncertainty of our estimate of the population age?</li>
+</ul>
+<p>## Computing a proportion and its 95% confidence interval</p>
+<p>We can now similarly compute an estimate of a proportion (or percentage) of a categorical variable in the population. For instance, the proportion of people who declare themselves interested in politics. This is the <code>Politics</code> variable. It has five categories that we are going to recode into ‘Significantly’ (interested) and ‘Not’ (significantly) in order to simplify the analysis.</p>
+<pre><code>FREQUENCIES VARIABLES=Politics
+/ORDER=ANALYSIS.
+
+RECODE Politics (9=SYSMIS) (1 thru 2=1) (3 thru 5=2) INTO Politics.s.
+EXECUTE.
+
+VARIABLE LABELS
+Politics.s   "Whether significantly interested in politics".
+VALUE LABELS
+Politics.s
+1  "Significant"
+2  "Not significant". 
+EXECUTE.
+
+FREQUENCIES VARIABLES=Politics.s
+/ORDER=ANALYSIS.
+
+WEIGHT BY WtFactor.
+FREQUENCIES VARIABLES=Politics.s
+/ORDER=ANALYSIS.
+WEIGHT OFF.</code></pre>
+<p>As with the mean of age earlier, we can see that the weighted and unweighted point estimates of the proportion of respondents significantly interested in politics change, even if slightly, and that they remain the same when survey design is accounted for.</p>
+<p>With the help of <code>CSTABULATE</code> we can examine frequencies, proportions and confidence intervals of these proportions accounting for the survey design. As before, the point estimates do not further change once survey design is accounted for.</p>
+<pre><code>* Complex Samples Frequencies.
+CSTABULATE
+/PLAN FILE='bsa17_SPSS_design.csaplan'
+/TABLES VARIABLES=Politics.s
+/CELLS POPSIZE TABLEPCT
+/STATISTICS CIN(95) 
+/MISSING SCOPE=TABLE CLASSMISSING=EXCLUDE.</code></pre>
+<p><strong>Question 4</strong> What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use <code>RAgecat5</code></p>
+</section>
+<section id="domain-i.e.-subpopulation-estimates" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="domain-i.e.-subpopulation-estimates"><span class="header-section-number">5.3</span> Domain (i.e.&nbsp;subpopulation) estimates</h2>
+<p>Although computing estimates for specific groups (for example the average age of people who report being interested in politics) is not conceptually different from doing it for the sample as a whole, doing it with weights as part of an inferential analysis requires some caution. Calculating weighted estimates for a subpopulation while the rest of the sample is left out of the analysis might yield incorrect results. This is why using survey design informed functions is particularly recommended when doing such analyses.</p>
+<p>The SPSS command <code>CSDESCRIPTIVES</code> that we used above makes such domain estimation relatively straightforward. If we would like to compute the mean age of BSA respondents by government office regions, we need to specify:</p>
+<ul>
+<li>The outcome variable whose estimate we want to compute: i.e.&nbsp;<code>RAgeE</code></li>
+<li>The grouping variable(s) <code>GOR_ID</code></li>
+<li>And the type of type of variance estimation we would like to see displayed i.e.&nbsp;standard errors or confidence interval</li>
+</ul>
+<pre><code>* Complex Samples Descriptives.
+CSDESCRIPTIVES
+/PLAN FILE='bsa17_SPSS_design.csaplan'
+/SUMMARY VARIABLES=RAgeE
+/SUBPOP TABLE=GOR_ID DISPLAY=LAYERED
+/MEAN
+/STATISTICS CIN(95)
+/MISSING SCOPE=ANALYSIS CLASSMISSING=EXCLUDE.</code></pre>
+<p>Our inference seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the oldest – their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the South East for example, as the CIs partially overlap.</p>
+<p>We can also examine proportions for subpopulations. In order to do this, we need to specify the category of the variable we are interested in as an outcome. For instance, the syntax below uses respondents who are significantly interested in politics:</p>
+<pre><code>* Complex Samples Frequencies.
+CSTABULATE
+/PLAN FILE='bsa17_SPSS_design.csaplan'
+/TABLES VARIABLES=Politics.s
+/SUBPOP TABLE=GOR_ID DISPLAY=LAYERED
+/CELLS TABLEPCT
+/STATISTICS CIN(95) 
+/MISSING SCOPE=TABLE CLASSMISSING=EXCLUDE.</code></pre>
+<p><strong>Question 5</strong> What is the 95% confidence interval for the proportion of people interested in politics in the South West? Is the proportion likely to be different in London? In what way? What is the region of the UK for which the precision of the estimates is likely to be the smallest?</p>
+<p>When using <code>CSTABULATE</code>, we can define domains or subpopulations with several variables, not just one. For example, we could look at gender differences in political affiliations by regions. However, as the size of subgroups decrease, so does the precision of the estimates as their confidence interval widens, to a point where their substantive interest is not meaningful anymore.</p>
+<p><strong>Question 6</strong> Using interest in politics as before, and three category age <code>RAgecat5</code>:</p>
+<ul>
+<li><p>Produce a table of results showing the proportion of respondents significantly interested in Politics by age group and gender</p></li>
+<li><p>Assess whether the age difference in interest for politics is similar for each gender?</p></li>
+<li><p>Based on the data, is it fair to say that men aged under 35 tend to be more likely to declare themselves interested in politics than women aged 55 and above?</p></li>
+</ul>
+<pre><code>CSTABULATE
+/PLAN FILE='bsa17_SPSS_design.csaplan'
+/TABLES VARIABLES=Politics.s
+/SUBPOP TABLE=Rsex BY RAgecat5 DISPLAY=LAYERED
+/CELLS TABLEPCT
+/STATISTICS CIN(95) 
+/MISSING SCOPE=TABLE CLASSMISSING=EXCLUDE.</code></pre>
+<section id="answers" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="answers"><span class="header-section-number">5.3.1</span> Answers</h3>
+<p><strong>Question 1</strong> The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e.&nbsp;number of addresses).</p>
+<p><strong>Question 2</strong> From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by <code>Spoint</code> and the strata by <code>StratID</code>. The weights variable is <code>WtFactor</code>. Addresses are not provided but could be approximated with a household identifier.</p>
+<p><strong>Question 3</strong> Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys. Using survey design variables does not alter the value of the estimated population mean. However, not accounting for it would lead us to overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval – by about plus or minus 3 months.</p>
+<p><strong>Question 4</strong> The proportion of 17-34 year old in the sample is 28.5 and its 95% confidence interval 26.5, 30.6</p>
+<p><strong>Question 5</strong> The 95% confidence interval for the proportion of people interested in politics in the South West is 39.8-53.4. By contrast, it is 47.6-60.8 in London. The region with the lowest precision of estimates (i.e.&nbsp;the widest confidence interval) is Wales, with a 20 percentage point difference between the upper and lower bounds of the confidence interval.</p>
+<p><strong>Question 6</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             I(Politics.s == "Significantly") ci_l ci_u
+17-34.Male                               42.9 37.7 48.2
+35-54.Male                               50.8 46.6 54.9
+55+.Male                                 57.8 53.9 61.6
+17-34.Female                             26.3 22.0 31.1
+35-54.Female                             34.1 30.6 37.8
+55+.Female                               43.0 39.6 46.5</code></pre>
 </div>
-<p></p></figure><p></p>
 </div>
-</div>
-</div>
+<p>Older respondents both male and female tend to be more involved in politics than younger ones.</p>
+<p>The confidence interval for the proportion of men under 35 and women above 55 interested in politics overlaps; it is unlikely that they differ in the population.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -312,6 +416,7 @@ UKDS. 2018. <span>“Data Skills Modules: Applying Weights to Survey Data.”</s
 Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edited by Goldsmiths Core Quantitative Methods Series. 2019. <a href="https://www.youtube.com/watch?v=brxx81U6N1o">https://www.youtube.com/watch?v=brxx81U6N1o</a>.
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -721,10 +826,13 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
   </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
+      <a href="./05_R.html" class="pagination-link" aria-label="R examples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R examples</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_Basics.html" class="pagination-link" aria-label="1. Basics of Survey Design">
-        <span class="nav-page-text">1. Basics of Survey Design</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07_Stata.html" class="pagination-link" aria-label="Stata examples">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

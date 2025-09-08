@@ -1,0 +1,32 @@
+# Stata examples
+
+Stata provides comprehensive support for computing estimates from survey
+data. Users may either opt to add sampling weights to the standard
+estimation commands, or use survey-specific commands. The latter is
+recommended when knowledge of estimate precision is required. Stata
+provides a conceptual distinction between four types of weights:
+  
+  -   frequency weights (`fweight`),
+-   analytical weights (`aweight`),
+-   importance weights (`iweight`) and
+-   probability weights (`pweight`).
+
+These differences impact on the way standard errors are computed during
+estimation. In most cases, social survey weights from UKDS datasets
+should be treated as probability weights. A number of of basic
+estimation commands, such as *summarise* do not allow using probability
+weights. This is an explicit features of Stata, meant to nudge users of
+survey data to prioritise the survey commands rather than 'casual'
+weighting.
+
+Using standalone weight specification (i.e. not using survey design
+                                       functions). In Stata it consists in the weighting variable being
+specified between square brackets. Stata defines four kind of weights:
+  
+  Only probability weights (abbreviated as `pw` in most Stata commands)
+should be used with survey data. However, Stata does not allow using
+them with its main commands, for the reason highlighted above i.e. in
+order for users not overlook survey design issues in their data.
+Therefore, one has to specify instead the wrong frequency weights (`fw`)
+if one does not wish to use the survey design functions.
+< pagebreak>

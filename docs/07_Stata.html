@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical inference with weights and survey design variables</title>
+<title>6&nbsp; Stata examples – Statistical inference  with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_Basics.html" rel="next">
+<link href="./09_References.html" rel="next">
+<link href="./06_SPSS.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,9 +90,6 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -105,7 +103,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07_Stata.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +133,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -177,7 +175,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07_Stata.html" class="sidebar-item-text sidebar-link">
+  <a href="./07_Stata.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
   </div>
 </li>
@@ -198,27 +196,20 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistical inference with weights and survey design variables</h1>
-<p class="subtitle lead">Practical guidelines using UKDS datasets</p>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -230,51 +221,16 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>This guide discusses the practical steps required to produce reliable population estimates with survey data curated by the UK Data Service. It focuses on how and when to use survey weights and design variables, and is aimed at users unfamiliar with the technical aspects of sample theory and survey design.</p>
-<p><em>Robust ie reliable population inference draws is a complex topic</em></p>
-<p>Population inference from survey data requires drawing from four domains: statistical theory (sampling distributions, parameter estimation, design effects, weighting), study-specific design issues (stratification, clustering, non-response), software estimation procedures and functions (inconsistent implementation, unclear documentation), and the secondary researcher/user’s own sets of circumstances (ie what they can hope to produce given available data and time/resources constraints).</p>
-<p><em>Teaching gaps</em></p>
-<p>Producing weighted survey estimates is routinely excluded from introductory methods courses due to time constraints, resource limitations, and perceived complexity. This leaves researchers and analysts with significant knowledge gaps in their survey analysis skills.</p>
-<p><em>Problematic Research Practices</em></p>
-<p>This gap potentially results in two problematic outcomes. Some researchers may be tempted to rely on undocumented, “quick and dirty” approaches to population inference, sometimes not giving enough consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses limit effective use of valuabl-e social research infrastructure .</p>
-<p><em>Purpose of these guidelines</em></p>
-<p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys data available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with currently examples in R and Stata. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[Target Population] --&gt; B[Survey Sample]
-    B --&gt; C{Raw Data Analysis}
-    B --&gt; D{Weighted Analysis}
-    
-    C --&gt; E[Biased Estimates]
-    D --&gt; F[Robust Estimates]
-    
-    G[Survey Design Effects] --&gt; H[Survey Weights]
-    I[Non-response] --&gt; H
-    J[Coverage Errors] --&gt; H
-    
-    H --&gt; D
-    K[Design Variables] --&gt; D
-    
-    E --&gt; L[❌ Unreliable Inference]
-    F --&gt; M[✅ Valid Population Inference]
-    
-    style A fill:#e1f5fe
-    style F fill:#c8e6c9
-    style E fill:#ffcdd2
-    style M fill:#c8e6c9
-    style L fill:#ffcdd2
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+<p>Stata provides comprehensive support for computing estimates from survey data. Users may either opt to add sampling weights to the standard estimation commands, or use survey-specific commands. The latter is recommended when knowledge of estimate precision is required. Stata provides a conceptual distinction between four types of weights:</p>
+<ul>
+<li>frequency weights (<code>fweight</code>),</li>
+<li>analytical weights (<code>aweight</code>),</li>
+<li>importance weights (<code>iweight</code>) and</li>
+<li>probability weights (<code>pweight</code>).</li>
+</ul>
+<p>These differences impact on the way standard errors are computed during estimation. In most cases, social survey weights from UKDS datasets should be treated as probability weights. A number of of basic estimation commands, such as <em>summarise</em> do not allow using probability weights. This is an explicit features of Stata, meant to nudge users of survey data to prioritise the survey commands rather than ‘casual’ weighting.</p>
+<p>Using standalone weight specification (i.e.&nbsp;not using survey design functions). In Stata it consists in the weighting variable being specified between square brackets. Stata defines four kind of weights:</p>
+<p>Only probability weights (abbreviated as <code>pw</code> in most Stata commands) should be used with survey data. However, Stata does not allow using them with its main commands, for the reason highlighted above i.e.&nbsp;in order for users not overlook survey design issues in their data. Therefore, one has to specify instead the wrong frequency weights (<code>fw</code>) if one does not wish to use the survey design functions. &lt; pagebreak&gt;</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -312,7 +268,6 @@ UKDS. 2018. <span>“Data Skills Modules: Applying Weights to Survey Data.”</s
 Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edited by Goldsmiths Core Quantitative Methods Series. 2019. <a href="https://www.youtube.com/watch?v=brxx81U6N1o">https://www.youtube.com/watch?v=brxx81U6N1o</a>.
 </div>
 </div>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -719,12 +674,15 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
     }
   });
   </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
+      <a href="./06_SPSS.html" class="pagination-link" aria-label="SPSS Examples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_Basics.html" class="pagination-link" aria-label="1. Basics of Survey Design">
-        <span class="nav-page-text">1. Basics of Survey Design</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./09_References.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

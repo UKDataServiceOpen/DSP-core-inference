@@ -1,0 +1,157 @@
+# Statistical Inference from Survey Data in Practice
+
+This section provides practical recommendations for making robust
+inferences from survey data, taking into account the factors highlighted
+in Section 3.
+
+In practice, there are four main strategies you can follow when
+estimating population parameters from survey data. They are listed below
+in the order recommended by the UK Data Service:
+  
+1.  Estimation using **survey weights and survey design variables** with
+survey-specific commands\
+2.  Estimation using **survey weights only** with survey-specific
+commands\
+3.  Estimation using **weighted standard commands** (not
+                                                     survey-specific)\
+4.  Estimation without weights (unweighted)
+
+------------------------------------------------------------------------
+  
+## Recommended Strategies
+  
+  -   **Strategy 1**: The most robust approach is to use **both weights
+and survey design variables** with survey-specific commands. This
+should always be the first choice. In practice, though, design
+variables may not be available, or access to them may require
+applying for special versions of the data, which can be
+time-consuming.
+
+-   **Strategy 2**: If design variables are not available, the next best
+option is to use **weights with survey-specific commands**. Point
+estimates will be the same as in Strategy 1, but confidence
+intervals and standard errors may be biased (too narrow or too wide
+                                             depending on the design). In these cases, it is important to
+acknowledge the limitation in reporting results. Sometimes, design
+effects provided in the documentation can help correct standard
+errors.
+
+-   **Strategy 3**: Some users apply **weights in standard commands**
+  (e.g. weighted means or regressions without survey commands). This
+often gives correct point estimates but can produce misleading
+confidence intervals or standard errors. In SAS and SPSS the values
+may be entirely incorrect, while in R and Stata they may sometimes
+be close to those obtained with Strategy 2. This approach should only be used for
+**low-sensitivity analyses**. Design factors (if published) can
+sometimes be used to improve these results.
+
+-   **Strategy 4**: **Unweighted estimation** is strongly discouraged
+for inference, as the results will almost always be unreliable. It
+is only acceptable for descriptive or teaching purposes where
+precision is not the focus.
+
+------------------------------------------------------------------------
+  
+## Flowchart: Choosing the right  estimation strategy
+  
+  ```{mermaid}
+flowchart TD
+A[Survey weights <br> present in the data?] -->|Yes| B[Survey design variables <br> present in the data?]
+A -->|No| G[Strategy 4 <br> Unweighted estimation  <br> *Sample description only*]
+B -->|Yes| C[Strategy 1  <br> Weights + Design Variables  <br> with survey commands]
+B -->|No| D[Strategy 2  <br> Weights only  <br> with survey commands]
+D --> E[Check if design effects  <br> are available  <br> to adjust precision]
+D -->|Low sensitivity analysis| F[Strategy 3 <br> Use weighted   <br> standard commands]
+```
+
+## Medium to high sensitivity analysis: workflow
+
+In most cases, researchers need not only point estimates but also measures of precision, such as confidence intervals or standard errors. The correct estimation of these depends on how much survey design
+information is available.
+
+### If survey design variables are available
+  
+  - Identify relevant weights and design variables (see data documentation)
+- Declare the design in your software using survey commands
+-   Estimate your statistics using survey functions
+-   Report the confidence intervals (or standard errors with point estimates)
+-   Discuss possible sources of bias (e.g. under/over-estimation of precision)
+
+
+### If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**
+  
+  -   Consider whether applying for SecureLab access is worth the time
+and effort given the sensitivity / importance of the project
+-   Information about applying of SecureLab access is available on the [UKDS website](https://ukdataservice.ac.uk/find-data/access-conditions/secure-application-requirements/)
+
+```{mermaid}        
+flowchart TD
+B[Check documentation: <br> are design variables available <br/> in a controlled dataset?]
+B -->|Yes| C[Cost–benefit assessment:<br/>time, feasibility, <br/> sensitivity of outputs]
+C -->|Apply| D[Apply for access: write <br/> application, take the <br/> accredited researcher training]
+D --> E[On approval: <br/> Strategy 1]
+C -->|Do not apply| F[Proceed without design vars <br/> → follow 4.3.3]
+B -->|No| F[Proceed without design vars <br/> → follow 4.3.3]
+```
+
+
+
+### If design variables are not available at all
+  
+  -   Check whether the data producer has already published the
+estimates you need
+-   Use the available weights and declare a simple random sampling
+design in your software
+-   Produce estimates with survey-specific commands
+-   Adjust for bias using published design effects if available
+-   If no design effects exist, report likely sources of bias (e.g.
+                                                               underestimation with clustering, overestimation with
+                                                               stratification)
+-   Be cautious with small sub-samples; consider only strong
+confidence levels when computing test and/or confidence intervals (ie $p<.001$)
+
+```{mermaid}
+flowchart TD
+A[Start] --> B[Has the producer already <br/> published the estimates?]
+B -->|Yes| C[Use official estimates <br/> with proper attribution]
+B -->|No| D[Identify available weights +<br/> design notes in docs]
+D --> E[Declare SRS in software + <br/> use survey commands <br/> where possible]
+E --> F[Produce estimates: <br/> point + naive precision]
+F --> G[Adjust precision using <br/> published Design Effects <br/> if available]
+G --> H[Report CIs/SEs and <br/> explicitly state likely bias<br/> clustering: underestimation <br/>stratified data: overestimation]
+H --> I[For small sub-samples: <br/> use stricter significance level;<br/>emphasise exploratory status]
+```
+
+
+### For subpopulation (domain) estimates
+  
+  -   Extra care is needed when analysing subsets (e.g. employed
+                                                   people, ethnic groups)
+-   Domain estimation requires using the **entire distribution of
+weights**, not just subgroup weights
+-   Failing to do this may produce incorrect point estimates and
+standard errors
+-   Survey-specific commands are essential here
+
+```{mermaid}
+flowchart TD
+B[Define domains<br/> e.g. age group, region <br/> economic activity]
+B --> D[Write domain <br/>estimation    syntax <br/> do NOT filter the data]
+D --> E[Compute domain estimates <br/> totals/proportions/means]
+E --> F[Report precision<br/> using CIs/SEs reflecting <br/> the whole sample design]
+F --> G[Look out for small-n <br/> and sparse cells;<br/>consider collapsing categories]
+G --> H[Document limitations and <br/> any design-factor adjustments]
+```
+
+
+## Lower Sensitivity Analysis
+
+Sometimes users are not aiming to conduct formal inference. This may be the case in:
+  
+  - Teaching or learning basic statistical concepts
+
+- Inspecting a sample or conducting exploratory work where precision is not essential
+
+In such cases, applying weights with standard commands can be acceptable. Most software will produce correct point estimates, but the standard errors and confidence intervals will be misleading because the software silently assumes simple random sampling. In some cases (e.g. SPSS, SAS), results may be entirely incorrect because of reliance on population totals with grossing weights.
+
+For low-sensitivity work, this may be tolerable, but it should not be used for research outputs that are subject to scrutiny or intended to inform policy.

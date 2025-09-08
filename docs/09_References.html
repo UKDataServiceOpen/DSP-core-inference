@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical inference with weights and survey design variables</title>
+<title>References – Statistical inference with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_Basics.html" rel="next">
+<link href="./08_Appendix.html" rel="next">
+<link href="./07_Stata.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,9 +90,6 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -105,7 +103,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09_References.html">References</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +133,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -183,7 +181,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09_References.html" class="sidebar-item-text sidebar-link">
+  <a href="./09_References.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -198,27 +196,20 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistical inference with weights and survey design variables</h1>
-<p class="subtitle lead">Practical guidelines using UKDS datasets</p>
+<h1 class="title">References</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -230,89 +221,58 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>This guide discusses the practical steps required to produce reliable population estimates with survey data curated by the UK Data Service. It focuses on how and when to use survey weights and design variables, and is aimed at users unfamiliar with the technical aspects of sample theory and survey design.</p>
-<p><em>Robust ie reliable population inference draws is a complex topic</em></p>
-<p>Population inference from survey data requires drawing from four domains: statistical theory (sampling distributions, parameter estimation, design effects, weighting), study-specific design issues (stratification, clustering, non-response), software estimation procedures and functions (inconsistent implementation, unclear documentation), and the secondary researcher/user’s own sets of circumstances (ie what they can hope to produce given available data and time/resources constraints).</p>
-<p><em>Teaching gaps</em></p>
-<p>Producing weighted survey estimates is routinely excluded from introductory methods courses due to time constraints, resource limitations, and perceived complexity. This leaves researchers and analysts with significant knowledge gaps in their survey analysis skills.</p>
-<p><em>Problematic Research Practices</em></p>
-<p>This gap potentially results in two problematic outcomes. Some researchers may be tempted to rely on undocumented, “quick and dirty” approaches to population inference, sometimes not giving enough consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses limit effective use of valuabl-e social research infrastructure .</p>
-<p><em>Purpose of these guidelines</em></p>
-<p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys data available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with currently examples in R and Stata. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[Target Population] --&gt; B[Survey Sample]
-    B --&gt; C{Raw Data Analysis}
-    B --&gt; D{Weighted Analysis}
-    
-    C --&gt; E[Biased Estimates]
-    D --&gt; F[Robust Estimates]
-    
-    G[Survey Design Effects] --&gt; H[Survey Weights]
-    I[Non-response] --&gt; H
-    J[Coverage Errors] --&gt; H
-    
-    H --&gt; D
-    K[Design Variables] --&gt; D
-    
-    E --&gt; L[❌ Unreliable Inference]
-    F --&gt; M[✅ Valid Population Inference]
-    
-    style A fill:#e1f5fe
-    style F fill:#c8e6c9
-    style E fill:#ffcdd2
-    style M fill:#c8e6c9
-    style L fill:#ffcdd2
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-
-
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Blair2014" class="csl-entry" role="listitem">
-Blair, Johnny. 2014. <em>Designing Surveys : A Guide to Decisions and Procedures.</em> 3rd edition / Johnny Blair, Ronald F. Czaja, Edward A. Blair. Los Angeles: SAGE.
+Blair, Johnny. 2014. <em>Designing Surveys : A Guide to Decisions and
+Procedures.</em> 3rd edition / Johnny Blair, Ronald F. Czaja, Edward A.
+Blair. Los Angeles: SAGE.
 </div>
 <div id="ref-DWP2014" class="csl-entry" role="listitem">
-DWP. 2014. <span>“Uncertainty in Family Resources Survey-Based Analysis. Guidance on Estimating Uncertainty in Family Resources Survey-Based Analysis.”</span> Edited by Department for Work and Pensions. 2014. <a href="https://www.gov.uk/government/publications/uncertainty-in-family-resources-survey-based-analysis">https://www.gov.uk/government/publications/uncertainty-in-family-resources-survey-based-analysis</a>.
+DWP. 2014. <span>“Uncertainty in Family Resources Survey-Based Analysis.
+Guidance on Estimating Uncertainty in Family Resources Survey-Based
+Analysis.”</span> Edited by Department for Work and Pensions. 2014. <a href="https://www.gov.uk/government/publications/uncertainty-in-family-resources-survey-based-analysis">https://www.gov.uk/government/publications/uncertainty-in-family-resources-survey-based-analysis</a>.
 </div>
 <div id="ref-IBM2020" class="csl-entry" role="listitem">
-IBM Support. 2020. <span>“Inconsistency in the Output When Using Weighting Procedure. IBM Support Document Number 419449.”</span> 2020. <a href="https://www.ibm.com/support/pages/inconsistency-output-when-using-weighting-procedure">https://www.ibm.com/support/pages/inconsistency-output-when-using-weighting-procedure</a>.
+IBM Support. 2020. <span>“Inconsistency in the Output When Using
+Weighting Procedure. IBM Support Document Number 419449.”</span> 2020.
+<a href="https://www.ibm.com/support/pages/inconsistency-output-when-using-weighting-procedure">https://www.ibm.com/support/pages/inconsistency-output-when-using-weighting-procedure</a>.
 </div>
 <div id="ref-Kish1995" class="csl-entry" role="listitem">
-Kish, Leslie. 1995. <em>Survey Sampling</em>. Wiley Classics Library. New York: Wiley.
+Kish, Leslie. 1995. <em>Survey Sampling</em>. Wiley Classics Library.
+New York: Wiley.
 </div>
 <div id="ref-Lohr20192010" class="csl-entry" role="listitem">
-Lohr, Sharon L. 2019 - 2010. <em>Sampling : Design and Analysis</em>. Second edition. Texts in Statistical Science. Boca Raton, FL: CRC Press.
+Lohr, Sharon L. 2019 - 2010. <em>Sampling : Design and Analysis</em>.
+Second edition. Texts in Statistical Science. Boca Raton, FL: CRC Press.
 </div>
 <div id="ref-Lumley2023" class="csl-entry" role="listitem">
-Lumley, Thomas. 2023. <span>“Survey: Analysis of Complex Survey Samples.”</span>
+Lumley, Thomas. 2023. <span>“Survey: Analysis of Complex Survey
+Samples.”</span>
 </div>
 <div id="ref-ONS2022" class="csl-entry" role="listitem">
-ONS. 2022. <span>“Family Resources Survey, 2020/21 Methodology and Standard Error Tables.”</span> Edited by Office for National Statistics. 2022. <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1065513/Ch1_Methodology_and_Standard_Errors.ods">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1065513/Ch1_Methodology_and_Standard_Errors.ods</a>.
+ONS. 2022. <span>“Family Resources Survey, 2020/21 Methodology and
+Standard Error Tables.”</span> Edited by Office for National Statistics.
+2022. <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1065513/Ch1_Methodology_and_Standard_Errors.ods">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1065513/Ch1_Methodology_and_Standard_Errors.ods</a>.
 </div>
 <div id="ref-Curran2016" class="csl-entry" role="listitem">
-P, Curran. 2016. <span>“Complex Survey Designs and Weighting Using Stata: Part 1-3.”</span> 2016. <a href="https://www.youtube.com/watch?v=oOpJdC_oeKY">https://www.youtube.com/watch?v=oOpJdC_oeKY</a>.
+P, Curran. 2016. <span>“Complex Survey Designs and Weighting Using
+Stata: Part 1-3.”</span> 2016. <a href="https://www.youtube.com/watch?v=oOpJdC_oeKY">https://www.youtube.com/watch?v=oOpJdC_oeKY</a>.
 </div>
 <div id="ref-UKDS2018" class="csl-entry" role="listitem">
-UKDS. 2018. <span>“Data Skills Modules: Applying Weights to Survey Data.”</span> Edited by UK Data Service. 2018. <a href="https://www.youtube.com/watch?v=TIad5__WP8g">https://www.youtube.com/watch?v=TIad5__WP8g</a>.
+UKDS. 2018. <span>“Data Skills Modules: Applying Weights to Survey
+Data.”</span> Edited by UK Data Service. 2018. <a href="https://www.youtube.com/watch?v=TIad5__WP8g">https://www.youtube.com/watch?v=TIad5__WP8g</a>.
 </div>
 <div id="ref-UKDS2019" class="csl-entry" role="listitem">
-———. 2019. <span>“Weights in Social Surveys: An Introduction:”</span> Edited by UK Data Service. 2019. <a href="https://www.youtube.com/watch?v=Vllr4olp3N4&amp;t=39s">https://www.youtube.com/watch?v=Vllr4olp3N4&amp;t=39s</a>.
+———. 2019. <span>“Weights in Social Surveys: An Introduction:”</span>
+Edited by UK Data Service. 2019. <a href="https://www.youtube.com/watch?v=Vllr4olp3N4&amp;t=39s">https://www.youtube.com/watch?v=Vllr4olp3N4&amp;t=39s</a>.
 </div>
 <div id="ref-Wallrich2019" class="csl-entry" role="listitem">
-Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edited by Goldsmiths Core Quantitative Methods Series. 2019. <a href="https://www.youtube.com/watch?v=brxx81U6N1o">https://www.youtube.com/watch?v=brxx81U6N1o</a>.
+Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span>
+Edited by Goldsmiths Core Quantitative Methods Series. 2019. <a href="https://www.youtube.com/watch?v=brxx81U6N1o">https://www.youtube.com/watch?v=brxx81U6N1o</a>.
 </div>
 </div>
-</section>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -719,12 +679,15 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
     }
   });
   </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
+      <a href="./07_Stata.html" class="pagination-link" aria-label="Stata examples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Stata examples</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_Basics.html" class="pagination-link" aria-label="1. Basics of Survey Design">
-        <span class="nav-page-text">1. Basics of Survey Design</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08_Appendix.html" class="pagination-link" aria-label="Appendix: Study-specific weighting and sample design information">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
