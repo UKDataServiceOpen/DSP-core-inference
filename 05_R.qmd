@@ -1,0 +1,396 @@
+# R examples
+
+The R *Survey* package [@Lumley2023] provides a comprehensive set of
+functions for computing point and variance estimates from survey data.
+At the same time, R Base does not provide a unified sets of commands or
+syntax for computing weighted estimates. Implementation of statistical
+theory may vary between packages, but algorithms are usually described
+in detail in the package documentation.
+
+In this example, we will practice statistical inference with data from
+the [2017 British Social Attitudes Survey
+     (BSA)](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450)
+taking into account weights and survey design variables. Please note
+that at the time of writing this document only some issues of the BSA
+include survey design variables.
+
+## Identifying the survey design and variables
+
+We first need to find out about the survey design that was used in the
+2017 BSA, and the design variables that are made available in the
+dataset. Such information can usually be found in the documentation that
+comes together with the data under the `mrdoc/pdf` folder.
+
+**Question 1** What is the design that was used in this survey (i.e. how
+                                                                many stages were there, and what were the units sampled). What were the
+primary sampling units; the strata (if relevant)?
+  
+  Now that we are a bit more familiar with the way the survey was
+designed, we need to try and identify the design variables we can
+include when producing estimates. The information can usually be found
+in the user manual or the data dictionary available under
+`mrdoc/ukda_data_dictionaries.zip` The file may need to be decompressed
+separately.
+
+**Question 2** What survey design variables are available? Are there any
+ones that are missing -- if so which ones? What is the name of the
+weights variables?
+  
+  ## Specifying the survey design
+  
+```{r 5.1, echo=-9:-7,message=F,warning=F}
+rm(list=ls())
+library(dplyr) ### Data manipulation functions
+library(haven) ### Importing stata/SPSS files
+library(Hmisc) ### Extra statistical functions
+library(survey) ### Survey design functions
+library(kableExtra) ### Survey design functions
+
+#setwd("C:/Users/mscsepw2/OneDrive - The University of Manchester/Surveyskills")
+#setwd("~/Dropbox/work/UKDS/DSP/DSP-core-inference") ### Edit as appropriate
+setwd("~/OneDrive/DSP/SSP/DSP-core-inference") ### Edit as appropriate
+datadir<-"~/Data/"                ### Edit as appropriate
+#datadir<-"~/Dropbox/work/UKDS/data/"                ### Edit as appropriate
+bsa17<-read_spss(paste0(datadir,"bsa/UKDA-8450-spss/spss/spss25/bsa2017_for_ukda.sav"))
+dim(bsa17)
+```
+
+We can specify the survey design earlier identified in the data
+documentation: using `Spoint` as Primary Sampling Unit, `StratID` as
+strata, and `WtFactor` as weights. R does this by creating a `svydesign`
+object, i.e. a survey design informed version of the data, which will be
+used for subsequent estimation.
+
+```{r 5.2}
+bsa17.s<-svydesign(ids=~Spoint, strata=~StratID, weights=~WtFactor,data=bsa17)
+class(bsa17.s)
+```
+
+## Mean age and its 95% confidence interval
+
+We can now produce a first set of estimates using this information and
+compare them with those we would have got without accounting for the
+survey design. We will compute the average (i.e. mean) age of
+respondents in the sample. We will need to use `svymean()`
+
+```{r mean}
+svymean(~RAgeE,bsa17.s)
+```
+
+By default `svymean()` computes the standard error of the mean. We need
+to\
+embed it within `confint()` in order to get a confidence interval.
+
+```{r 5.3}
+confint(svymean(~RAgeE,bsa17.s)) ### Just the confidence interval...
+round(
+  c(
+    svymean(~RAgeE,bsa17.s),
+    confint(svymean(~RAgeE,bsa17.s))
+  ),
+  1)### Estimate and CI, rounded
+```
+
+**Question 3** What would be the consequences of weighing but not
+accounting for the sample design; not using weights and accounting for
+the sample design when:
+  
+  -   inferring the mean value of the population age?
+  -   inferring the uncertainty of our estimate of the population age?
+  
+  ## Computing a proportion and its 95% confidence interval
+  
+  We can now similarly compute the distribution of a categorical variable
+in the population by estimating proportions (or percentages), for
+instance, the proportion of people who declare that they are interested
+in politics. This is the `Politics` variable in the BSA. It has five
+categories ranging from 1 'A great deal' to 5- 'Not at all'. We could
+recode 1 and 2 - `quite a lot` into 'Significantly', but since we are
+only interested in estimating the confidence intervals, we will select
+the relevant values 'on the go'.
+
+```{r 5.4}
+attr(bsa17$Politics,"label")     ### Phrasing of the question
+attr(bsa17$Politics,"labels")     ### Value labels
+
+table(as_factor(bsa17$Politics)) ### Sample distribution
+
+```
+
+**Note**: Changes in a data frame are not automatically transferred into
+`svydesign` objects used for inferences. We therefore need to recreate
+it each time we create or recode a variable.
+
+```{r 5.5}
+round(100*prop.table(svytable(~(Politics==1 | Politics==2),bsa17.s)),1)
+```
+
+Let us now compute the confidence intervals for these proportions.
+Traditional statistical software compute these without giving us an idea
+of the underlying computations going on. Doing this in R requires more
+coding, but also a better understanding of what is actually estimated.
+
+Confidence intervals for proportions of categorical variables are
+usually computed as a sequence of binomial/dichotomic estimations --
+  i.e. one for each category. In R this needs to be specified explicitly
+via the `svyciprop()` and `I()` functions. The former actually computes
+the proportion and its confidence interval (by default 95%), whereas the
+latter allows us to define the category we are focusing on.
+
+```{r 5.6}
+svyciprop(~I(Politics==1 | Politics==2),bsa17.s)
+round(100*
+        c(prop.table(svytable(~(Politics==1 | Politics==2),bsa17.s))[2],
+          attr(svyciprop(~I(Politics==1 | Politics==2),bsa17.s),"ci")),1
+)
+```
+
+**Question 4** What is the proportion of respondents aged 17-34 in the
+sample, as well as its 95% confidence interval? You can use `RAgecat5`
+
+## Computing domain estimates
+
+Computing domain estimates, that is estimates for subgroups adds a layer
+of complexity to the above example. They key point is that as weights
+are usually  designed using the whole of the sample by data producers, confidence intervals or standard errors computed using only part of the
+sample may be unreliable, as they will rely on some of the  weights only.  Instead, it is recommended to use commands that take into
+account the entire distribution of the weights.
+
+In R, the command that does this is `svyby()`
+
+For instance, if we would like to compute the mean age of BSA
+respondents by Government Office Regions, we need to specify:
+  
+  -   The outcome variable whose estimate we want to compute: i.e. `RAgeE`
+-   The grouping variable(s) `GOR_ID`
+-   The estimate function we are going to use here: `svymean`, the same
+as we used before
+-   And the type of type of variance estimation we would like to see
+displayed i.e. standard errors or confidence interval
+
+```{r 5.7}
+round(
+  svyby(~RAgeE,by=~as_factor(GOR_ID),svymean,design=bsa17.s,vartype = "ci")[-1]
+  ,1)
+```
+
+*Note:* we used `[-1]` from the object created by `svyby()` in order to
+remove a column with alphanumeric values (the region names), so that we
+could round the results without getting an error.
+
+Our inference seem to suggest that the population in London is among the
+youngest in the country, and that those in the South West are among the
+oldest -- their respective 95% confidence intervals do not overlap. We
+should not feel so confident about differences between London and the
+South East for example, as the CIs partially overlap.
+
+We can follow a similar approach with proportions: we just need to
+specify the category of the variable we are interested in as an outcome,
+for instance respondents who are significantly interested in politics,
+and replace `svymean` by `svyciprop`.
+
+```{r 5.8}
+round(
+  100*
+    svyby(~I(Politics==1 | Politics==2),
+          by=~as_factor(GOR_ID),
+          svyciprop,
+          design=bsa17.s,
+          vartype = "ci")[-1],
+  1)
+```
+
+**Question 5** What is the 95% confidence interval for the proportion of
+people interested in politics in the South West? Is the proportion
+likely to be different in London? In what way? What is the region of the
+UK for which the precision of the estimates is likely to be the
+smallest?
+  
+  **Question 6** Using interest in politics as before, and three category
+age `RAgecat5`:
+  
+  -   Produce a table of results showing the proportion of respondents
+significantly interested in Politics by age group and gender
+
+-   Assess whether the age difference in interest for politics is
+similar for each gender?
+  
+  -   Based on the data, is it fair to say that men aged under 35 tend to
+be more likely to declare themselves interested in politics than
+women aged 55 and above?
+  
+  ## Inference without survey design variables using R
+  
+  *Example: count and proportion of the regional population of the UK
+using the LFS with End User License (EUL)*
+  
+  As a rule, EUL versions of the LFS do not include sample design
+variables. On the other hand they come with two weight variables:
+  
+  -   `pwt22` for estimation with the whole sample
+-   `piwt22` for estimation of income using respondents currently in
+employment (and accounting for the high level of non response for
+            the earnings variables)
+
+Estimation without accounting for sample design will likely be biased
+and should be reported as such including warnings, even if the nature
+(over or underestimation of the precision) and and size are not known.
+An alternative is to look for design effects tables published by the
+data producer which could be used to correct for the bias.
+
+The Office for National Statistics regularly publishes such tables for
+the LFS, albeit mostly for their headline statistics. Obtaining further
+design effects for subpopulations might not be straighforward. The
+overall methodology is described [in this
+                                  note](https://www.ons.gov.uk/methodology/methodologicalpublications/generalmethodology/onsworkingpaperseries/onsmethodologyworkingpaperseriesno9guidetocalculatingstandarderrorsforonssocialsurveys#annex-a-labour-force-survey-standard-errors-january-to-march-2015-united-kingdom),
+                                        and updated tables are provided [on this
+                                                                         page](Volume%201:%20Background%20and%20methodology%20(PDF,%201.2MB)).
+
+Let's see how this can be achieved. But first, let's produce uncorrected
+'naive' estimates of the regional population.
+
+```{r  5.9}
+lfs<-read_dta((paste0(datadir,"lfs/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta")))%>%
+  select(PWT22,PIWT22,URESMC,ILODEFR)
+names(lfs)<-tolower(names(lfs))
+lfs$uresmc.f<-droplevels(as_factor(lfs$uresmc))
+lfs.s<-svydesign(ids=~1,weights=~piwt22,data=lfs%>%filter(ilodefr==1)) 
+round(confint(svytotal(~uresmc.f,lfs.s)))
+```
+
+In the above example, we are working with the most commonly used flavour
+of the Labour Force Survey: the quarterly edition. The specific dataset
+used above is the April-July 2022 issue. Looking at the latest version
+of the documentation mentioned above - Volume 1, Annex C, we can see a
+list of design effects for the number of employed respondents by Region
+of Usual Residence.
+
+![LFS design
+  factors](pics/lfs_vol1_SE.png){fig-alt="Screenshot of LFS documentation Volume 1, Annex C showing Design Effects"}
+
+We can see that for some reason, the number of regions has been reduced
+from the original 16 to 13. We therefore need to recode our original
+variable.
+
+```{r 5.10}
+lfs<-lfs%>%mutate(uresmc.fn=case_when(
+  lfs$uresmc.f=="Tyne & Wear" | 
+    lfs$uresmc.f== "Rest of Northern region" ~ "North East",
+  lfs$uresmc.f=="South Yorkshire" |
+    lfs$uresmc.f== "West Yorkshire" | 
+    lfs$uresmc.f== "Rest of Yorks & Humberside" ~ "Yorkshire & Humberside",
+  lfs$uresmc.f=="Inner London" | 
+    lfs$uresmc.f== "Outer London"~"London",
+  lfs$uresmc.f=="West Midlands (met county)" |
+    lfs$uresmc.f== "Rest of West Midlands"~"West Midlands",
+  lfs$uresmc.f=="Greater Manchester" |
+    lfs$uresmc.f== "Rest of North West" ~ "North West",
+  lfs$uresmc.f=="Strathclyde" |
+    lfs$uresmc.f== "Rest of Scotland"~"Scotland",
+  .default=uresmc.f
+))
+```
+
+For convenience, reorder the factor levels in order to match the ONS
+ordering:
+  
+```{r 5.11}
+
+lfs$uresmc.fn<-as.factor(lfs$uresmc.fn)
+lfs$uresmc.fn<-factor(
+  lfs$uresmc.fn,
+  levels = levels(lfs$uresmc.fn)[c(5,6,4,13,2,12,1,3,8,10,11,9,7)])
+```
+
+Let us now check the results:
+  
+```{r 5.12}
+lfs.s<-svydesign(ids=~1,weights=~piwt22,data=lfs%>%filter(ilodefr==1)) 
+round(confint(svytotal(~uresmc.fn,lfs.s)))
+```
+
+We can now import the design factors from the LFS documentation. This
+has to be done by hand, by directly copying the relevant numbers from
+the LFS.
+
+While we are at it we can also improve the original table:
+  
+```{r 5.13}
+tot<-data.frame(svytotal(~uresmc.fn,lfs.s))
+tot$deft<-c(0.8712,1.0857,1.3655,1.0051,0.9634,
+            1.0382,0.8936,1.3272,0.9677,0.9137,
+            1.0012,1.0437,0.7113)
+tot["2.5%"]<-tot$total-(1.96*tot$SE*tot$deft)
+tot["97.5%"]<-tot$total+(1.96*tot$SE*tot$deft)
+rownames(tot)<-substr(rownames(tot),10,nchar(rownames(tot)))
+kable(round(tot[,c("2.5%","97.5%")]))
+```
+
+### Answers
+
+**Question 1** The 2017 BSA is a three stage stratified random survey,
+with postcode sectors, adresses and individuals as the units selected at
+each stage. Primary sampling units were stratified according to
+geographies (sub regions), population density, and proportion of
+owner-occupiers. Sampling rate was proportional to the size of postcode
+sectors (i.e. number of addresses).
+
+**Question 2** From the Data Dictionary it appears that the primary
+sampling units (sub regions) are identified by `Spoint` and the strata
+by `StratID`. The weights variable is `WtFactor`. Addresses are not
+provided but could be approximated with a household identifier.
+
+**Question 3** Not using weights would make us overestimate the mean age
+in the population (of those aged 16+) by about 4 years. This is likely
+to be due to the fact that older respondents are more likely to take
+part to surveys. Using survey design variables does not alter the value
+of the estimated population mean. However, not accounting for it would
+lead us to overestimate the precision/underestimate the uncertainty of
+our estimate with a narrower confidence interval -- by about plus or
+minus 3 months.
+
+**Question 4** The proportion of 17-34 year old in the sample is
+`r round(100*as.numeric(svyciprop(~I(RAgecat5 == 1),bsa17.s)[1]),1)` and
+its 95% confidence interval
+`r round(100*attr(svyciprop(~I(RAgecat5 == 1),bsa17.s),"ci"),1)`
+
+**Question 5** The 95% confidence interval for the proportion of people
+interested in politics in the South West is 39.8-53.4. By contrast, it
+is 47.6-60.8 in London. The region with the lowest precision of
+estimates (i.e. the widest confidence interval) is Wales, with a 20
+percentage point difference between the upper and lower bounds of the
+confidence interval.
+
+**Question 6**
+  
+```{r 5.14,echo=F}
+bsa17$Politics.s<-ifelse(bsa17$Politics==1 |
+                           bsa17$Politics==2,"Significantly",NA)
+bsa17$Politics.s<-ifelse(bsa17$Politics>=3 &
+                           bsa17$Politics<=5,"Not Interested",bsa17$Politics.s)
+bsa17$Politics.s<-as.factor(bsa17$Politics.s)
+
+bsa17$RAgecat5.f<-as_factor(bsa17$RAgecat5)
+bsa17$Rsex.f<-as_factor(bsa17$Rsex)
+
+bsa17.s<-svydesign(ids=~Spoint+Sserial, 
+                   strata=~StratID, 
+                   weights=~WtFactor,
+                   data=bsa17)
+
+round(
+  100*svyby(
+    ~I(Politics.s=="Significantly"),
+    by=~RAgecat5.f+Rsex.f,
+    svyciprop,
+    design=bsa17.s,
+    vartype = "ci")[c(-8,-4),c(-2,-1)]
+  ,1)
+```
+
+Older respondents both male and female tend to be more involved in
+politics than younger ones.
+
+The confidence interval for the proportion of men under 35 and women
+above 55 interested in politics overlaps; it is unlikely that they
+differ in the population.

@@ -1,0 +1,48 @@
+# Appendix: Study-specific weighting and sample design information
+
+## British Social Attitudes Survey
+
+The BSA is a three stage stratified random survey, with postcode
+sectors, addresses and individuals as the units selected at each stage.
+Primary sampling units were furthermore stratified according to
+geographies (sub regions), population density, and proportion of
+owner-occupiers. Sampling rate was proportional to the size of postcode
+sectors (i.e. number of addresses). Some issues of the BSA such as the
+2017 include survey design information. The 2017 issue included
+information about Primary Smapling Units (`Spoint`), strata (`StratID`).
+Weights are called `WtFactor`.
+
+## Labour Force Survey
+
+The LFS is a geographically stratified random survey. For the main part
+Primary sampling units are addresses within postcode sectors, drawn from
+the Small Users Postcode Address File (PAF). The small users PAF is
+limited to addresses which receive, fewer than 50 items of post per day.
+In a small number of cases a second stage sampling occurs where several
+households exist at a given address. A clustering effect is also present
+to the extent that units of observations are individuals within
+households, and that some groups are clustered within these, typically
+ethnicity. LFS weights (all of these include a grossing component that
+                        enables estimation of population counts): - PWTxx – person level
+sampling weight; - PIWTxx - person-level sampling weight for income
+analysis (i.e. subsample of people in paid work) - PHHWTxx -
+  Household-level sampling weight (for household-level analysis)
+
+## Family Resources Survey
+
+The FRS is a stratified clustered random survey, with survey design
+differing slightly between countries of the UK. In Great Britain,
+Primary sampling units are postcode sectors, drawn from the Small Users
+Postcode Address File (PAF). Before being selected, PSUs are stratified
+according to geography, proportion of household reference persons from
+higher social classes in the area, proportion of economically active
+respondents in the area, and proportion of economically active men who
+are unemployed. In Northern Ireland, the sample is a systematic random
+sample of addresses.
+
+Information about Design Effects in the Family Resources Survey series
+is available
+[here](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/972808/Ch1_Methodology_and_Standard_Errors.xlsx)
+
+FRS weights: GROSS4: person-level sampling weight; enables inferring
+population counts
