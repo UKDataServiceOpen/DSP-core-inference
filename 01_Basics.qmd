@@ -1,4 +1,4 @@
-# 1. Basics of Survey Design {.unnumbered}
+# Basics of Survey Design
 
 At the heart of survey design is how we choose who takes part in the
 survey - this is known as sampling. There are two main approaches:
@@ -59,7 +59,7 @@ and **stratification**.
 
 ------------------------------------------------------------------------
 
-## 1.1 📦 Clustering in Survey Sampling
+## 📦 Clustering in Survey Sampling
 
 Clustering is a common technique in survey design, especially in
 large-scale studies. Its usage implies **multistage sampling**, which
@@ -196,7 +196,7 @@ flowchart TD
 -   Always account for clustering during analysis to avoid misleading
     results.
 
-## 🧩  1.2 Stratification
+## 🧩  Stratification
 
 Stratification is another important technique used in survey sampling.
 It involves dividing the population into different groups - called
@@ -255,7 +255,7 @@ population overall
 By making sure each group is adequately represented, stratification
 helps improve the accuracy and representativeness of survey estimates
 
-## 🎯 1.3 Proportionate vs disproportionate sampling
+## 🎯 Proportionate vs disproportionate sampling
 
 In **simple random sampling**, every person (or unit) in the population
 has the **same chance** of being selected. This means that the
