@@ -1,32 +1,348 @@
-# Stata examples
+# Stata  {.unnumbered}
 
-Stata provides comprehensive support for computing estimates from survey
-data. Users may either opt to add sampling weights to the standard
-estimation commands, or use survey-specific commands. The latter is
-recommended when knowledge of estimate precision is required. Stata
-provides a conceptual distinction between four types of weights:
+Stata provides comprehensive support for computing estimates from survey data using weights and survey design variables. Perhaps a bit confusingly to some users,  it  distinguishes between four weighted estimation techniques, also called *weights*:
+
+- frequency weights (`fweight`)  
+- analytical weights (`aweight`),
+- importance weights (`iweight`) and
+- probability weights (`pweight`).
+
+These mostly differ in the way standard errors are estimated. 
+
+In most cases,  survey weights available in UKDS datasets should be treated as *probability weights* in Stata jargon. Indeed not all of the above weighting methods were designed to work with survey data. 
+
+As other statistical software, weighted estimation in Stata can either be performed:
+
+- as a two stage process consisting of first declaring the current dataset in memory to be survey data (using `svyset`), then run survey data-specific estimation commands using the `svy:` prefix.
+- or by specifying weights alongside standard estimation commands ie `command based` or `casual`weighting.
+
+At the same time, a feature of Stata is that a number  of basic estimation commands, such as `summarise` or `tabulate`. This is meant to nudge users of survey data to prioritise the survey estimation commands rather than command-based weighting.
+
+
+In the example below, we will practice statistical inference with data from the [2017 British Social Attitudes Survey      (BSA)](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450) taking into account weights and survey design variables. Please note
+that at the time of writing this document only some issues of the BSA include survey design variables.
+
+## Identifying the survey design and variables
+
+We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the `mrdoc/pdf` folder.
+
+
+
+::: {.callout-tip icon=false collapse=true}
+## **Question 1** *What was the design  used in this survey (i.e. think stages and units sampled). What were the primary sampling units; the strata (if relevant)?*
+
+*The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at
+each stage. Primary sampling units were stratified according to geographies (sub regions), population density, and proportion of
+owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e. number of addresses).*
+
+:::
   
-  -   frequency weights (`fweight`),
--   analytical weights (`aweight`),
--   importance weights (`iweight`) and
--   probability weights (`pweight`).
-
-These differences impact on the way standard errors are computed during
-estimation. In most cases, social survey weights from UKDS datasets
-should be treated as probability weights. A number of of basic
-estimation commands, such as *summarise* do not allow using probability
-weights. This is an explicit features of Stata, meant to nudge users of
-survey data to prioritise the survey commands rather than 'casual'
-weighting.
-
-Using standalone weight specification (i.e. not using survey design
-                                       functions). In Stata it consists in the weighting variable being
-specified between square brackets. Stata defines four kind of weights:
+------------------------------
   
-  Only probability weights (abbreviated as `pw` in most Stata commands)
-should be used with survey data. However, Stata does not allow using
-them with its main commands, for the reason highlighted above i.e. in
-order for users not overlook survey design issues in their data.
-Therefore, one has to specify instead the wrong frequency weights (`fw`)
-if one does not wish to use the survey design functions.
-< pagebreak>
+Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can
+include when producing estimates. The information can usually be found in the user manual or the data dictionary available under
+`mrdoc/ukda_data_dictionaries.zip` The file may need to be decompressed separately.
+
+::: {.callout-tip icon=false collapse=true}
+## **Question 2** *What survey design variables are available? Are there any ones that are missing -- if so which ones? What is the name of the weights variables?*
+
+*From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by `Spoint` and the strata by `StratID`. The weights variable is `WtFactor`. Addresses are not provided but could be approximated with a household identifier.*
+:::
+
+------------------------------
+  
+## Specifying the survey design in Stata
+
+We first need to open the BSA dataset.
+
+```{stata 7.1}
+*** Setting the working directory
+*** Edit the line below  as appropriate
+quietly  cd ~/OneDrive/DSP/SSP/DSP-core-inference 
+
+use ~/Data/bsa/UKDA-8450-stata/bsa2017_for_ukda.dta
+
+*** We use the short option in order to avoid 
+*** all variables in the dataset to be list
+
+describe, short 
+```
+
+We can now specify the survey design earlier identified in the data documentation using:
+
+- `Spoint` as Primary Sampling Unit;
+- `StratID` as strata...
+- and `WtFactor` as weights. 
+
+The Stata command to do  this is `svyset`.
+
+```{stata 7.2}
+*** First examine the survey design variables
+
+describe Spoint StratID WtFactor
+
+svyset Spoint [pw=WtFactor], strata(StratID)
+```
+
+## Mean age and its 95% confidence interval
+
+We can now produce a first set of estimates and compare it with those we would have got without accounting for the survey design. We will compute the average (i.e. mean) age of respondents. From this point, we will are going to use the `svy:` prefix before Stata estimation commands, so that our estimates are informed by the survey design. 
+
+```{stata 7.3}
+svy:mean RAgeE
+```
+
+By default `svy:mean` computes both the standard error of the mean and its confidence interval.
+
+From the above  results, we can see that back in 2017 the mean age of the British population  aged 16 and over was likely to range between 
+47.5  and 49.1 years.  
+
+::: {.callout-tip icon=false collapse=true}
+## **Question 3** *What would be the consequences of weighing but not accounting for the sample design; not using weights and accounting for the sample design on estimating the mean and its confidence interval*
+
+- Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys. 
+
+```{stata 7.3.1}
+mean RAgeE
+```
+
+- Not using survey design variables does not alter the value of the estimated population mean. However, this would lead us to - marginally - overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval  ie between 47.6 and 49 years, that is by a little bit more than a month in each direction.
+
+```{stata 7.3.2}
+*** Declaring survey design as simple random
+svyset [pw=WtFactor]
+svy:mean RAgeE
+```
+:::
+
+--------------------------
+
+## Proportions and their 95% confidence interval
+  
+We can similarly estimate the distribution of a categorical variable in the population by computing proportions (or percentages), for
+instance, the proportion of people who declare that they are interested in politics. This is the `Politics` variable in the BSA. It has five
+categories ranging from 1 - 'A great deal' to 5 - 'None at all'. We are going to recode it into a dichotomic variable with
+ 1 and 2 - `quite a lot` and as 'Significantly', and the rest as 'Not so much'. 
+
+```{stata 7.4.1}
+*** Overview of the variable
+inspect Politics
+
+*** Frequency distribution
+tab Politics
+```
+
+Let's create the dichotomic version and look at the results:
+
+```{stata 7.4.2}
+
+recode Politics 1 2=1 3/max=0, gen(DPol)
+
+*** Labelling the variable
+lab def LDPol 0 "Not so much" 1 "Significantly"
+lab val DPol LDPol
+
+*** Frequency distribution
+tab Politics DPol 
+```
+
+We can now estimate the proportion of people significantly interested in politics in the population. We just need to add `ci` as an option in order to also get the 95% confidence interval.
+
+
+```{stata 7.4.3}
+*** Let's not forget to declare the survey design again
+
+*** We need to declare again the survey design after the last exercise
+svyset Spoint [pw=WtFactor], strata(StratID)
+
+svy:tab DPol,percent ci
+```
+
+::: {.callout-tip icon=false collapse=true}
+
+## **Question 4** *What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use `RAgecat5`*
+- The proportion of 17-34 year old in the sample is 
+
+```{stata 7.4.5}
+svy:tab RAgecat5, percent ci
+```
+:::
+
+--------------------------
+
+## Domain estimates
+
+*Domain estimates*  refer to  estimates for groups or subpopulations, which  adds a layer of complexity to what we have done so far. They key point is that as survey weights are usually  designed by data producers using the whole of the sample, confidence intervals and standard errors computed using only part of the sample - such as for example when subsetting the dataset or removing observations - may be unreliable, as they will rely on some of the  weights only.  Instead, it is recommended to use commands that take into account the entire distribution of the weights. 
+
+In Stata, this can be either achieved with `subpop()` or `over`. 
+
+`subpop()` computes estimates for single groups identified either by a dummy variable (ie coded 0-1), or by a conditional statement.  For instance, if we would like to know the mean age of BSA respondents  in the North East, we need to specify (using the Government Office Regions `GOR_ID` variable):
+  
+```{stata 7.5.1}
+
+svy, subpop(if GOR_ID==1):mean RAgeE
+```
+The above would be  identical to:
+
+```{stata 7.5.2}
+*** Creates dummy variables with the category number as suffix
+quietly tab GOR_ID ,gen(region) 
+
+svy, subpop(region1): mean RAgeE, cformat(%9.1f)
+```
+
+In case there are  more than  a few subpopulations, Stata provides the 'over' option, that can be used with in conjunction with estimation commands.
+In our case:
+
+```{stata 7.5.3}
+svy: mean RAgeE,over(GOR_ID) cformat(%9.1f)
+```
+
+Our results seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the
+oldest -- their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the
+South East, as the CIs partially overlap.
+
+We can follow a similar approach with proportions: we just need to specify the variable we are interested in as an outcome, for instance respondents who are significantly interested in politics, and either replace `mean` with `proportion` or even more simply use `tab`:
+
+```{stata 7.8}
+svy:proportion DPol, percent over(GOR_ID) 
+svy:tab GOR_ID DPol, row percent  ci 
+
+```
+
+::: {.callout-tip icon=false collapse=true}
+## **Question 5** *What is the 95% confidence interval for the proportion of people interested in politics in the South West? Is the proportion likely to be different in London? In what way? What is the region of the UK for which the precision of the estimates is likely to be the smallest?*
+
+The 95% confidence interval for the proportion of people interested in politics in the South West in 2017 was  39.8-53.4. By contrast, it
+was 47.6-60.8 in London. The region with the lowest precision of estimates (i.e. the widest confidence interval) was Wales, with a 20
+percentage point difference between the upper and lower bounds of the confidence interval.
+:::
+
+--------------------------
+
+::: {.callout-tip icon=false collapse=true}
+  
+## **Question 6** *Using interest in politics as before, and three category age `RAgecat5`: 1. Produce a table of results showing the proportion of respondents significantly interested in politics by age group and gender; 2. Assess whether the age difference in interest in politics is similar for each gender; 3. Based on the data, is it fair to say that men aged under 35 tend to be more likely to declare themselves interested in politics than women aged 55 and above?
+  
+```{stata 5.14,echo=F}
+svy,subpop(if RAgecat5==1 & Rsex==1): proportion DPol,percent
+svy: proportion DPol,over(RAgecat5 Rsex)
+```
+
+Older respondents both male and female tend to be more involved in politics than younger ones.
+
+The confidence interval for the proportion of men under 35 and women above 55 interested in politics overlaps; it is unlikely that they differ in the population.  
+
+:::
+  
+--------------------------
+
+## Inference without survey design variables 
+  
+*Example: count and proportion of the regional population of the UK
+using Quarterly  Labour Force Survey safeguarded data*
+  
+As a rule, safeguarded versions of the LFS do not include sample design
+variables. On the other hand they include  two weight variables:
+  
+-   `pwt22` for estimation with the whole sample
+-   `piwt22` for estimation of income using respondents currently in
+employment (and accounting for the high level of non response for
+            the earnings variables)
+
+Estimation without accounting for sample design will likely be biased
+and should be reported as such including warnings, even if the nature
+(over or underestimation of the precision) and and size are not known.
+An alternative is to look for design effects tables published by the
+data producer which could be used to correct for the bias.
+
+The Office for National Statistics regularly publishes such tables for
+the LFS, albeit mostly for their headline statistics. Obtaining further
+design effects for subpopulations might not be straighforward. The
+overall methodology is described [in this note](https://www.ons.gov.uk/methodology/methodologicalpublications/generalmethodology/onsworkingpaperseries/onsmethodologyworkingpaperseriesno9guidetocalculatingstandarderrorsforonssocialsurveys#annex-a-labour-force-survey-standard-errors-january-to-march-2015-united-kingdom), and updated tables are provided [on this page](Volume%201:%20Background%20and%20methodology%20(PDF,%201.2MB)).
+
+Let's see how this can be achieved. But first, let's produce uncorrected
+'naive' estimates of the regional population.
+
+```{stata  7.9}
+clear 
+use ~/Data/lfs/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta
+
+svyset [pw=PIWT22] 
+
+*** Counts the number of valid cases for the SEX variable
+svy:total SEX, over(URESMC)
+```
+
+In the above example, we are working with the most commonly used flavour
+of the Labour Force Survey: the quarterly edition. The specific dataset
+used above is the April-July 2022 issue. Looking at the latest version
+of the documentation mentioned above - Volume 1, Annex C, we can see a
+list of design effects for the number of employed respondents by Region
+of Usual Residence.
+
+![LFS design
+  factors](pics/lfs_vol1_SE.png){fig-alt="Screenshot of LFS documentation Volume 1, Annex C showing Design Effects"}
+
+We can see that for some reason, the number of regions has been reduced
+from the original 16 to 13. We therefore need to recode our original
+variable.
+
+```{stata 7.10}
+*** Recoding
+recode URESMC 1 2=1 3 4 5 =2 8 9=8 12 13 =12 14 16 =14 18 19=18,gen(rURESMC)
+
+*** Adapting values labels
+lab copy URESMC ur2
+lab def ur2 1 "North East" 2 "Yorkshire & Humber" 8 "London" 12 "West Midlands" 14 "North West" 18 "Scotland",modify
+lab val  rURESMC ur2
+
+*** Checking the results
+tab rURESMC
+```
+
+
+Let us now produce the updated population estimates:
+  
+```{stata 7.11}
+svy:total SEX, over(rURESMC)
+```
+
+We can now amend  the standard errors and CIs using the design factors from the LFS documentation. This has to be done by hand, by directly copying the relevant numbers from the LFS documentation.
+
+For example, if we wanted to adjust the population estimates for London, we would need to start with the original standard error, multiply it by the relevanmt  design effect, then compute the 95% confidence interval of the point estimate. The design effect for London is smaller than 1, which indicates that the  confidence interval after correction will be narrower - more precise than when simple random sampling was assumed.
+
+Here is the adjusted  standard error for London:
+
+```{stata 7.12}
+dis 294956.8*0.9634
+``` 
+
+... The corresponding  lower bound of the confidence interval
+```{stata 7.13}
+dis 5912194-1.96*(294956.8*0.9634)
+```
+
+... And the upper bound
+```{stata 7.14}
+dis 5912194+1.96*(294956.8*0.9634)
+```
+
+... Instead of the original one:  
+
+`[5334080 -6490308]`
+
+We can see that it is indeed narrower.
+
+*Note*: it would be  possible to produce an amended table in full, using Stata's MATA functions.
+
+```{stata 5.13}
+mat input deff= (0.8712,1.0857,1.3655,1.0051,0.9634,1.0382,0.8936,1.3272,0.9677,0.9137, 1.0012,1.0437,0.7113)
+
+mat orig= e(b)',r(table)["se",.]',deff',hadamard(r(table)["se",.],deff)'
+
+*mat ciL = test[.,"total"]-(1.96*tot$SE*tot$deft)
+*tot["97.5%"]<-tot$total+(1.96*tot$SE*tot$deft)
+*rownames(tot)<-substr(rownames(tot),10,nchar(rownames(tot)))
+*kable(round(tot[,c("2.5%","97.5%")]))
+```

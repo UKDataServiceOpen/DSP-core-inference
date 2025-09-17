@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Stata examples – Statistical inference  with weights and survey design variables</title>
+<title>Stata – Statistical inference with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -103,7 +138,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07_Stata.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html">5. Exercises</a></li><li class="breadcrumb-item"><a href="./07_Stata.html">Stata</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,7 +152,7 @@ div.csl-indent {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="http:// ukdataservice.ac.uk" class="sidebar-logo-link">
+      <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
@@ -161,24 +196,35 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">5. Exercises</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
+ <span class="menu-text">R</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
+ <span class="menu-text">SPSS</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07_Stata.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
+ <span class="menu-text">Stata</span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_References.html" class="sidebar-item-text sidebar-link">
@@ -188,7 +234,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
   </div>
 </li>
     </ul>
@@ -196,20 +242,31 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#identifying-the-survey-design-and-variables" id="toc-identifying-the-survey-design-and-variables" class="nav-link active" data-scroll-target="#identifying-the-survey-design-and-variables">Identifying the survey design and variables</a></li>
+  <li><a href="#specifying-the-survey-design-in-stata" id="toc-specifying-the-survey-design-in-stata" class="nav-link" data-scroll-target="#specifying-the-survey-design-in-stata">Specifying the survey design in Stata</a></li>
+  <li><a href="#mean-age-and-its-95-confidence-interval" id="toc-mean-age-and-its-95-confidence-interval" class="nav-link" data-scroll-target="#mean-age-and-its-95-confidence-interval">Mean age and its 95% confidence interval</a></li>
+  <li><a href="#proportions-and-their-95-confidence-interval" id="toc-proportions-and-their-95-confidence-interval" class="nav-link" data-scroll-target="#proportions-and-their-95-confidence-interval">Proportions and their 95% confidence interval</a></li>
+  <li><a href="#domain-estimates" id="toc-domain-estimates" class="nav-link" data-scroll-target="#domain-estimates">Domain estimates</a></li>
+  <li><a href="#inference-without-survey-design-variables" id="toc-inference-without-survey-design-variables" class="nav-link" data-scroll-target="#inference-without-survey-design-variables">Inference without survey design variables</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html">5. Exercises</a></li><li class="breadcrumb-item"><a href="./07_Stata.html">Stata</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></h1>
+<h1 class="title">Stata</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -221,16 +278,812 @@ div.csl-indent {
 </header>
 
 
-<p>Stata provides comprehensive support for computing estimates from survey data. Users may either opt to add sampling weights to the standard estimation commands, or use survey-specific commands. The latter is recommended when knowledge of estimate precision is required. Stata provides a conceptual distinction between four types of weights:</p>
+<p>Stata provides comprehensive support for computing estimates from survey data using weights and survey design variables. Perhaps a bit confusingly to some users, it distinguishes between four weighted estimation techniques, also called <em>weights</em>:</p>
 <ul>
-<li>frequency weights (<code>fweight</code>),</li>
+<li>frequency weights (<code>fweight</code>)<br>
+</li>
 <li>analytical weights (<code>aweight</code>),</li>
 <li>importance weights (<code>iweight</code>) and</li>
 <li>probability weights (<code>pweight</code>).</li>
 </ul>
-<p>These differences impact on the way standard errors are computed during estimation. In most cases, social survey weights from UKDS datasets should be treated as probability weights. A number of of basic estimation commands, such as <em>summarise</em> do not allow using probability weights. This is an explicit features of Stata, meant to nudge users of survey data to prioritise the survey commands rather than ‘casual’ weighting.</p>
-<p>Using standalone weight specification (i.e.&nbsp;not using survey design functions). In Stata it consists in the weighting variable being specified between square brackets. Stata defines four kind of weights:</p>
-<p>Only probability weights (abbreviated as <code>pw</code> in most Stata commands) should be used with survey data. However, Stata does not allow using them with its main commands, for the reason highlighted above i.e.&nbsp;in order for users not overlook survey design issues in their data. Therefore, one has to specify instead the wrong frequency weights (<code>fw</code>) if one does not wish to use the survey design functions. &lt; pagebreak&gt;</p>
+<p>These mostly differ in the way standard errors are estimated.</p>
+<p>In most cases, survey weights available in UKDS datasets should be treated as <em>probability weights</em> in Stata jargon. Indeed not all of the above weighting methods were designed to work with survey data.</p>
+<p>As other statistical software, weighted estimation in Stata can either be performed:</p>
+<ul>
+<li>as a two stage process consisting of first declaring the current dataset in memory to be survey data (using <code>svyset</code>), then run survey data-specific estimation commands using the <code>svy:</code> prefix.</li>
+<li>or by specifying weights alongside standard estimation commands ie <code>command based</code> or <code>casual</code>weighting.</li>
+</ul>
+<p>At the same time, a feature of Stata is that a number of basic estimation commands, such as <code>summarise</code> or <code>tabulate</code>. This is meant to nudge users of survey data to prioritise the survey estimation commands rather than command-based weighting.</p>
+<p>In the example below, we will practice statistical inference with data from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450">2017 British Social Attitudes Survey (BSA)</a> taking into account weights and survey design variables. Please note that at the time of writing this document only some issues of the BSA include survey design variables.</p>
+<section id="identifying-the-survey-design-and-variables" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-the-survey-design-and-variables">Identifying the survey design and variables</h2>
+<p>We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the <code>mrdoc/pdf</code> folder.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<em>Question 1 What was the design used in this survey (i.e.&nbsp;think stages and units sampled). What were the primary sampling units; the strata (if relevant)?</em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e.&nbsp;number of addresses).</em></p>
+</div>
+</div>
+</div>
+<hr>
+<p>Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under <code>mrdoc/ukda_data_dictionaries.zip</code> The file may need to be decompressed separately.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<em>Question 2 What survey design variables are available? Are there any ones that are missing – if so which ones? What is the name of the weights variables?</em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by <code>Spoint</code> and the strata by <code>StratID</code>. The weights variable is <code>WtFactor</code>. Addresses are not provided but could be approximated with a household identifier.</em></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="specifying-the-survey-design-in-stata" class="level2">
+<h2 class="anchored" data-anchor-id="specifying-the-survey-design-in-stata">Specifying the survey design in Stata</h2>
+<p>We first need to open the BSA dataset.</p>
+<div id="e90f00cb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>*** Setting the working directory</span>
+<span id="cb1-2"><a href="#cb1-2"></a>*** Edit the <span class="kw">line</span> below  <span class="kw">as</span> appropriate</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">quietly</span>  cd ~/OneDrive/DSP/SSP/DSP-core-inference </span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">use</span> ~/Data/bsa/UKDA-8450-stata/bsa2017_for_ukda.dta</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>*** We <span class="kw">use</span> the <span class="kw">short</span> option <span class="kw">in</span> <span class="kw">order</span> to avoid </span>
+<span id="cb1-8"><a href="#cb1-8"></a>*** <span class="ot">all</span> variables <span class="kw">in</span> the dataset to <span class="kw">be</span> <span class="ot">list</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">describe</span>, <span class="kw">short</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+
+
+Contains data from ~/Data/bsa/UKDA-8450-stata/bsa2017_for_ukda.dta
+ Observations:         3,988                  
+    Variables:           580                  09 FEB 2021 09:29
+Sorted by: </code></pre>
+</div>
+</div>
+<p>We can now specify the survey design earlier identified in the data documentation using:</p>
+<ul>
+<li><code>Spoint</code> as Primary Sampling Unit;</li>
+<li><code>StratID</code> as strata…</li>
+<li>and <code>WtFactor</code> as weights.</li>
+</ul>
+<p>The Stata command to do this is <code>svyset</code>.</p>
+<div id="c9169534" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>*** First examine the survey design variables</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">describe</span> Spoint StratID WtFactor</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">svyset</span> Spoint [pw=WtFactor], <span class="kw">strata</span>(StratID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+--------------------------------------------------------------------------------
+Spoint          int     %8.0g                 Sample point
+StratID         int     %8.0g                 Stratification ID
+WtFactor        double  %12.0g                Final BSA weight
+
+
+Sampling weights: WtFactor
+             VCE: linearized
+     Single unit: missing
+        Strata 1: StratID
+ Sampling unit 1: Spoint
+           FPC 1: &lt;zero&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="mean-age-and-its-95-confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval">Mean age and its 95% confidence interval</h2>
+<p>We can now produce a first set of estimates and compare it with those we would have got without accounting for the survey design. We will compute the average (i.e.&nbsp;mean) age of respondents. From this point, we will are going to use the <code>svy:</code> prefix before Stata estimation commands, so that our estimates are informed by the survey design.</p>
+<div id="395c08cb" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">svy</span>:<span class="kw">mean</span> RAgeE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata = 159            Number of obs   =      3,988
+Number of PSUs   = 372            Population size = 3,988.0019
+                                  Design df       =        213
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+       RAgeE |   48.31309   .4235811      47.47815    49.14804
+--------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>By default <code>svy:mean</code> computes both the standard error of the mean and its confidence interval.</p>
+<p>From the above results, we can see that back in 2017 the mean age of the British population aged 16 and over was likely to range between 47.5 and 49.1 years.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Question 3</strong> <em>What would be the consequences of weighing but not accounting for the sample design; not using weights and accounting for the sample design on estimating the mean and its confidence interval</em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys.</li>
+</ul>
+<div id="21d49046" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">mean</span> RAgeE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mean estimation                          Number of obs = 3,988
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+       RAgeE |   52.19358   .2872482      51.63041    52.75675
+--------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>Not using survey design variables does not alter the value of the estimated population mean. However, this would lead us to - marginally - overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval ie between 47.6 and 49 years, that is by a little bit more than a month in each direction.</li>
+</ul>
+<div id="d8a8a8b6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>*** Declaring survey design <span class="kw">as</span> simple random</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">svyset</span> [pw=WtFactor]</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">svy</span>:<span class="kw">mean</span> RAgeE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Sampling weights: WtFactor
+             VCE: linearized
+     Single unit: missing
+        Strata 1: &lt;one&gt;
+ Sampling unit 1: &lt;observations&gt;
+           FPC 1: &lt;zero&gt;
+
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     1          Number of obs   =      3,988
+Number of PSUs   = 3,988          Population size = 3,988.0019
+                                  Design df       =      3,987
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+       RAgeE |   48.31309   .3435013      47.63964    48.98655
+--------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="proportions-and-their-95-confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="proportions-and-their-95-confidence-interval">Proportions and their 95% confidence interval</h2>
+<p>We can similarly estimate the distribution of a categorical variable in the population by computing proportions (or percentages), for instance, the proportion of people who declare that they are interested in politics. This is the <code>Politics</code> variable in the BSA. It has five categories ranging from 1 - ‘A great deal’ to 5 - ‘None at all’. We are going to recode it into a dichotomic variable with 1 and 2 - <code>quite a lot</code> and as ‘Significantly’, and the rest as ‘Not so much’.</p>
+<div id="8f82e839" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a>*** Overview <span class="kw">of</span> the <span class="kw">variable</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>inspect Politics</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>*** Frequency distribution</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">tab</span> Politics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Politics:  How much interest do you have        Number of observations
+-------------------------------------------------------------------------------
+                                             Total      Integers   Nonintegers
+|  #                         Negative            -             -             -
+|  #                         Zero                -             -             -
+|  #   #                     Positive        3,988         3,988             -
+|  #   #   #                           -----------   -----------   -----------
+|  #   #   #                 Total           3,988         3,988             -
+|  #   #   #   .   .         Missing             -
++----------------------                -----------
+1                     8                      3,988
+   (6 unique values)
+
+      Politics is labeled and all values are documented in the label.
+
+
+   How much interest do |
+  you have in politics? |      Freq.     Percent        Cum.
+------------------------+-----------------------------------
+      ... a great deal, |        739       18.53       18.53
+           quite a lot, |        982       24.62       43.15
+                  some, |      1,179       29.56       72.72
+         not very much, |        708       17.75       90.47
+       or, none at all? |        379        9.50       99.97
+             Don`t know |          1        0.03      100.00
+------------------------+-----------------------------------
+                  Total |      3,988      100.00</code></pre>
+</div>
+</div>
+<p>Let’s create the dichotomic version and look at the results:</p>
+<div id="d1e097ba" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">recode</span> Politics 1 2=1 3/<span class="fu">max</span>=0, <span class="kw">gen</span>(DPol)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>*** Labelling the <span class="kw">variable</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>lab def LDPol 0 <span class="st">"Not so much"</span> 1 <span class="st">"Significantly"</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>lab val DPol LDPol</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>*** Frequency distribution</span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">tab</span> Politics DPol </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+(3,249 differences between Politics and DPol)
+
+
+
+
+                      |  RECODE of Politics
+                      | (How much interest do
+                      |      you have in
+ How much interest do |      politics?)
+you have in politics? | Not so mu  Significa |     Total
+----------------------+----------------------+----------
+    ... a great deal, |         0        739 |       739 
+         quite a lot, |         0        982 |       982 
+                some, |     1,179          0 |     1,179 
+       not very much, |       708          0 |       708 
+     or, none at all? |       379          0 |       379 
+           Don`t know |         1          0 |         1 
+----------------------+----------------------+----------
+                Total |     2,267      1,721 |     3,988 </code></pre>
+</div>
+</div>
+<p>We can now estimate the proportion of people significantly interested in politics in the population. We just need to add <code>ci</code> as an option in order to also get the 95% confidence interval.</p>
+<div id="0d514278" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>*** Let's <span class="kw">not</span> forget to declare the survey design again</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a>*** We need to declare again the survey design after the <span class="fu">last</span> exercise</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">svyset</span> Spoint [pw=WtFactor], <span class="kw">strata</span>(StratID)</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">svy</span>:<span class="kw">tab</span> DPol,<span class="kw">percent</span> <span class="kw">ci</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Sampling weights: WtFactor
+             VCE: linearized
+     Single unit: missing
+        Strata 1: StratID
+ Sampling unit 1: Spoint
+           FPC 1: &lt;zero&gt;
+
+(running tabulate on estimation sample)
+
+Number of strata = 159                            Number of obs   =      3,988
+Number of PSUs   = 372                            Population size = 3,988.0019
+                                                  Design df       =        213
+
+----------------------------------------------
+RECODE of |
+Politics  |
+(How much |
+interest  |
+do you    |
+have in   |
+politics? |
+)         | percentage          lb          ub
+----------+-----------------------------------
+ Not so m |      56.99       55.06        58.9
+ Signific |      43.01        41.1       44.94
+          | 
+    Total |        100                        
+----------------------------------------------
+Key: percentage = Cell percentage
+             lb = Lower 95% confidence bound for cell percentage
+             ub = Upper 95% confidence bound for cell percentage</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Question 4</strong> <em>What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use <code>RAgecat5</code></em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>The proportion of 17-34 year old in the sample is</li>
+</ul>
+<div id="117173a4" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">svy</span>:<span class="kw">tab</span> RAgecat5, <span class="kw">percent</span> <span class="kw">ci</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(running tabulate on estimation sample)
+
+Number of strata = 159                            Number of obs   =      3,988
+Number of PSUs   = 372                            Population size = 3,988.0019
+                                                  Design df       =        213
+
+----------------------------------------------
+Age of    |
+responden |
+t(grouped |
+)         |
+&lt;3-catego |
+ry&gt; dv    | percentage          lb          ub
+----------+-----------------------------------
+    17-34 |      28.46       26.46       30.56
+    35-54 |      33.98        32.3       35.69
+      55+ |       37.5       35.67       39.36
+   DK/Ref |      .0601       .0214       .1683
+          | 
+    Total |        100                        
+----------------------------------------------
+Key: percentage = Cell percentage
+             lb = Lower 95% confidence bound for cell percentage
+             ub = Upper 95% confidence bound for cell percentage</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="domain-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="domain-estimates">Domain estimates</h2>
+<p><em>Domain estimates</em> refer to estimates for groups or subpopulations, which adds a layer of complexity to what we have done so far. They key point is that as survey weights are usually designed by data producers using the whole of the sample, confidence intervals and standard errors computed using only part of the sample - such as for example when subsetting the dataset or removing observations - may be unreliable, as they will rely on some of the weights only. Instead, it is recommended to use commands that take into account the entire distribution of the weights.</p>
+<p>In Stata, this can be either achieved with <code>subpop()</code> or <code>over</code>.</p>
+<p><code>subpop()</code> computes estimates for single groups identified either by a dummy variable (ie coded 0-1), or by a conditional statement. For instance, if we would like to compute the mean age of BSA respondents by Government Office Regions, we need to specify:</p>
+<div id="bf19c7a4" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">svy</span>, subpop(<span class="kw">if</span> GOR_ID==1):<span class="kw">mean</span> RAgeE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =  8             Number of obs   =        214
+Number of PSUs   = 19             Population size = 199.035253
+                                  Subpop. no. obs =        180
+                                  Subpop. size    = 167.274844
+                                  Design df       =         11
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+       RAgeE |   46.10143   1.269496      43.30729    48.89557
+--------------------------------------------------------------
+Note: 151 strata omitted because they contain no subpopulation
+      members.</code></pre>
+</div>
+</div>
+<p>Please note that the above is identical to:</p>
+<div id="bab59aa8" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1"></a>*** Creates dummy variables with the category number <span class="kw">as</span> suffix</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">quietly</span> <span class="kw">tab</span> GOR_ID ,<span class="kw">gen</span>(region) </span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">svy</span>, subpop(region1): <span class="kw">mean</span> RAgeE, cformat(%9.1f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =  8             Number of obs   =        214
+Number of PSUs   = 19             Population size = 199.035253
+                                  Subpop. no. obs =        180
+                                  Subpop. size    = 167.274844
+                                  Design df       =         11
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+       RAgeE |       46.1        1.3          43.3        48.9
+--------------------------------------------------------------
+Note: 151 strata omitted because they contain no subpopulation
+      members.</code></pre>
+</div>
+</div>
+<p>In case there are more than a few subpopulations, Stata provides the ‘over’ option, that can be used with in conjunction with estimation commands. In our case:</p>
+<div id="1459ce12" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">svy</span>: <span class="kw">mean</span> RAgeE,<span class="bn">over</span>(GOR_ID) cformat(%9.1f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata = 159                           Number of obs   =      3,988
+Number of PSUs   = 372                           Population size = 3,988.0019
+                                                 Design df       =        213
+
+-----------------------------------------------------------------------------
+                            |             Linearized
+                            |       Mean   std. err.     [95% conf. interval]
+----------------------------+------------------------------------------------
+             c.RAgeE@GOR_ID |
+              A North East  |       46.1        1.3          43.6        48.6
+              B North West  |       49.6        1.2          47.2        52.0
+D Yorkshire and The Humber  |       48.0        1.4          45.2        50.8
+           E East Midlands  |       48.6        1.4          45.9        51.4
+           F West Midlands  |       48.1        1.6          45.0        51.2
+         G East of England  |       49.0        1.5          46.0        52.1
+                  H London  |       45.0        1.0          43.0        46.9
+              J South East  |       48.0        1.4          45.1        50.8
+              K South West  |       53.4        0.9          51.5        55.2
+                   L Wales  |       49.1        2.0          45.1        53.1
+                M Scotland  |       47.3        1.4          44.7        50.0
+-----------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Our results seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the oldest – their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the South East, as the CIs partially overlap.</p>
+<p>We can follow a similar approach with proportions: we just need to specify the variable we are interested in as an outcome, for instance respondents who are significantly interested in politics, and replace by <code>mean</code> with <code>proportion</code>.</p>
+<div id="6f9f8b44" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">svy</span>:<span class="kw">proportion</span> DPol, <span class="kw">percent</span> <span class="bn">over</span>(GOR_ID) </span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">svy</span>,subpop(<span class="kw">if</span> GOR_ID==1):<span class="kw">proportion</span> DPol, <span class="kw">percent</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+(running proportion on estimation sample)
+
+Survey: Percent estimation
+
+Number of strata = 159                            Number of obs   =      3,988
+Number of PSUs   = 372                            Population size = 3,988.0019
+                                                  Design df       =        213
+
+------------------------------------------------------------------------------
+                             |             Linearized            Logit
+                             |    Percent   std. err.     [95% conf. interval]
+-----------------------------+------------------------------------------------
+                 DPol@GOR_ID |
+   Not so much A North East  |      66.62       3.12         60.21       72.46
+   Not so much B North West  |      58.09       2.91         52.26       63.70
+                Not so much #|
+ D Yorkshire and The Humber  |      64.42       3.23         57.84       70.51
+Not so much E East Midlands  |      63.09       1.92         59.23       66.79
+Not so much F West Midlands  |      63.67       2.41         58.79       68.28
+                Not so much #|
+          G East of England  |      52.82       2.78         47.33       58.24
+       Not so much H London  |      45.77       3.37         39.25       52.45
+   Not so much J South East  |      55.35       2.97         49.46       61.10
+   Not so much K South West  |      53.46       3.47         46.60       60.18
+        Not so much L Wales  |      61.42       5.16         50.90       70.97
+     Not so much M Scotland  |      57.26       3.30         50.67       63.60
+ Significantly A North East  |      33.38       3.12         27.54       39.79
+ Significantly B North West  |      41.91       2.91         36.30       47.74
+              Significantly #|
+ D Yorkshire and The Humber  |      35.58       3.23         29.49       42.16
+              Significantly #|
+            E East Midlands  |      36.91       1.92         33.21       40.77
+              Significantly #|
+            F West Midlands  |      36.33       2.41         31.72       41.21
+              Significantly #|
+          G East of England  |      47.18       2.78         41.76       52.67
+     Significantly H London  |      54.23       3.37         47.55       60.75
+ Significantly J South East  |      44.65       2.97         38.90       50.54
+ Significantly K South West  |      46.54       3.47         39.82       53.40
+      Significantly L Wales  |      38.58       5.16         29.03       49.10
+   Significantly M Scotland  |      42.74       3.30         36.40       49.33
+------------------------------------------------------------------------------
+
+(running proportion on estimation sample)
+
+Survey: Percent estimation
+
+Number of strata =  8               Number of obs   =        214
+Number of PSUs   = 19               Population size = 199.035253
+                                    Subpop. no. obs =        180
+                                    Subpop. size    = 167.274844
+                                    Design df       =         11
+
+----------------------------------------------------------------
+               |             Linearized            Logit
+               |    Percent   std. err.     [95% conf. interval]
+---------------+------------------------------------------------
+          DPol |
+  Not so much  |      66.62       3.12         59.43       73.10
+Significantly  |      33.38       3.12         26.90       40.57
+----------------------------------------------------------------
+Note: 151 strata omitted because they contain no subpopulation
+      members.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Question 5</strong> <em>What is the 95% confidence interval for the proportion of people interested in politics in the South West? Is the proportion likely to be different in London? In what way? What is the region of the UK for which the precision of the estimates is likely to be the smallest?</em>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The 95% confidence interval for the proportion of people interested in politics in the South West in 2017 was 39.8-53.4. By contrast, it was 47.6-60.8 in London. The region with the lowest precision of estimates (i.e.&nbsp;the widest confidence interval) was Wales, with a 20 percentage point difference between the upper and lower bounds of the confidence interval.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Question 6</strong> *Using interest in politics as before, and three category age <code>RAgecat5</code>: 1. Produce a table of results showing the proportion of respondents significantly interested in politics by age group and gender; 2. Assess whether the age difference in interest in politics is similar for each gender; 3. Based on the data, is it fair to say that men aged under 35 tend to be more likely to declare themselves interested in politics than women aged 55 and above?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="2f8c9ff6" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">svy</span>,subpop(<span class="kw">if</span> RAgecat5==1 &amp; Rsex==1): <span class="kw">proportion</span> DPol,<span class="kw">percent</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">svy</span>: <span class="kw">proportion</span> DPol,<span class="bn">over</span>(RAgecat5 Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+(running proportion on estimation sample)
+
+Survey: Percent estimation
+
+Number of strata = 138              Number of obs   =      3,591
+Number of PSUs   = 326              Population size = 3,608.3226
+                                    Subpop. no. obs =        339
+                                    Subpop. size    = 573.962978
+                                    Design df       =        188
+
+----------------------------------------------------------------
+               |             Linearized            Logit
+               |    Percent   std. err.     [95% conf. interval]
+---------------+------------------------------------------------
+          DPol |
+  Not so much  |      57.28       2.64         52.02       62.38
+Significantly  |      42.72       2.64         37.62       47.98
+----------------------------------------------------------------
+Note: 21 strata omitted because they contain no subpopulation
+      members.
+
+(running proportion on estimation sample)
+
+Survey: Proportion estimation
+
+Number of strata = 159                            Number of obs   =      3,988
+Number of PSUs   = 372                            Population size = 3,988.0019
+                                                  Design df       =        213
+
+------------------------------------------------------------------------------
+                             |             Linearized            Logit
+                             | Proportion   std. err.     [95% conf. interval]
+-----------------------------+------------------------------------------------
+          DPol@RAgecat5#Rsex |
+     Not so much 17-34#Male  |   .5728105   .0263534      .5202484    .6237784
+   Not so much 17-34#Female  |   .7368923   .0228962      .6893531    .7794836
+     Not so much 35-54#Male  |   .4921008   .0210396      .4507772    .5335326
+   Not so much 35-54#Female  |   .6587693   .0180841      .6222803    .6934697
+       Not so much 55+#Male  |   .4220344   .0197446      .3836731    .4613601
+     Not so much 55+#Female  |    .569871   .0175356      .5350198    .6040433
+    Not so much DK/Ref#Male  |          1          .             .           .
+  Not so much DK/Ref#Female  |          0  (no observations)
+   Significantly 17-34#Male  |   .4271895   .0263534      .3762216    .4797516
+ Significantly 17-34#Female  |   .2631077   .0228962      .2205164    .3106469
+   Significantly 35-54#Male  |   .5078992   .0210396      .4664674    .5492228
+ Significantly 35-54#Female  |   .3412307   .0180841      .3065303    .3777197
+     Significantly 55+#Male  |   .5779656   .0197446      .5386399    .6163269
+   Significantly 55+#Female  |    .430129   .0175356      .3959567    .4649802
+  Significantly DK/Ref#Male  |          0  (no observations)
+Significantly DK/Ref#Female  |          1          .             .           .
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Older respondents both male and female tend to be more involved in politics than younger ones.</p>
+<p>The confidence interval for the proportion of men under 35 and women above 55 interested in politics overlaps; it is unlikely that they differ in the population.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="inference-without-survey-design-variables" class="level2">
+<h2 class="anchored" data-anchor-id="inference-without-survey-design-variables">Inference without survey design variables</h2>
+<p><em>Example: count and proportion of the regional population of the UK using Quarterly Labour Force Survey safeguarded data</em></p>
+<p>As a rule, safeguarded versions of the LFS do not include sample design variables. On the other hand they include two weight variables:</p>
+<ul>
+<li><code>pwt22</code> for estimation with the whole sample</li>
+<li><code>piwt22</code> for estimation of income using respondents currently in employment (and accounting for the high level of non response for the earnings variables)</li>
+</ul>
+<p>Estimation without accounting for sample design will likely be biased and should be reported as such including warnings, even if the nature (over or underestimation of the precision) and and size are not known. An alternative is to look for design effects tables published by the data producer which could be used to correct for the bias.</p>
+<p>The Office for National Statistics regularly publishes such tables for the LFS, albeit mostly for their headline statistics. Obtaining further design effects for subpopulations might not be straighforward. The overall methodology is described <a href="https://www.ons.gov.uk/methodology/methodologicalpublications/generalmethodology/onsworkingpaperseries/onsmethodologyworkingpaperseriesno9guidetocalculatingstandarderrorsforonssocialsurveys#annex-a-labour-force-survey-standard-errors-january-to-march-2015-united-kingdom">in this note</a>, and updated tables are provided <a href="Volume 1: Background and methodology (PDF, 1.2MB)">on this page</a>.</p>
+<p>Let’s see how this can be achieved. But first, let’s produce uncorrected ‘naive’ estimates of the regional population.</p>
+<div id="f18fc0fa" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">clear</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">use</span> ~/Data/lfs/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta</span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="kw">svyset</span> [pw=PIWT22] </span>
+<span id="cb29-5"><a href="#cb29-5"></a></span>
+<span id="cb29-6"><a href="#cb29-6"></a>*** Counts the number <span class="kw">of</span> valid cases <span class="kw">for</span> the SEX <span class="kw">variable</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="kw">svy</span>:<span class="kw">total</span> SEX, <span class="bn">over</span>(URESMC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+
+
+Sampling weights: PIWT22
+             VCE: linearized
+     Single unit: missing
+        Strata 1: &lt;one&gt;
+ Sampling unit 1: &lt;observations&gt;
+           FPC 1: &lt;zero&gt;
+
+(running total on estimation sample)
+
+Survey: Total estimation
+
+Number of strata =      1                        Number of obs   =     75,992
+Number of PSUs   = 75,992                        Population size = 28,327,129
+                                                 Design df       =     75,991
+
+-----------------------------------------------------------------------------
+                            |             Linearized
+                            |      Total   std. err.     [95% conf. interval]
+----------------------------+------------------------------------------------
+               c.SEX@URESMC |
+               Tyne &amp; Wear  |     711226   70420.39      573202.4    849249.6
+   Rest of Northern region  |    1138483   74814.36      991847.2     1285119
+           South Yorkshire  |     674216   65640.17      545561.6    802870.4
+            West Yorkshire  |    1514892   97543.74       1323707     1706077
+Rest of Yorks &amp; Humberside  |    1203435   84752.98       1037320     1369550
+             East Midlands  |    3084354   139855.5       2810238     3358470
+               East Anglia  |    1737856   108910.1       1524393     1951319
+              Inner London  |    2486698   217962.9       2059492     2913904
+              Outer London  |    3425496   199794.6       3033900     3817092
+        Rest of South East  |    8146349   266897.6       7623231     8669467
+                South West  |    3529068   153618.8       3227976     3830160
+West Midlands (met county)  |    1628710   136654.7       1360868     1896552
+     Rest of West Midlands  |    2096013   127469.1       1846174     2345852
+        Greater Manchester  |    1759917   118336.3       1527978     1991856
+                Merseyside  |     942263     112404      721951.8     1162574
+        Rest of North West  |    1585060   108062.8       1373257     1796863
+                     Wales  |    1865801   121156.4       1628335     2103267
+               Strathclyde  |    1329341   114407.4       1105103     1553579
+          Rest of Scotland  |    2344507   155628.7       2039476     2649538
+          Northern Ireland  |    1119091   44878.71       1031129     1207053
+-----------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>In the above example, we are working with the most commonly used flavour of the Labour Force Survey: the quarterly edition. The specific dataset used above is the April-July 2022 issue. Looking at the latest version of the documentation mentioned above - Volume 1, Annex C, we can see a list of design effects for the number of employed respondents by Region of Usual Residence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/lfs_vol1_SE.png" class="img-fluid figure-img" alt="Screenshot of LFS documentation Volume 1, Annex C showing Design Effects"></p>
+<figcaption>LFS design factors</figcaption>
+</figure>
+</div>
+<p>We can see that for some reason, the number of regions has been reduced from the original 16 to 13. We therefore need to recode our original variable.</p>
+<div id="dce76a96" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a href="#cb31-1"></a>*** Recoding</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="kw">recode</span> URESMC 1 2=1 3 4 5 =2 8 9=8 12 13 =12 14 16 =14 18 19=18,<span class="kw">gen</span>(rURESMC)</span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a>*** Adapting <span class="kw">values</span> labels</span>
+<span id="cb31-5"><a href="#cb31-5"></a>lab copy URESMC ur2</span>
+<span id="cb31-6"><a href="#cb31-6"></a>lab def ur2 1 <span class="st">"North East"</span> 2 <span class="st">"Yorkshire &amp; Humber"</span> 8 <span class="st">"London"</span> 12 <span class="st">"West Midlands"</span> 14 <span class="st">"North West"</span> 18 <span class="st">"Scotland"</span>,modify</span>
+<span id="cb31-7"><a href="#cb31-7"></a>lab val  rURESMC ur2</span>
+<span id="cb31-8"><a href="#cb31-8"></a></span>
+<span id="cb31-9"><a href="#cb31-9"></a>*** Checking the results</span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="kw">tab</span> rURESMC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+(23,406 differences between URESMC and rURESMC)
+
+
+
+
+
+  RECODE of URESMC (Region |
+       of usual residence) |      Freq.     Percent        Cum.
+---------------------------+-----------------------------------
+                North East |      4,249        5.59        5.59
+        Yorkshire &amp; Humber |      6,435        8.47       14.06
+             East Midlands |      5,701        7.50       21.56
+               East Anglia |      3,114        4.10       25.66
+                    London |      6,523        8.58       34.24
+        Rest of South East |     13,725       18.06       52.30
+                South West |      7,237        9.52       61.83
+             West Midlands |      6,089        8.01       69.84
+                North West |      5,501        7.24       77.08
+                Merseyside |        993        1.31       78.39
+                     Wales |      3,750        4.93       83.32
+                  Scotland |      5,626        7.40       90.72
+          Northern Ireland |      7,049        9.28      100.00
+---------------------------+-----------------------------------
+                     Total |     75,992      100.00</code></pre>
+</div>
+</div>
+<p>Let us now produce the updated population estimates:</p>
+<div id="d612e140" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">svy</span>:<span class="kw">total</span> SEX, <span class="bn">over</span>(rURESMC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(running total on estimation sample)
+
+Survey: Total estimation
+
+Number of strata =      1                Number of obs   =     75,992
+Number of PSUs   = 75,992                Population size = 28,327,129
+                                         Design df       =     75,991
+
+---------------------------------------------------------------------
+                    |             Linearized
+                    |      Total   std. err.     [95% conf. interval]
+--------------------+------------------------------------------------
+      c.SEX@rURESMC |
+        North East  |    1849709   102546.1       1648719     2050699
+Yorkshire &amp; Humber  |    3392543   144303.8       3109708     3675378
+     East Midlands  |    3084354   139855.5       2810238     3358470
+       East Anglia  |    1737856   108910.1       1524393     1951319
+            London  |    5912194   294956.8       5334080     6490308
+Rest of South East  |    8146349   266897.6       7623231     8669467
+        South West  |    3529068   153618.8       3227976     3830160
+     West Midlands  |    3724723   186419.1       3359342     4090104
+        North West  |    3344977   159817.1       3031736     3658218
+        Merseyside  |     942263     112404      721951.8     1162574
+             Wales  |    1865801   121156.4       1628335     2103267
+          Scotland  |    3673848   192752.3       3296054     4051642
+  Northern Ireland  |    1119091   44878.71       1031129     1207053
+---------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>We can now amend the standard errors and CIs using the design factors from the LFS documentation. This has to be done by hand, by directly copying the relevant numbers from the LFS documentation.</p>
+<p>For example, if we wanted to adjust the population estimates for London, we would need to start with the original standard error, multiply it by the relevanmt design effect, then compute the 95% confidence interval of the point estimate. The design effect for London is smaller than 1, which indicates that the confidence interval after correction will be narrower - more precise than when simple random sampling was assumed.</p>
+<p>Here is the adjusted standard error for London:</p>
+<div id="c0044444" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><a href="#cb35-1"></a>dis 294956.8*0.9634</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>284161.38</code></pre>
+</div>
+</div>
+<p>… The corresponding lower bound of the confidence interval</p>
+<div id="73876915" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb37-1"><a href="#cb37-1"></a>dis 5912194-1.96*(294956.8*0.9634)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5355237.7</code></pre>
+</div>
+</div>
+<p>… And the upper bound</p>
+<div id="ff12d4a3" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb39-1"><a href="#cb39-1"></a>dis 5912194+1.96*(294956.8*0.9634)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>6469150.3</code></pre>
+</div>
+</div>
+<p>… Instead of the original one:</p>
+<p><code>[5334080 -6490308]</code></p>
+<p>We can see that it is indeed narrower.</p>
+<p><em>Note</em>: it would be possible to produce an amended table in full, using Stata’s MATA functions.</p>
+<div id="848a383e" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb41-1"><a href="#cb41-1"></a>mat input <span class="kw">deff</span>= (0.8712,1.0857,1.3655,1.0051,0.9634,1.0382,0.8936,1.3272,0.9677,0.9137, 1.0012,1.0437,0.7113)</span>
+<span id="cb41-2"><a href="#cb41-2"></a></span>
+<span id="cb41-3"><a href="#cb41-3"></a>mat orig= <span class="fu">e</span>(b)',<span class="fu">r</span>(<span class="kw">table</span>)[<span class="st">"se"</span>,.]',deff',<span class="fu">hadamard</span>(<span class="fu">r</span>(<span class="kw">table</span>)[<span class="st">"se"</span>,.],<span class="kw">deff</span>)'</span>
+<span id="cb41-4"><a href="#cb41-4"></a></span>
+<span id="cb41-5"><a href="#cb41-5"></a>*mat ciL = <span class="kw">test</span>[.,<span class="st">"total"</span>]-(1.96*tot<span class="ot">$SE</span>*tot<span class="ot">$deft</span>)</span>
+<span id="cb41-6"><a href="#cb41-6"></a>*tot[<span class="st">"97.5%"</span>]&lt;-tot<span class="ot">$total</span>+(1.96*tot<span class="ot">$SE</span>*tot<span class="ot">$deft</span>)</span>
+<span id="cb41-7"><a href="#cb41-7"></a>*<span class="ot">rownames</span>(tot)&lt;-<span class="fu">substr</span>(<span class="ot">rownames</span>(tot),10,nchar(<span class="ot">rownames</span>(tot)))</span>
+<span id="cb41-8"><a href="#cb41-8"></a>*kable(<span class="fu">round</span>(tot[,c(<span class="st">"2.5%"</span>,<span class="st">"97.5%"</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -268,6 +1121,7 @@ UKDS. 2018. <span>“Data Skills Modules: Applying Weights to Survey Data.”</s
 Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edited by Goldsmiths Core Quantitative Methods Series. 2019. <a href="https://www.youtube.com/watch?v=brxx81U6N1o">https://www.youtube.com/watch?v=brxx81U6N1o</a>.
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -674,10 +1528,10 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
     }
   });
   </script>
-<nav class="page-navigation column-page-right">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="./06_SPSS.html" class="pagination-link" aria-label="SPSS Examples">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span>
+      <a href="./06_SPSS.html" class="pagination-link" aria-label="SPSS">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SPSS</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

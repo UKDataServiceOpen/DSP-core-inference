@@ -7,7 +7,7 @@ nocite: |
 jupyter: nbstata
 
 execute:
-  echo: false
+  echo: true
   warning: false
   message: false
   cache: false
@@ -23,9 +23,11 @@ book:
     - 02_Design-Based_Inference.qmd
     - 03_Real_world.qmd
     - 04_Statistical_Inference.qmd
-    - 05_R.qmd
-    - 06_SPSS.qmd
-    - 07_Stata.qmd
+    - part: "5. Exercises"
+      chapters:
+        - 05_R.qmd
+        - 06_SPSS.qmd
+        - 07_Stata.qmd
     - 09_References.qmd
     - 08_Appendix.qmd
 

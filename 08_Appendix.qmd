@@ -1,4 +1,4 @@
-# Appendix: Study-specific weighting and sample design information
+# Appendix: Study-specific weighting and sample design information  {.unnumbered}
 
 ## British Social Attitudes Survey
 
@@ -9,7 +9,7 @@ geographies (sub regions), population density, and proportion of
 owner-occupiers. Sampling rate was proportional to the size of postcode
 sectors (i.e. number of addresses). Some issues of the BSA such as the
 2017 include survey design information. The 2017 issue included
-information about Primary Smapling Units (`Spoint`), strata (`StratID`).
+information about Primary Sampling Units (`Spoint`), strata (`StratID`).
 Weights are called `WtFactor`.
 
 ## Labour Force Survey

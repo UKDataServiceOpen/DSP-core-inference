@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -119,7 +154,7 @@ div.csl-indent {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="http:// ukdataservice.ac.uk" class="sidebar-logo-link">
+      <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
@@ -163,24 +198,35 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">5. Exercises</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
+ <span class="menu-text">R</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
+ <span class="menu-text">SPSS</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07_Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
+ <span class="menu-text">Stata</span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_References.html" class="sidebar-item-text sidebar-link">
@@ -190,7 +236,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
   </div>
 </li>
     </ul>
@@ -233,15 +279,38 @@ div.csl-indent {
 <section id="introduction" class="level1 unnumbered">
 <h1 class="unnumbered">Introduction</h1>
 <p>This guide discusses the practical steps required to produce reliable population estimates with survey data curated by the UK Data Service. It focuses on how and when to use survey weights and design variables, and is aimed at users unfamiliar with the technical aspects of sample theory and survey design.</p>
-<p><em>Robust ie reliable population inference draws is a complex topic</em></p>
+<p><em>Robust ie reliable population inference is a complex topic</em></p>
 <p>Population inference from survey data requires drawing from four domains: statistical theory (sampling distributions, parameter estimation, design effects, weighting), study-specific design issues (stratification, clustering, non-response), software estimation procedures and functions (inconsistent implementation, unclear documentation), and the secondary researcher/user’s own sets of circumstances (ie what they can hope to produce given available data and time/resources constraints).</p>
 <p><em>Teaching gaps</em></p>
 <p>Producing weighted survey estimates is routinely excluded from introductory methods courses due to time constraints, resource limitations, and perceived complexity. This leaves researchers and analysts with significant knowledge gaps in their survey analysis skills.</p>
 <p><em>Problematic Research Practices</em></p>
-<p>This gap potentially results in two problematic outcomes. Some researchers may be tempted to rely on undocumented, “quick and dirty” approaches to population inference, sometimes not giving enough consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses limit effective use of valuabl-e social research infrastructure .</p>
+<p>This gap potentially results in two problematic outcomes. Some users may be tempted to rely on undocumented, “quick and dirty” approaches to population inference, sometimes not giving enough consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses limit effective use of valuable social research infrastructure.</p>
 <p><em>Purpose of these guidelines</em></p>
-<p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys data available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with currently examples in R and Stata. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
+<p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys microdata available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with examples in R, Stata and SPSS. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
 <div class="cell" data-layout-align="default">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1"></a>flowchart TD</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    A[Target Population] --&gt; B[Survey Sample]</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    B --&gt; C{Raw Data Analysis}</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    B --&gt; D{Weighted Analysis}</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    C --&gt; E[Biased Estimates]</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    D --&gt; F[Robust Estimates]</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    G[Survey Design Effects] --&gt; H[Survey Weights]</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    I[Non-response] --&gt; H</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    J[Coverage Errors] --&gt; H</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    H --&gt; D</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    K[Design Variables] --&gt; D</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    </span>
+<span id="cb1-16"><a href="#cb1-16"></a>    E --&gt; L[❌ Unreliable Inference]</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    F --&gt; M[✅ Valid Population Inference]</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    </span>
+<span id="cb1-19"><a href="#cb1-19"></a>    style A fill:#e1f5fe</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    style F fill:#c8e6c9</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    style E fill:#ffcdd2</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    style M fill:#c8e6c9</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    style L fill:#ffcdd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
