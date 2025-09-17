@@ -1,4 +1,4 @@
-# R examples
+# R  {.unnumbered}
 
 The R *Survey* package [@Lumley2023] provides a comprehensive set of
 functions for computing point and variance estimates from survey data.
@@ -7,7 +7,7 @@ syntax for computing weighted estimates. Implementation of statistical
 theory may vary between packages, but algorithms are usually described
 in detail in the package documentation.
 
-In this example, we will practice statistical inference with data from
+In the example below, we will practice statistical inference with data from
 the [2017 British Social Attitudes Survey
      (BSA)](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450)
 taking into account weights and survey design variables. Please note

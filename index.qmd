@@ -6,43 +6,27 @@ focuses on how and when to use survey weights and design variables, and
 is aimed at users unfamiliar with the technical aspects of sample theory
 and survey design.
 
-*Robust ie reliable population inference draws is a complex topic*
+*Robust ie reliable population inference is a complex topic*
   
-  Population inference from survey data requires drawing from four
-domains: statistical theory (sampling distributions, parameter
-                             estimation, design effects, weighting), study-specific design issues
-(stratification, clustering, non-response), software estimation
-procedures and functions (inconsistent implementation, unclear
-                          documentation), and the secondary researcher/user's own sets of
+Population inference from survey data requires drawing from four domains: statistical theory (sampling distributions, parameter estimation, design effects, weighting), study-specific design issues
+(stratification, clustering, non-response), software estimation procedures and functions (inconsistent implementation, unclear documentation), and the secondary researcher/user's own sets of
 circumstances (ie what they can hope to produce given available data and
 time/resources constraints).
 
 *Teaching gaps*
 
-Producing weighted survey estimates is routinely excluded from
-introductory methods courses due to time constraints, resource
-limitations, and perceived complexity. This leaves researchers and
-analysts with significant knowledge gaps in their survey analysis
-skills.
+Producing weighted survey estimates is routinely excluded from introductory methods courses due to time constraints, resource limitations, and perceived complexity. This leaves researchers and analysts with significant knowledge gaps in their survey analysis skills.
 
 *Problematic Research Practices*
 
-This gap potentially results in two problematic outcomes. Some
-researchers may be tempted to rely on undocumented, "quick and dirty"
-approaches to population inference, sometimes not giving enough
-consideration to whether techniques are methodologically appropriate to
-the data and their research aims. Others avoid working with survey
-datasets entirely, believing they lack necessary skills. Both responses
-limit effective use of valuabl-e social research infrastructure .
+This gap potentially results in two problematic outcomes. Some users may be tempted to rely on undocumented, "quick and dirty" approaches to population inference, sometimes not giving enough
+consideration to whether techniques are methodologically appropriate to the data and their research aims. Others avoid working with survey datasets entirely, believing they lack necessary skills. Both responses
+limit effective use of valuable social research infrastructure.
 
-*Purpose of these guidelines*
+*Purpose of these guidelines* 
 
-The guidelines below attempt to address these challenges by documenting
-plain English procedures for robust population inference using surveys
-data available at the UK Data Service. It relies on examples from the
-Labour Force Survey, Family Expenditure Survey, and British Social
-Attitudes survey with currently examples in R and Stata. The aim is
-enabling confident implementation of robust estimation strategies
+The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys microdata available at the UK Data Service. It relies on examples from the
+Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with  examples in R, Stata and SPSS. The aim is enabling confident implementation of robust estimation strategies
 regardless of mathematical background.
 
 ```{mermaid}

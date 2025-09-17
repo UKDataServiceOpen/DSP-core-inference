@@ -1,9 +1,9 @@
-# SPSS Examples
+# SPSS  {.unnumbered}
 
 At the time of writing this document (September 2023) Standard editions
 of SPSS did not include support for estimation with survey design
 variables, and only limited use of sampling weights. When using grossing
-weights -- i.e. weight that have been designed to enable computing
+weights -- i.e. weight that  have been designed to enable computing
 population totals from sample data -- as is the case for instance with
 the Labour Force and Family Resources surveys, measures of dispersion
 and standard errors will not be adequately computed. It is therefore not

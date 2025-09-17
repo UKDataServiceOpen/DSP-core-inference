@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; R examples – Statistical inference  with weights and survey design variables</title>
+<title>R – Statistical inference  with weights and survey design variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +138,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html">5. Exercises</a></li><li class="breadcrumb-item"><a href="./05_R.html">R</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -152,7 +152,7 @@ div.csl-indent {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="http:// ukdataservice.ac.uk" class="sidebar-logo-link">
+      <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
@@ -196,24 +196,35 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Inference from Survey Data in Practice</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">5. Exercises</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05_R.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></span></a>
+ <span class="menu-text">R</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_SPSS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span></a>
+ <span class="menu-text">SPSS</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07_Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Stata examples</span></span></a>
+ <span class="menu-text">Stata</span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09_References.html" class="sidebar-item-text sidebar-link">
@@ -223,7 +234,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
   </div>
 </li>
     </ul>
@@ -236,11 +247,11 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#identifying-the-survey-design-and-variables" id="toc-identifying-the-survey-design-and-variables" class="nav-link active" data-scroll-target="#identifying-the-survey-design-and-variables"><span class="header-section-number">5.1</span> Identifying the survey design and variables</a></li>
-  <li><a href="#mean-age-and-its-95-confidence-interval" id="toc-mean-age-and-its-95-confidence-interval" class="nav-link" data-scroll-target="#mean-age-and-its-95-confidence-interval"><span class="header-section-number">5.2</span> Mean age and its 95% confidence interval</a></li>
-  <li><a href="#computing-domain-estimates" id="toc-computing-domain-estimates" class="nav-link" data-scroll-target="#computing-domain-estimates"><span class="header-section-number">5.3</span> Computing domain estimates</a>
+  <li><a href="#identifying-the-survey-design-and-variables" id="toc-identifying-the-survey-design-and-variables" class="nav-link active" data-scroll-target="#identifying-the-survey-design-and-variables">Identifying the survey design and variables</a></li>
+  <li><a href="#mean-age-and-its-95-confidence-interval" id="toc-mean-age-and-its-95-confidence-interval" class="nav-link" data-scroll-target="#mean-age-and-its-95-confidence-interval">Mean age and its 95% confidence interval</a></li>
+  <li><a href="#computing-domain-estimates" id="toc-computing-domain-estimates" class="nav-link" data-scroll-target="#computing-domain-estimates">Computing domain estimates</a>
   <ul class="collapse">
-  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers"><span class="header-section-number">5.3.1</span> Answers</a></li>
+  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers">Answers</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -248,9 +259,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html">5. Exercises</a></li><li class="breadcrumb-item"><a href="./05_R.html">R</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R examples</span></h1>
+<h1 class="title">R</h1>
 </div>
 
 
@@ -268,9 +279,9 @@ div.csl-indent {
 
 
 <p>The R <em>Survey</em> package <span class="citation" data-cites="Lumley2023">(<a href="09_References.html#ref-Lumley2023" role="doc-biblioref">Lumley 2023</a>)</span> provides a comprehensive set of functions for computing point and variance estimates from survey data. At the same time, R Base does not provide a unified sets of commands or syntax for computing weighted estimates. Implementation of statistical theory may vary between packages, but algorithms are usually described in detail in the package documentation.</p>
-<p>In this example, we will practice statistical inference with data from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450">2017 British Social Attitudes Survey (BSA)</a> taking into account weights and survey design variables. Please note that at the time of writing this document only some issues of the BSA include survey design variables.</p>
-<section id="identifying-the-survey-design-and-variables" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="identifying-the-survey-design-and-variables"><span class="header-section-number">5.1</span> Identifying the survey design and variables</h2>
+<p>In the example below, we will practice statistical inference with data from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8450">2017 British Social Attitudes Survey (BSA)</a> taking into account weights and survey design variables. Please note that at the time of writing this document only some issues of the BSA include survey design variables.</p>
+<section id="identifying-the-survey-design-and-variables" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-the-survey-design-and-variables">Identifying the survey design and variables</h2>
 <p>We first need to find out about the survey design that was used in the 2017 BSA, and the design variables that are made available in the dataset. Such information can usually be found in the documentation that comes together with the data under the <code>mrdoc/pdf</code> folder.</p>
 <p><strong>Question 1</strong> What is the design that was used in this survey (i.e.&nbsp;how many stages were there, and what were the units sampled). What were the primary sampling units; the strata (if relevant)?</p>
 <p>Now that we are a bit more familiar with the way the survey was designed, we need to try and identify the design variables we can include when producing estimates. The information can usually be found in the user manual or the data dictionary available under <code>mrdoc/ukda_data_dictionaries.zip</code> The file may need to be decompressed separately.</p>
@@ -294,15 +305,18 @@ div.csl-indent {
 </div>
 <p>We can specify the survey design earlier identified in the data documentation: using <code>Spoint</code> as Primary Sampling Unit, <code>StratID</code> as strata, and <code>WtFactor</code> as weights. R does this by creating a <code>svydesign</code> object, i.e.&nbsp;a survey design informed version of the data, which will be used for subsequent estimation.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>bsa17.s<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids=</span><span class="sc">~</span>Spoint, <span class="at">strata=</span><span class="sc">~</span>StratID, <span class="at">weights=</span><span class="sc">~</span>WtFactor,<span class="at">data=</span>bsa17)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">class</span>(bsa17.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "survey.design2" "survey.design" </code></pre>
 </div>
 </div>
 </section>
-<section id="mean-age-and-its-95-confidence-interval" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval"><span class="header-section-number">5.2</span> Mean age and its 95% confidence interval</h2>
+<section id="mean-age-and-its-95-confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval">Mean age and its 95% confidence interval</h2>
 <p>We can now produce a first set of estimates using this information and compare them with those we would have got without accounting for the survey design. We will compute the average (i.e.&nbsp;mean) age of respondents in the sample. We will need to use <code>svymean()</code></p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        mean     SE
 RAgeE 48.313 0.4236</code></pre>
@@ -311,10 +325,17 @@ RAgeE 48.313 0.4236</code></pre>
 <p>By default <code>svymean()</code> computes the standard error of the mean. We need to<br>
 embed it within <code>confint()</code> in order to get a confidence interval.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s)) <span class="do">### Just the confidence interval...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         2.5 %  97.5 %
 RAgeE 47.48289 49.1433</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">round</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">c</span>(</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>RAgeE,bsa17.s))</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  ),</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="dv">1</span>)<span class="do">### Estimate and CI, rounded</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RAgeE             
  48.3  47.5  49.1 </code></pre>
@@ -328,9 +349,11 @@ RAgeE 47.48289 49.1433</code></pre>
 <p>## Computing a proportion and its 95% confidence interval</p>
 <p>We can now similarly compute the distribution of a categorical variable in the population by estimating proportions (or percentages), for instance, the proportion of people who declare that they are interested in politics. This is the <code>Politics</code> variable in the BSA. It has five categories ranging from 1 ‘A great deal’ to 5- ‘Not at all’. We could recode 1 and 2 - <code>quite a lot</code> into ‘Significantly’, but since we are only interested in estimating the confidence intervals, we will select the relevant values ‘on the go’.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">attr</span>(bsa17<span class="sc">$</span>Politics,<span class="st">"label"</span>)     <span class="do">### Phrasing of the question</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "How much interest do you have in politics?"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">attr</span>(bsa17<span class="sc">$</span>Politics,<span class="st">"labels"</span>)     <span class="do">### Value labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>skip, version off route     Item not applicable       ... a great deal, 
                      -2                      -1                       1 
@@ -339,6 +362,7 @@ RAgeE 47.48289 49.1433</code></pre>
        or, none at all?              Don`t know                 Refusal 
                       5                       8                       9 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa17<span class="sc">$</span>Politics)) <span class="do">### Sample distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 skip, version off route     Item not applicable       ... a great deal, 
@@ -351,6 +375,7 @@ skip, version off route     Item not applicable       ... a great deal,
 </div>
 <p><strong>Note</strong>: Changes in a data frame are not automatically transferred into <code>svydesign</code> objects used for inferences. We therefore need to recreate it each time we create or recode a variable.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">svytable</span>(<span class="sc">~</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s)),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Politics == 1 | Politics == 2
 FALSE  TRUE 
@@ -360,10 +385,15 @@ FALSE  TRUE
 <p>Let us now compute the confidence intervals for these proportions. Traditional statistical software compute these without giving us an idea of the underlying computations going on. Doing this in R requires more coding, but also a better understanding of what is actually estimated.</p>
 <p>Confidence intervals for proportions of categorical variables are usually computed as a sequence of binomial/dichotomic estimations – i.e.&nbsp;one for each category. In R this needs to be specified explicitly via the <code>svyciprop()</code> and <code>I()</code> functions. The former actually computes the proportion and its confidence interval (by default 95%), whereas the latter allows us to define the category we are focusing on.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">svyciprop</span>(<span class="sc">~</span><span class="fu">I</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                        2.5% 97.5%
 I(Politics == 1 | Politics == 2) 0.430 0.411 0.449</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>        <span class="fu">c</span>(<span class="fu">prop.table</span>(<span class="fu">svytable</span>(<span class="sc">~</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s))[<span class="dv">2</span>],</span>
+<span id="cb21-3"><a href="#cb21-3"></a>          <span class="fu">attr</span>(<span class="fu">svyciprop</span>(<span class="sc">~</span><span class="fu">I</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),bsa17.s),<span class="st">"ci"</span>)),<span class="dv">1</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> TRUE  2.5% 97.5% 
  43.0  41.1  44.9 </code></pre>
@@ -371,8 +401,8 @@ I(Politics == 1 | Politics == 2) 0.430 0.411 0.449</code></pre>
 </div>
 <p><strong>Question 4</strong> What is the proportion of respondents aged 17-34 in the sample, as well as its 95% confidence interval? You can use <code>RAgecat5</code></p>
 </section>
-<section id="computing-domain-estimates" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="computing-domain-estimates"><span class="header-section-number">5.3</span> Computing domain estimates</h2>
+<section id="computing-domain-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="computing-domain-estimates">Computing domain estimates</h2>
 <p>Computing domain estimates, that is estimates for subgroups adds a layer of complexity to the above example. They key point is that as weights are usually designed using the whole of the sample by data producers, confidence intervals or standard errors computed using only part of the sample may be unreliable, as they will rely on some of the weights only. Instead, it is recommended to use commands that take into account the entire distribution of the weights.</p>
 <p>In R, the command that does this is <code>svyby()</code></p>
 <p>For instance, if we would like to compute the mean age of BSA respondents by Government Office Regions, we need to specify:</p>
@@ -383,6 +413,9 @@ I(Politics == 1 | Politics == 2) 0.430 0.411 0.449</code></pre>
 <li>And the type of type of variance estimation we would like to see displayed i.e.&nbsp;standard errors or confidence interval</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">round</span>(</span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">svyby</span>(<span class="sc">~</span>RAgeE,<span class="at">by=</span><span class="sc">~</span><span class="fu">as_factor</span>(GOR_ID),svymean,<span class="at">design=</span>bsa17.s,<span class="at">vartype =</span> <span class="st">"ci"</span>)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb23-3"><a href="#cb23-3"></a>  ,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                           RAgeE ci_l ci_u
 A North East                46.1 43.6 48.6
@@ -402,6 +435,14 @@ M Scotland                  47.3 44.7 50.0</code></pre>
 <p>Our inference seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the oldest – their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the South East for example, as the CIs partially overlap.</p>
 <p>We can follow a similar approach with proportions: we just need to specify the category of the variable we are interested in as an outcome, for instance respondents who are significantly interested in politics, and replace <code>svymean</code> by <code>svyciprop</code>.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">round</span>(</span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="fu">svyby</span>(<span class="sc">~</span><span class="fu">I</span>(Politics<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> Politics<span class="sc">==</span><span class="dv">2</span>),</span>
+<span id="cb25-4"><a href="#cb25-4"></a>          <span class="at">by=</span><span class="sc">~</span><span class="fu">as_factor</span>(GOR_ID),</span>
+<span id="cb25-5"><a href="#cb25-5"></a>          svyciprop,</span>
+<span id="cb25-6"><a href="#cb25-6"></a>          <span class="at">design=</span>bsa17.s,</span>
+<span id="cb25-7"><a href="#cb25-7"></a>          <span class="at">vartype =</span> <span class="st">"ci"</span>)[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                           I(Politics == 1 | Politics == 2) ci_l ci_u
 A North East                                           33.4 26.6 40.9
@@ -435,6 +476,12 @@ M Scotland                                             42.7 36.0 49.8</code></pr
 <p>The Office for National Statistics regularly publishes such tables for the LFS, albeit mostly for their headline statistics. Obtaining further design effects for subpopulations might not be straighforward. The overall methodology is described <a href="https://www.ons.gov.uk/methodology/methodologicalpublications/generalmethodology/onsworkingpaperseries/onsmethodologyworkingpaperseriesno9guidetocalculatingstandarderrorsforonssocialsurveys#annex-a-labour-force-survey-standard-errors-january-to-march-2015-united-kingdom">in this note</a>, and updated tables are provided <a href="Volume 1: Background and methodology (PDF, 1.2MB)">on this page</a>.</p>
 <p>Let’s see how this can be achieved. But first, let’s produce uncorrected ‘naive’ estimates of the regional population.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>lfs<span class="ot">&lt;-</span><span class="fu">read_dta</span>((<span class="fu">paste0</span>(datadir,<span class="st">"lfs/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta"</span>)))<span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">select</span>(PWT22,PIWT22,URESMC,ILODEFR)</span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="fu">names</span>(lfs)<span class="ot">&lt;-</span><span class="fu">tolower</span>(<span class="fu">names</span>(lfs))</span>
+<span id="cb27-4"><a href="#cb27-4"></a>lfs<span class="sc">$</span>uresmc.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(lfs<span class="sc">$</span>uresmc))</span>
+<span id="cb27-5"><a href="#cb27-5"></a>lfs.s<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>piwt22,<span class="at">data=</span>lfs<span class="sc">%&gt;%</span><span class="fu">filter</span>(ilodefr<span class="sc">==</span><span class="dv">1</span>)) </span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="fu">round</span>(<span class="fu">confint</span>(<span class="fu">svytotal</span>(<span class="sc">~</span>uresmc.f,lfs.s)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                     2.5 %  97.5 %
 uresmc.fTyne &amp; Wear                 375843  544677
@@ -467,9 +514,35 @@ uresmc.fNorthern Ireland            689076  803340</code></pre>
 </figure>
 </div>
 <p>We can see that for some reason, the number of regions has been reduced from the original 16 to 13. We therefore need to recode our original variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>lfs<span class="ot">&lt;-</span>lfs<span class="sc">%&gt;%</span><span class="fu">mutate</span>(<span class="at">uresmc.fn=</span><span class="fu">case_when</span>(</span>
+<span id="cb29-2"><a href="#cb29-2"></a>  lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Tyne &amp; Wear"</span> <span class="sc">|</span> </span>
+<span id="cb29-3"><a href="#cb29-3"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of Northern region"</span> <span class="sc">~</span> <span class="st">"North East"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4"></a>  lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"South Yorkshire"</span> <span class="sc">|</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"West Yorkshire"</span> <span class="sc">|</span> </span>
+<span id="cb29-6"><a href="#cb29-6"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of Yorks &amp; Humberside"</span> <span class="sc">~</span> <span class="st">"Yorkshire &amp; Humberside"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7"></a>  lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Inner London"</span> <span class="sc">|</span> </span>
+<span id="cb29-8"><a href="#cb29-8"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Outer London"</span><span class="sc">~</span><span class="st">"London"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9"></a>  lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"West Midlands (met county)"</span> <span class="sc">|</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of West Midlands"</span><span class="sc">~</span><span class="st">"West Midlands"</span>,</span>
+<span id="cb29-11"><a href="#cb29-11"></a>  lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Greater Manchester"</span> <span class="sc">|</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of North West"</span> <span class="sc">~</span> <span class="st">"North West"</span>,</span>
+<span id="cb29-13"><a href="#cb29-13"></a>  lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span><span class="st">"Strathclyde"</span> <span class="sc">|</span></span>
+<span id="cb29-14"><a href="#cb29-14"></a>    lfs<span class="sc">$</span>uresmc.f<span class="sc">==</span> <span class="st">"Rest of Scotland"</span><span class="sc">~</span><span class="st">"Scotland"</span>,</span>
+<span id="cb29-15"><a href="#cb29-15"></a>  <span class="at">.default=</span>uresmc.f</span>
+<span id="cb29-16"><a href="#cb29-16"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>For convenience, reorder the factor levels in order to match the ONS ordering:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>lfs<span class="sc">$</span>uresmc.fn<span class="ot">&lt;-</span><span class="fu">as.factor</span>(lfs<span class="sc">$</span>uresmc.fn)</span>
+<span id="cb30-2"><a href="#cb30-2"></a>lfs<span class="sc">$</span>uresmc.fn<span class="ot">&lt;-</span><span class="fu">factor</span>(</span>
+<span id="cb30-3"><a href="#cb30-3"></a>  lfs<span class="sc">$</span>uresmc.fn,</span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="at">levels =</span> <span class="fu">levels</span>(lfs<span class="sc">$</span>uresmc.fn)[<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">13</span>,<span class="dv">2</span>,<span class="dv">12</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">7</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Let us now check the results:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>lfs.s<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>piwt22,<span class="at">data=</span>lfs<span class="sc">%&gt;%</span><span class="fu">filter</span>(ilodefr<span class="sc">==</span><span class="dv">1</span>)) </span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">round</span>(<span class="fu">confint</span>(<span class="fu">svytotal</span>(<span class="sc">~</span>uresmc.fn,lfs.s)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                  2.5 %  97.5 %
 uresmc.fnNorth East             1108265 1366323
@@ -490,6 +563,14 @@ uresmc.fnNorthern Ireland        689076  803340</code></pre>
 <p>We can now import the design factors from the LFS documentation. This has to be done by hand, by directly copying the relevant numbers from the LFS.</p>
 <p>While we are at it we can also improve the original table:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>tot<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">svytotal</span>(<span class="sc">~</span>uresmc.fn,lfs.s))</span>
+<span id="cb33-2"><a href="#cb33-2"></a>tot<span class="sc">$</span>deft<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.8712</span>,<span class="fl">1.0857</span>,<span class="fl">1.3655</span>,<span class="fl">1.0051</span>,<span class="fl">0.9634</span>,</span>
+<span id="cb33-3"><a href="#cb33-3"></a>            <span class="fl">1.0382</span>,<span class="fl">0.8936</span>,<span class="fl">1.3272</span>,<span class="fl">0.9677</span>,<span class="fl">0.9137</span>,</span>
+<span id="cb33-4"><a href="#cb33-4"></a>            <span class="fl">1.0012</span>,<span class="fl">1.0437</span>,<span class="fl">0.7113</span>)</span>
+<span id="cb33-5"><a href="#cb33-5"></a>tot[<span class="st">"2.5%"</span>]<span class="ot">&lt;-</span>tot<span class="sc">$</span>total<span class="sc">-</span>(<span class="fl">1.96</span><span class="sc">*</span>tot<span class="sc">$</span>SE<span class="sc">*</span>tot<span class="sc">$</span>deft)</span>
+<span id="cb33-6"><a href="#cb33-6"></a>tot[<span class="st">"97.5%"</span>]<span class="ot">&lt;-</span>tot<span class="sc">$</span>total<span class="sc">+</span>(<span class="fl">1.96</span><span class="sc">*</span>tot<span class="sc">$</span>SE<span class="sc">*</span>tot<span class="sc">$</span>deft)</span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="fu">rownames</span>(tot)<span class="ot">&lt;-</span><span class="fu">substr</span>(<span class="fu">rownames</span>(tot),<span class="dv">10</span>,<span class="fu">nchar</span>(<span class="fu">rownames</span>(tot)))</span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="fu">kable</span>(<span class="fu">round</span>(tot[,<span class="fu">c</span>(<span class="st">"2.5%"</span>,<span class="st">"97.5%"</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -569,8 +650,8 @@ uresmc.fnNorthern Ireland        689076  803340</code></pre>
 </table>
 </div>
 </div>
-<section id="answers" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="answers"><span class="header-section-number">5.3.1</span> Answers</h3>
+<section id="answers" class="level3">
+<h3 class="anchored" data-anchor-id="answers">Answers</h3>
 <p><strong>Question 1</strong> The 2017 BSA is a three stage stratified random survey, with postcode sectors, adresses and individuals as the units selected at each stage. Primary sampling units were stratified according to geographies (sub regions), population density, and proportion of owner-occupiers. Sampling rate was proportional to the size of postcode sectors (i.e.&nbsp;number of addresses).</p>
 <p><strong>Question 2</strong> From the Data Dictionary it appears that the primary sampling units (sub regions) are identified by <code>Spoint</code> and the strata by <code>StratID</code>. The weights variable is <code>WtFactor</code>. Addresses are not provided but could be approximated with a household identifier.</p>
 <p><strong>Question 3</strong> Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys. Using survey design variables does not alter the value of the estimated population mean. However, not accounting for it would lead us to overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval – by about plus or minus 3 months.</p>
@@ -1042,8 +1123,8 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./06_SPSS.html" class="pagination-link" aria-label="SPSS Examples">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">SPSS Examples</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./06_SPSS.html" class="pagination-link" aria-label="SPSS">
+        <span class="nav-page-text">SPSS</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
