@@ -164,6 +164,7 @@ and why **survey design** often plays an important role in getting it
 right.
 
 ```{mermaid}
+%%| echo: false
 flowchart TD
 
 A[What Are We Estimating?] --> B[Point Estimate]

@@ -2,7 +2,7 @@
 
 At the heart of survey design is how we choose who takes part in the
 survey - this is known as sampling. There are two main approaches:
-  **probability sampling**, where individuals are chosen at random and
+**probability sampling**, where individuals are chosen at random and
 everyone in the population has a known (non-zero) chance of being
 selected, and **non-probability sampling**, where people are selected in
 a more informal or purposive way - such as when internet users choose to
@@ -59,7 +59,7 @@ and **stratification**.
 
 ------------------------------------------------------------------------
 
-## 📦 Clustering in Survey Sampling
+## Clustering in Survey Sampling
 
 Clustering is a common technique in survey design, especially in
 large-scale studies. Its usage implies **multistage sampling**, which
@@ -76,7 +76,7 @@ within the selected clusters.
 
 ------------------------------------------------------------------------
 
-### 🗺️ **Clustering in the UK Context**
+### **Clustering in the UK Context**
 
 In Great Britain, there is no national population register listing all
 individuals. The best available alternative is a list of addresses
@@ -102,9 +102,9 @@ limiting travel distances and interviewer time.
 
 ------------------------------------------------------------------------
 
-### 📊 Figure 1: Example of Two-Stage Cluster Sampling
 
-![](pics/cluster.png){fig-alt="Schematic representation of sample clustering"}
+
+![**Figure 1: Example of Two-Stage Cluster Sampling**](pics/cluster.png){fig-alt="Schematic representation of sample clustering"}
 
 In Figure 1, the population is grouped into four postcode districts.
 Districts 1 and 4 are randomly selected as the **Primary Sampling Units
@@ -118,7 +118,7 @@ big role in cost and logistics.
 
 ------------------------------------------------------------------------
 
-### 🏠 Clustering at the Household Level
+### Clustering at the Household Level
 
 Clustering can also happen within households. For example, some UK
 household surveys (like the **Labour Force Survey**) include **all
@@ -162,7 +162,7 @@ individuals were selected randomly from across the population.
 
 ------------------------------------------------------------------------
 
-### ⚠️ Trade-offs of Clustering
+###  Trade-offs of Clustering
 
 Clustering makes sampling more practical and cost-effective—but it comes
 with a trade-off: **reduced precision**. Because we are leaving out
@@ -175,20 +175,16 @@ We’ll return to this idea when we discuss how to account for clustering
 in data analysis.
 
 ------------------------------------------------------------------------
-
-### 📌 Visual Summary: Clustering in Survey Sampling
-
 ```{mermaid}
+%%| echo: false
+%%| fig-cap: "**Visual Summary: Clustering in Survey Sampling**" 
 flowchart TD
-    A[FULL POPULATION] --> B[Grouped into Clusters <br/>e.g. postcode districts]   
-
-    B --> C[Random Sample of Clusters <br/> ie Primary Sampling Units - PSUs]  
-
-    C --> D[Further sampling:  <br/> ie  households, individuals]
-
+    A[FULL POPULATION] --> B[Grouped into clusters <br/>e.g. postcode districts]   
+    B --> C[Sampling of clusters <br/>Primary Sampling Units]  
+    C --> D[Further sampling:  <br/>households, individuals]
 ```
 
-🧠 **Key Points to Remember**:
+**Key Points to Remember**:
 
 -   Clustering simplifies data collection but reduces precision.
 -   It is often combined with **multistage sampling**.
@@ -196,7 +192,7 @@ flowchart TD
 -   Always account for clustering during analysis to avoid misleading
     results.
 
-## 🧩  Stratification
+##  Stratification
 
 Stratification is another important technique used in survey sampling.
 It involves dividing the population into different groups - called
@@ -204,7 +200,7 @@ strata - and then selecting a sample from each group. This ensures that
 important subgroups are properly represented in the final sample, even
 if they are small or harder to reach.
 
-### 🧠 How is stratification different from clustering?
+###  How is stratification different from clustering?
 
 In clustering, each selected group (such as a postcode district) is a
 mini version of the population - as it is designed to be internally
@@ -212,19 +208,18 @@ diverse. In stratification, the groups are made to be as homogeneous as
 possible - people in each stratum share certain traits (like age or
 location), and this helps make groups comparisons more precise.
 
-### 🗺️ Example: Stratification by Region
+###  Example: Stratification by Region
 
 Imagine we split the population into four regions: North, South, East,
 and West. From each region, we randomly select a fixed number of
-addresses - say, five from each. This ensures every region is covered in
-the sample, no matter how small or different it is.
+addresses - say, five from each. This ensures every region is covered in the sample, no matter how small or different it is.
 
 Figure 2 shows how samples are drawn evenly across regional strata.
 
-![Figure 2: An example of stratified
-sampling](pics/strata.png){fig-alt="Schematic representation of sample stratification"}
+![**Figure 2: An example of stratified
+sampling**](pics/strata.png){fig-alt="Schematic representation of sample stratification"}
 
-### 🇬🇧 Stratification in UK Social Surveys
+### Stratification in UK Social Surveys
 
 Strata in UK surveys are often based on:
 
@@ -234,78 +229,77 @@ Strata in UK surveys are often based on:
     an area
 
 -   Demographic traits, such as the number of pensioners or the area's
-population density
+    population density
 
 This information usually comes from Census data, which provides a
 detailed picture of the population across the country.
 
-### 🎯 Why Use Stratification?
+###  Why Use Stratification?
 
 Stratification is especially useful when:
-  
-  -   Some groups in the population are small but important (e.g. ethnic
-                                                             minorities, rural areas, younger people)
+
+-   Some groups in the population are small but important (e.g. ethnic
+    minorities, rural areas, younger people)
 
 -   One needs to improve estimates precision - by reducing variation
-within each group
+    within each group
 
 -   One needs reliable results for every group, not just for the
-population overall
+    population overall
 
 By making sure each group is adequately represented, stratification
 helps improve the accuracy and representativeness of survey estimates
 
-## 🎯 Proportionate vs disproportionate sampling
+##  Proportionate vs disproportionate sampling
 
 In **simple random sampling**, every person (or unit) in the population
 has the **same chance** of being selected. This means that the
 **sampling fraction**—the proportion of the population included in the
 sample—is calculated as:
-  
-  $$
+
+$$
   \text{Sampling fraction} = \frac{n}{N}
 $$
-  
-  Where:
-  
-  -   $n$ = sample size
+
+Where:
+
+-   $n$ = sample size
 -   $N$ = population size
 
-### 🧭 Proportionate Stratified Sampling
+###  Proportionate Stratified Sampling
 
 When the **same sampling fraction** is used in each strata, we call it
 **proportionate stratification**. That means:
-  
-  $$
+
+$$
   \frac{n_h}{N_h} = \frac{n}{N}
 $$
-  
-  Where:
-  
-  -   $n_h$ = number of people sampled in stratum $h$
-  -   $N_h$ = total number of people in stratum $h$
-  
-  This method ensures that each group is represented **in proportion to
+
+Where:
+
+-   $n_h$ = number of people sampled in stratum $h$
+-   $N_h$ = total number of people in stratum $h$
+
+This method ensures that each group is represented **in proportion to
 its size** in the population.
 
 ------------------------------------------------------------------------
-  
-### ⚖️ Disproportionate Stratified Sampling
-  
-  Sometimes, researchers deliberately **over-sample** certain groups. This
+
+###  Disproportionate Stratified Sampling
+
+Sometimes, researchers deliberately **over-sample** certain groups. This
 is called **disproportionate stratification** - when the sampling
 fraction is **larger in some strata than others**.
 
 This is useful when:
-  
-  -   The group is **small** but important for the study (e.g. ethnic
-                                                          minorities, people in rural areas)
+
+-   The group is **small** but important for the study (e.g. ethnic
+    minorities, people in rural areas)
 -   More data is needed to analyse that group accurately
 
-🔎 **Example:** In the **British Election Study 2010**, people from
+**Example:** In the **British Election Study 2010**, people from
 ethnic minority backgrounds were over-sampled. This was done because
 there was limited data on their voting behaviour, and researchers needed
 enough cases to draw valid conclusions.
 
 ------------------------------------------------------------------------
-  

@@ -1,4 +1,4 @@
-# Design-Based Inference from Social Surveys
+# Design-Based Inference
 
 Conducting *inference* from surveys involves estimating population
 parameters (like means or medians) sometimes also called *point

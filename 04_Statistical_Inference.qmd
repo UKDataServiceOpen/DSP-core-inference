@@ -52,13 +52,13 @@ precision is not the focus.
 
 ------------------------------------------------------------------------
   
-## Flowchart: Choosing the right  estimation strategy
-  
-  ```{mermaid}
+```{mermaid}
+%%| echo: false
+%%| fig-cap: "**Flowchart: Choosing the right  estimation strategy**"
 flowchart TD
 A[Survey weights <br> present in the data?] -->|Yes| B[Survey design variables <br> present in the data?]
 A -->|No| G[Strategy 4 <br> Unweighted estimation  <br> *Sample description only*]
-B -->|Yes| C[Strategy 1  <br> Weights + Design Variables  <br> with survey commands]
+B -->|Yes| C[Strategy 1  <br>Weights + design vars  <br> with survey commands]
 B -->|No| D[Strategy 2  <br> Weights only  <br> with survey commands]
 D --> E[Check if design effects  <br> are available  <br> to adjust precision]
 D -->|Low sensitivity analysis| F[Strategy 3 <br> Use weighted   <br> standard commands]
@@ -84,7 +84,8 @@ information is available.
 and effort given the sensitivity / importance of the project
 -   Information about applying of SecureLab access is available on the [UKDS website](https://ukdataservice.ac.uk/find-data/access-conditions/secure-application-requirements/)
 
-```{mermaid}        
+```{mermaid}    
+%%| echo: false
 flowchart TD
 B[Check documentation: <br> are design variables available <br/> in a controlled dataset?]
 B -->|Yes| C[Cost–benefit assessment:<br/>time, feasibility, <br/> sensitivity of outputs]
@@ -111,6 +112,8 @@ design in your software
 confidence levels when computing test and/or confidence intervals (ie $p<.001$)
 
 ```{mermaid}
+%%| echo: false
+
 flowchart TD
 A[Start] --> B[Has the producer already <br/> published the estimates?]
 B -->|Yes| C[Use official estimates <br/> with proper attribution]
@@ -134,6 +137,8 @@ standard errors
 -   Survey-specific commands are essential here
 
 ```{mermaid}
+%%| echo: false
+
 flowchart TD
 B[Define domains<br/> e.g. age group, region <br/> economic activity]
 B --> D[Write domain <br/>estimation    syntax <br/> do NOT filter the data]
