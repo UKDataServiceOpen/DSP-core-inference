@@ -14,7 +14,7 @@ execute:
 book:
   title: "Statistical inference  with weights and survey design variables"
   subtitle: Practical guidelines using  UKDS datasets
-#  downloads: [pdf]
+#  downloads: [pdf] ### Not working with diagrams currently
   chapters:
     - index.qmd
     - 01_Basics.qmd
