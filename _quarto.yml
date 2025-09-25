@@ -7,10 +7,8 @@ nocite: |
 jupyter: nbstata
 
 execute:
-  echo: true
   warning: false
   message: false
-  cache: false
   freeze: false
 
 book:
@@ -36,8 +34,9 @@ book:
     logo-href: https://ukdataservice.ac.uk
     logo-alt: "UKDS homepage"
     style: "floating"
+    search: true
+    title: " "
     
-
 
 format:
     html: 
@@ -51,6 +50,8 @@ format:
       link-external-newwindow: true
       citations-hover: true
       footnotes-hover: true
+      title-block-banner: "white"
+      title-block-banner-color: "#742082"
       
     # titlepage-pdf:
     #   titlepage: plain
