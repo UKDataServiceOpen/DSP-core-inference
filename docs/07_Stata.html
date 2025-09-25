@@ -126,6 +126,23 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: #742082;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: #742082;
+background: white;
+      }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -136,7 +153,7 @@ div.csl-indent {
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -152,7 +169,23 @@ div.csl-indent {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html">5. Exercises</a></li><li class="breadcrumb-item"><a href="./07_Stata.html">Stata</a></li></ol></nav>
+      <h1 class="title">Stata</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-body">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
@@ -262,25 +295,10 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_R.html">5. Exercises</a></li><li class="breadcrumb-item"><a href="./07_Stata.html">Stata</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Stata</h1>
-</div>
+<main class="content quarto-banner-title-block column-body" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta column-body">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <p>Stata provides comprehensive support for computing estimates from survey data using weights and survey design variables. Perhaps a bit confusingly to some users, it distinguishes between four weighted estimation techniques, also called <em>weights</em>:</p>
@@ -342,7 +360,7 @@ div.csl-indent {
 <section id="specifying-the-survey-design-in-stata" class="level2">
 <h2 class="anchored" data-anchor-id="specifying-the-survey-design-in-stata">Specifying the survey design in Stata</h2>
 <p>We first need to open the BSA dataset.</p>
-<div id="4302f6cb" class="cell" data-execution_count="1">
+<div id="97708b08" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>*** Setting the working directory</span>
 <span id="cb1-2"><a href="#cb1-2"></a>*** Edit the <span class="kw">line</span> below  <span class="kw">as</span> appropriate</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">quietly</span>  cd ~/OneDrive/DSP/SSP/DSP-core-inference </span>
@@ -386,7 +404,7 @@ Sorted by:
 <li>and <code>WtFactor</code> as weights.</li>
 </ul>
 <p>The Stata command to do this is <code>svyset</code>.</p>
-<div id="0ae4dd2e" class="cell" data-execution_count="2">
+<div id="0d497e72" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>*** First examine the survey design variables</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="kw">describe</span> Spoint StratID WtFactor</span>
@@ -422,7 +440,7 @@ Sampling weights: WtFactor
 <section id="mean-age-and-its-95-confidence-interval" class="level2">
 <h2 class="anchored" data-anchor-id="mean-age-and-its-95-confidence-interval">Mean age and its 95% confidence interval</h2>
 <p>We can now produce a first set of estimates and compare it with those we would have got without accounting for the survey design. We will compute the average (i.e.&nbsp;mean) age of respondents. From this point, we will are going to use the <code>svy:</code> prefix before Stata estimation commands, so that our estimates are informed by the survey design.</p>
-<div id="2b4bcfa0" class="cell" data-execution_count="3">
+<div id="cab09ce7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">svy</span>:<span class="kw">mean</span> RAgeE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. svy:mean RAgeE
@@ -459,7 +477,7 @@ Number of PSUs   = 372            Population size = 3,988.0019
 <ul>
 <li>Not using weights would make us overestimate the mean age in the population (of those aged 16+) by about 4 years. This is likely to be due to the fact that older respondents are more likely to take part to surveys.</li>
 </ul>
-<div id="a0424085" class="cell" data-execution_count="4">
+<div id="6b8f3a83" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">mean</span> RAgeE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. mean RAgeE
@@ -476,7 +494,7 @@ Mean estimation                          Number of obs = 3,988
 <ul>
 <li>Not using survey design variables does not alter the value of the estimated population mean. However, this would lead us to - marginally - overestimate the precision/underestimate the uncertainty of our estimate with a narrower confidence interval ie between 47.6 and 49 years, that is by a little bit more than a month in each direction.</li>
 </ul>
-<div id="8a4777ec" class="cell" data-execution_count="5">
+<div id="5533a608" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>*** Declaring survey design <span class="kw">as</span> simple random</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="kw">svyset</span> [pw=WtFactor]</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="kw">svy</span>:<span class="kw">mean</span> RAgeE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -519,7 +537,7 @@ Number of PSUs   = 3,988          Population size = 3,988.0019
 <section id="proportions-and-their-95-confidence-interval" class="level2">
 <h2 class="anchored" data-anchor-id="proportions-and-their-95-confidence-interval">Proportions and their 95% confidence interval</h2>
 <p>We can similarly estimate the distribution of a categorical variable in the population by computing proportions (or percentages), for instance, the proportion of people who declare that they are interested in politics. This is the <code>Politics</code> variable in the BSA. It has five categories ranging from 1 - ‘A great deal’ to 5 - ‘None at all’. We are going to recode it into a dichotomic variable with 1 and 2 - <code>quite a lot</code> and as ‘Significantly’, and the rest as ‘Not so much’.</p>
-<div id="1ebfc25d" class="cell" data-execution_count="6">
+<div id="7a03d092" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a>*** Overview <span class="kw">of</span> the <span class="kw">variable</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>inspect Politics</span>
 <span id="cb11-3"><a href="#cb11-3"></a></span>
@@ -565,7 +583,7 @@ Politics:  How much interest do you have        Number of observations
 </div>
 </div>
 <p>Let’s create the dichotomic version and look at the results:</p>
-<div id="0ebb680a" class="cell" data-execution_count="7">
+<div id="18735d27" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">recode</span> Politics 1 2=1 3/<span class="fu">max</span>=0, <span class="kw">gen</span>(DPol)</span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>*** Labelling the <span class="kw">variable</span></span>
@@ -608,7 +626,7 @@ you have in politics? | Not so mu  Significa |     Total
 </div>
 </div>
 <p>We can now estimate the proportion of people significantly interested in politics in the population. We just need to add <code>ci</code> as an option in order to also get the 95% confidence interval.</p>
-<div id="171a2610" class="cell" data-execution_count="8">
+<div id="dc7d0aeb" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>*** Let's <span class="kw">not</span> forget to declare the survey design again</span>
 <span id="cb15-2"><a href="#cb15-2"></a></span>
 <span id="cb15-3"><a href="#cb15-3"></a>*** We need to declare again the survey design after the <span class="fu">last</span> exercise</span>
@@ -674,7 +692,7 @@ Key: percentage = Cell percentage
 <ul>
 <li>The proportion of 17-34 year old in the sample is</li>
 </ul>
-<div id="74b1c5a4" class="cell" data-execution_count="9">
+<div id="41007bb2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">svy</span>:<span class="kw">tab</span> RAgecat5, <span class="kw">percent</span> <span class="kw">ci</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. svy:tab RAgecat5, percent ci
@@ -714,7 +732,7 @@ Key: percentage = Cell percentage
 <p><em>Domain estimates</em> refer to estimates for groups or subpopulations, which adds a layer of complexity to what we have done so far. They key point is that as survey weights are usually designed by data producers using the whole of the sample, confidence intervals and standard errors computed using only part of the sample - such as for example when subsetting the dataset or removing observations - may be unreliable, as they will rely on some of the weights only. Instead, it is recommended to use commands that take into account the entire distribution of the weights.</p>
 <p>In Stata, this can be either achieved with <code>subpop()</code> or <code>over</code>.</p>
 <p><code>subpop()</code> computes estimates for single groups identified either by a dummy variable (ie coded 0-1), or by a conditional statement. For instance, if we would like to know the mean age of BSA respondents in the North East, we need to specify (using the Government Office Regions <code>GOR_ID</code> variable):</p>
-<div id="08534577" class="cell" data-execution_count="10">
+<div id="8ac5dc3a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">svy</span>, subpop(<span class="kw">if</span> GOR_ID==1):<span class="kw">mean</span> RAgeE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. svy, subpop(if GOR_ID==1):mean RAgeE
@@ -739,7 +757,7 @@ Note: 151 strata omitted because they contain no subpopulation
 </div>
 </div>
 <p>The above would be identical to:</p>
-<div id="b7dc4527" class="cell" data-execution_count="11">
+<div id="26ccfb98" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1"></a>*** Creates dummy variables with the category number <span class="kw">as</span> suffix</span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="kw">quietly</span> <span class="kw">tab</span> GOR_ID ,<span class="kw">gen</span>(region) </span>
 <span id="cb21-3"><a href="#cb21-3"></a></span>
@@ -774,7 +792,7 @@ Note: 151 strata omitted because they contain no subpopulation
 </div>
 </div>
 <p>In case there are more than a few subpopulations, Stata provides the ‘over’ option, that can be used with in conjunction with estimation commands. In our case:</p>
-<div id="5b2f0c7f" class="cell" data-execution_count="12">
+<div id="2fae320e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">svy</span>: <span class="kw">mean</span> RAgeE,<span class="bn">over</span>(GOR_ID) cformat(%9.1f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. svy: mean RAgeE,over(GOR_ID) cformat(%9.1f)
@@ -807,7 +825,7 @@ D Yorkshire and The Humber  |       48.0        1.4          45.2        50.8
 </div>
 <p>Our results seem to suggest that the population in London is among the youngest in the country, and that those in the South West are among the oldest – their respective 95% confidence intervals do not overlap. We should not feel so confident about differences between London and the South East, as the CIs partially overlap.</p>
 <p>We can follow a similar approach with proportions: we just need to specify the variable we are interested in as an outcome, for instance respondents who are significantly interested in politics, and either replace <code>mean</code> with <code>proportion</code> or even more simply use <code>tab</code>:</p>
-<div id="36cdcf3f" class="cell" data-execution_count="13">
+<div id="7df0c0a5" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">svy</span>:<span class="kw">proportion</span> DPol, <span class="kw">percent</span> <span class="bn">over</span>(GOR_ID) </span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="kw">svy</span>:<span class="kw">tab</span> GOR_ID DPol, <span class="ot">row</span> <span class="kw">percent</span>  <span class="kw">ci</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -945,7 +963,7 @@ Key: Row percentage
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="de6dbd28" class="cell" data-execution_count="14">
+<div id="01a7ef7d" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">svy</span>,subpop(<span class="kw">if</span> RAgecat5==1 &amp; Rsex==1): <span class="kw">proportion</span> DPol,<span class="kw">percent</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="kw">svy</span>: <span class="kw">proportion</span> DPol,<span class="bn">over</span>(RAgecat5 Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1025,7 +1043,7 @@ Significantly DK/Ref#Female  |          1          .             .           .
 <p>Estimation without accounting for sample design will likely be biased and should be reported as such including warnings, even if the nature (over or underestimation of the precision) and and size are not known. An alternative is to look for design effects tables published by the data producer which could be used to correct for the bias.</p>
 <p>The Office for National Statistics regularly publishes such tables for the LFS, albeit mostly for their headline statistics. Obtaining further design effects for subpopulations might not be straighforward. The overall methodology is described <a href="https://www.ons.gov.uk/methodology/methodologicalpublications/generalmethodology/onsworkingpaperseries/onsmethodologyworkingpaperseriesno9guidetocalculatingstandarderrorsforonssocialsurveys#annex-a-labour-force-survey-standard-errors-january-to-march-2015-united-kingdom">in this note</a>, and updated tables are provided <a href="Volume 1: Background and methodology (PDF, 1.2MB)">on this page</a>.</p>
 <p>Let’s see how this can be achieved. But first, let’s produce uncorrected ‘naive’ estimates of the regional population.</p>
-<div id="439a312a" class="cell" data-execution_count="15">
+<div id="98d3c575" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">clear</span> </span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="kw">use</span> ~/Data/lfs/UKDA-8999-stata/lfsp_aj22_eul_pwt22.dta</span>
 <span id="cb29-3"><a href="#cb29-3"></a></span>
@@ -1098,7 +1116,7 @@ West Midlands (met county)  |    1628710   136654.7       1360868     1896552
 </figure>
 </div>
 <p>We can see that for some reason, the number of regions has been reduced from the original 16 to 13. We therefore need to recode our original variable.</p>
-<div id="40077ca6" class="cell" data-execution_count="16">
+<div id="5df63ada" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a href="#cb31-1"></a>*** Recoding</span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="kw">recode</span> URESMC 1 2=1 3 4 5 =2 8 9=8 12 13 =12 14 16 =14 18 19=18,<span class="kw">gen</span>(rURESMC)</span>
 <span id="cb31-3"><a href="#cb31-3"></a></span>
@@ -1151,7 +1169,7 @@ West Midlands (met county)  |    1628710   136654.7       1360868     1896552
 </div>
 </div>
 <p>Let us now produce the updated population estimates:</p>
-<div id="efdfbe75" class="cell" data-execution_count="17">
+<div id="e88a8d0b" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">svy</span>:<span class="kw">total</span> SEX, <span class="bn">over</span>(rURESMC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. svy:total SEX, over(rURESMC)
@@ -1187,7 +1205,7 @@ Rest of South East  |    8146349   266897.6       7623231     8669467
 <p>We can now amend the standard errors and CIs using the design factors from the LFS documentation. This has to be done by hand, by directly copying the relevant numbers from the LFS documentation.</p>
 <p>For example, if we wanted to adjust the population estimates for London, we would need to start with the original standard error, multiply it by the relevanmt design effect, then compute the 95% confidence interval of the point estimate. The design effect for London is smaller than 1, which indicates that the confidence interval after correction will be narrower - more precise than when simple random sampling was assumed.</p>
 <p>Here is the adjusted standard error for London:</p>
-<div id="c01513a8" class="cell" data-execution_count="18">
+<div id="e9260d65" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><a href="#cb35-1"></a>dis 294956.8*0.9634</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. dis 294956.8*0.9634
@@ -1195,7 +1213,7 @@ Rest of South East  |    8146349   266897.6       7623231     8669467
 </div>
 </div>
 <p>… The corresponding lower bound of the confidence interval</p>
-<div id="a0e6308d" class="cell" data-execution_count="19">
+<div id="7189c347" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb37-1"><a href="#cb37-1"></a>dis 5912194-1.96*(294956.8*0.9634)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. dis 5912194-1.96*(294956.8*0.9634)
@@ -1203,7 +1221,7 @@ Rest of South East  |    8146349   266897.6       7623231     8669467
 </div>
 </div>
 <p>… And the upper bound</p>
-<div id="edc205e2" class="cell" data-execution_count="20">
+<div id="a64840e7" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb39-1"><a href="#cb39-1"></a>dis 5912194+1.96*(294956.8*0.9634)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>. dis 5912194+1.96*(294956.8*0.9634)
@@ -1214,7 +1232,7 @@ Rest of South East  |    8146349   266897.6       7623231     8669467
 <p><code>[5334080 -6490308]</code></p>
 <p>We can see that it is indeed narrower.</p>
 <p><em>Note</em>: it would be possible to produce an amended table in full, using Stata’s MATA functions.</p>
-<div id="27411a42" class="cell" data-execution_count="21">
+<div id="e90ad0d3" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb41-1"><a href="#cb41-1"></a>mat input <span class="kw">deff</span>= (0.8712,1.0857,1.3655,1.0051,0.9634,1.0382,0.8936,1.3272,0.9677,0.9137, 1.0012,1.0437,0.7113)</span>
 <span id="cb41-2"><a href="#cb41-2"></a></span>
 <span id="cb41-3"><a href="#cb41-3"></a>mat orig= <span class="fu">e</span>(b)',<span class="fu">r</span>(<span class="kw">table</span>)[<span class="st">"se"</span>,.]',deff',<span class="fu">hadamard</span>(<span class="fu">r</span>(<span class="kw">table</span>)[<span class="st">"se"</span>,.],<span class="kw">deff</span>)'</span>
