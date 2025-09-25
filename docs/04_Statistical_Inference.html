@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -89,14 +54,15 @@ div.csl-indent {
 <link href="./03_Real_world.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30585b6bbc52feac0159273fe5e41b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a51c6eda23400dd08e9904a0902dfcf7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,7 +109,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -185,7 +151,8 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistical inference with weights and survey design variables</a> 
@@ -213,7 +180,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,7 +233,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text">Appendix: Study-specific weighting and sample design information</span></a>
   </div>
 </li>
     </ul>
@@ -280,15 +247,14 @@ window.Quarto = {
    
   <ul>
   <li><a href="#recommended-strategies" id="toc-recommended-strategies" class="nav-link active" data-scroll-target="#recommended-strategies"><span class="header-section-number">4.1</span> Recommended Strategies</a></li>
-  <li><a href="#flowchart-choosing-the-right-estimation-strategy" id="toc-flowchart-choosing-the-right-estimation-strategy" class="nav-link" data-scroll-target="#flowchart-choosing-the-right-estimation-strategy"><span class="header-section-number">4.2</span> Flowchart: Choosing the right estimation strategy</a></li>
-  <li><a href="#medium-to-high-sensitivity-analysis-workflow" id="toc-medium-to-high-sensitivity-analysis-workflow" class="nav-link" data-scroll-target="#medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">4.3</span> Medium to high sensitivity analysis: workflow</a>
+  <li><a href="#medium-to-high-sensitivity-analysis-workflow" id="toc-medium-to-high-sensitivity-analysis-workflow" class="nav-link" data-scroll-target="#medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">4.2</span> Medium to high sensitivity analysis: workflow</a>
   <ul class="collapse">
-  <li><a href="#if-survey-design-variables-are-available" id="toc-if-survey-design-variables-are-available" class="nav-link" data-scroll-target="#if-survey-design-variables-are-available"><span class="header-section-number">4.3.1</span> If survey design variables are available</a></li>
-  <li><a href="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" id="toc-if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="nav-link" data-scroll-target="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">4.3.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</a></li>
-  <li><a href="#if-design-variables-are-not-available-at-all" id="toc-if-design-variables-are-not-available-at-all" class="nav-link" data-scroll-target="#if-design-variables-are-not-available-at-all"><span class="header-section-number">4.3.3</span> If design variables are not available at all</a></li>
-  <li><a href="#for-subpopulation-domain-estimates" id="toc-for-subpopulation-domain-estimates" class="nav-link" data-scroll-target="#for-subpopulation-domain-estimates"><span class="header-section-number">4.3.4</span> For subpopulation (domain) estimates</a></li>
+  <li><a href="#if-survey-design-variables-are-available" id="toc-if-survey-design-variables-are-available" class="nav-link" data-scroll-target="#if-survey-design-variables-are-available"><span class="header-section-number">4.2.1</span> If survey design variables are available</a></li>
+  <li><a href="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" id="toc-if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="nav-link" data-scroll-target="#if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">4.2.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</a></li>
+  <li><a href="#if-design-variables-are-not-available-at-all" id="toc-if-design-variables-are-not-available-at-all" class="nav-link" data-scroll-target="#if-design-variables-are-not-available-at-all"><span class="header-section-number">4.2.3</span> If design variables are not available at all</a></li>
+  <li><a href="#for-subpopulation-domain-estimates" id="toc-for-subpopulation-domain-estimates" class="nav-link" data-scroll-target="#for-subpopulation-domain-estimates"><span class="header-section-number">4.2.4</span> For subpopulation (domain) estimates</a></li>
   </ul></li>
-  <li><a href="#lower-sensitivity-analysis" id="toc-lower-sensitivity-analysis" class="nav-link" data-scroll-target="#lower-sensitivity-analysis"><span class="header-section-number">4.4</span> Lower Sensitivity Analysis</a></li>
+  <li><a href="#lower-sensitivity-analysis" id="toc-lower-sensitivity-analysis" class="nav-link" data-scroll-target="#lower-sensitivity-analysis"><span class="header-section-number">4.3</span> Lower Sensitivity Analysis</a></li>
   </ul>
 </nav>
     </div>
@@ -335,17 +301,7 @@ window.Quarto = {
 <li><p><strong>Strategy 4</strong>: <strong>Unweighted estimation</strong> is strongly discouraged for inference, as the results will almost always be unreliable. It is only acceptable for descriptive or teaching purposes where precision is not the focus.</p></li>
 </ul>
 <hr>
-</section>
-<section id="flowchart-choosing-the-right-estimation-strategy" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="flowchart-choosing-the-right-estimation-strategy"><span class="header-section-number">4.2</span> Flowchart: Choosing the right estimation strategy</h2>
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1"></a>flowchart TD</span>
-<span id="cb1-2"><a href="#cb1-2"></a>A[Survey weights &lt;br&gt; present in the data?] --&gt;|Yes| B[Survey design variables &lt;br&gt; present in the data?]</span>
-<span id="cb1-3"><a href="#cb1-3"></a>A --&gt;|No| G[Strategy 4 &lt;br&gt; Unweighted estimation  &lt;br&gt; *Sample description only*]</span>
-<span id="cb1-4"><a href="#cb1-4"></a>B --&gt;|Yes| C[Strategy 1  &lt;br&gt; Weights + Design Variables  &lt;br&gt; with survey commands]</span>
-<span id="cb1-5"><a href="#cb1-5"></a>B --&gt;|No| D[Strategy 2  &lt;br&gt; Weights only  &lt;br&gt; with survey commands]</span>
-<span id="cb1-6"><a href="#cb1-6"></a>D --&gt; E[Check if design effects  &lt;br&gt; are available  &lt;br&gt; to adjust precision]</span>
-<span id="cb1-7"><a href="#cb1-7"></a>D --&gt;|Low sensitivity analysis| F[Strategy 3 &lt;br&gt; Use weighted   &lt;br&gt; standard commands]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -353,22 +309,22 @@ window.Quarto = {
 <pre class="mermaid mermaid-js">flowchart TD
 A[Survey weights &lt;br&gt; present in the data?] --&gt;|Yes| B[Survey design variables &lt;br&gt; present in the data?]
 A --&gt;|No| G[Strategy 4 &lt;br&gt; Unweighted estimation  &lt;br&gt; *Sample description only*]
-B --&gt;|Yes| C[Strategy 1  &lt;br&gt; Weights + Design Variables  &lt;br&gt; with survey commands]
+B --&gt;|Yes| C[Strategy 1  &lt;br&gt;Weights + design vars  &lt;br&gt; with survey commands]
 B --&gt;|No| D[Strategy 2  &lt;br&gt; Weights only  &lt;br&gt; with survey commands]
 D --&gt; E[Check if design effects  &lt;br&gt; are available  &lt;br&gt; to adjust precision]
 D --&gt;|Low sensitivity analysis| F[Strategy 3 &lt;br&gt; Use weighted   &lt;br&gt; standard commands]
 </pre>
 </div>
-<p></p></figure><p></p>
+<p></p><figcaption> <strong>Flowchart: Choosing the right estimation strategy</strong></figcaption> </figure><p></p>
 </div>
 </div>
 </div>
 </section>
-<section id="medium-to-high-sensitivity-analysis-workflow" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">4.3</span> Medium to high sensitivity analysis: workflow</h2>
+<section id="medium-to-high-sensitivity-analysis-workflow" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="medium-to-high-sensitivity-analysis-workflow"><span class="header-section-number">4.2</span> Medium to high sensitivity analysis: workflow</h2>
 <p>In most cases, researchers need not only point estimates but also measures of precision, such as confidence intervals or standard errors. The correct estimation of these depends on how much survey design information is available.</p>
-<section id="if-survey-design-variables-are-available" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="if-survey-design-variables-are-available"><span class="header-section-number">4.3.1</span> If survey design variables are available</h3>
+<section id="if-survey-design-variables-are-available" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="if-survey-design-variables-are-available"><span class="header-section-number">4.2.1</span> If survey design variables are available</h3>
 <ul>
 <li>Identify relevant weights and design variables (see data documentation)</li>
 <li>Declare the design in your software using survey commands</li>
@@ -377,20 +333,13 @@ D --&gt;|Low sensitivity analysis| F[Strategy 3 &lt;br&gt; Use weighted   &lt;br
 <li>Discuss possible sources of bias (e.g.&nbsp;under/over-estimation of precision)</li>
 </ul>
 </section>
-<section id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">4.3.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</h3>
+<section id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="if-design-variables-are-not-in-the-safeguarded-eul-dataset-but-are-available-in-controlled-access-datasets"><span class="header-section-number">4.2.2</span> If design variables are not in the safeguarded (EUL) dataset but are available in controlled access datasets**</h3>
 <ul>
 <li>Consider whether applying for SecureLab access is worth the time and effort given the sensitivity / importance of the project</li>
 <li>Information about applying of SecureLab access is available on the <a href="https://ukdataservice.ac.uk/find-data/access-conditions/secure-application-requirements/">UKDS website</a></li>
 </ul>
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1"></a>flowchart TD</span>
-<span id="cb2-2"><a href="#cb2-2"></a>B[Check documentation: &lt;br&gt; are design variables available &lt;br/&gt; in a controlled dataset?]</span>
-<span id="cb2-3"><a href="#cb2-3"></a>B --&gt;|Yes| C[Cost–benefit assessment:&lt;br/&gt;time, feasibility, &lt;br/&gt; sensitivity of outputs]</span>
-<span id="cb2-4"><a href="#cb2-4"></a>C --&gt;|Apply| D[Apply for access: write &lt;br/&gt; application, take the &lt;br/&gt; accredited researcher training]</span>
-<span id="cb2-5"><a href="#cb2-5"></a>D --&gt; E[On approval: &lt;br/&gt; Strategy 1]</span>
-<span id="cb2-6"><a href="#cb2-6"></a>C --&gt;|Do not apply| F[Proceed without design vars &lt;br/&gt; → follow 4.3.3]</span>
-<span id="cb2-7"><a href="#cb2-7"></a>B --&gt;|No| F[Proceed without design vars &lt;br/&gt; → follow 4.3.3]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -409,8 +358,8 @@ B --&gt;|No| F[Proceed without design vars &lt;br/&gt; → follow 4.3.3]
 </div>
 </div>
 </section>
-<section id="if-design-variables-are-not-available-at-all" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="if-design-variables-are-not-available-at-all"><span class="header-section-number">4.3.3</span> If design variables are not available at all</h3>
+<section id="if-design-variables-are-not-available-at-all" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="if-design-variables-are-not-available-at-all"><span class="header-section-number">4.2.3</span> If design variables are not available at all</h3>
 <ul>
 <li>Check whether the data producer has already published the estimates you need</li>
 <li>Use the available weights and declare a simple random sampling design in your software</li>
@@ -420,15 +369,6 @@ B --&gt;|No| F[Proceed without design vars &lt;br/&gt; → follow 4.3.3]
 <li>Be cautious with small sub-samples; consider only strong confidence levels when computing test and/or confidence intervals (ie <span class="math inline">\(p&lt;.001\)</span>)</li>
 </ul>
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1"></a>flowchart TD</span>
-<span id="cb3-2"><a href="#cb3-2"></a>A[Start] --&gt; B[Has the producer already &lt;br/&gt; published the estimates?]</span>
-<span id="cb3-3"><a href="#cb3-3"></a>B --&gt;|Yes| C[Use official estimates &lt;br/&gt; with proper attribution]</span>
-<span id="cb3-4"><a href="#cb3-4"></a>B --&gt;|No| D[Identify available weights +&lt;br/&gt; design notes in docs]</span>
-<span id="cb3-5"><a href="#cb3-5"></a>D --&gt; E[Declare SRS in software + &lt;br/&gt; use survey commands &lt;br/&gt; where possible]</span>
-<span id="cb3-6"><a href="#cb3-6"></a>E --&gt; F[Produce estimates: &lt;br/&gt; point + naive precision]</span>
-<span id="cb3-7"><a href="#cb3-7"></a>F --&gt; G[Adjust precision using &lt;br/&gt; published Design Effects &lt;br/&gt; if available]</span>
-<span id="cb3-8"><a href="#cb3-8"></a>G --&gt; H[Report CIs/SEs and &lt;br/&gt; explicitly state likely bias&lt;br/&gt; clustering: underestimation &lt;br/&gt;stratified data: overestimation]</span>
-<span id="cb3-9"><a href="#cb3-9"></a>H --&gt; I[For small sub-samples: &lt;br/&gt; use stricter significance level;&lt;br/&gt;emphasise exploratory status]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -449,8 +389,8 @@ H --&gt; I[For small sub-samples: &lt;br/&gt; use stricter significance level;&l
 </div>
 </div>
 </section>
-<section id="for-subpopulation-domain-estimates" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="for-subpopulation-domain-estimates"><span class="header-section-number">4.3.4</span> For subpopulation (domain) estimates</h3>
+<section id="for-subpopulation-domain-estimates" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="for-subpopulation-domain-estimates"><span class="header-section-number">4.2.4</span> For subpopulation (domain) estimates</h3>
 <ul>
 <li>Extra care is needed when analysing subsets (e.g.&nbsp;employed people, ethnic groups)</li>
 <li>Domain estimation requires using the <strong>entire distribution of weights</strong>, not just subgroup weights</li>
@@ -458,13 +398,6 @@ H --&gt; I[For small sub-samples: &lt;br/&gt; use stricter significance level;&l
 <li>Survey-specific commands are essential here</li>
 </ul>
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1"></a>flowchart TD</span>
-<span id="cb4-2"><a href="#cb4-2"></a>B[Define domains&lt;br/&gt; e.g. age group, region &lt;br/&gt; economic activity]</span>
-<span id="cb4-3"><a href="#cb4-3"></a>B --&gt; D[Write domain &lt;br/&gt;estimation    syntax &lt;br/&gt; do NOT filter the data]</span>
-<span id="cb4-4"><a href="#cb4-4"></a>D --&gt; E[Compute domain estimates &lt;br/&gt; totals/proportions/means]</span>
-<span id="cb4-5"><a href="#cb4-5"></a>E --&gt; F[Report precision&lt;br/&gt; using CIs/SEs reflecting &lt;br/&gt; the whole sample design]</span>
-<span id="cb4-6"><a href="#cb4-6"></a>F --&gt; G[Look out for small-n &lt;br/&gt; and sparse cells;&lt;br/&gt;consider collapsing categories]</span>
-<span id="cb4-7"><a href="#cb4-7"></a>G --&gt; H[Document limitations and &lt;br/&gt; any design-factor adjustments]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -484,8 +417,8 @@ G --&gt; H[Document limitations and &lt;br/&gt; any design-factor adjustments]
 </div>
 </section>
 </section>
-<section id="lower-sensitivity-analysis" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="lower-sensitivity-analysis"><span class="header-section-number">4.4</span> Lower Sensitivity Analysis</h2>
+<section id="lower-sensitivity-analysis" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="lower-sensitivity-analysis"><span class="header-section-number">4.3</span> Lower Sensitivity Analysis</h2>
 <p>Sometimes users are not aiming to conduct formal inference. This may be the case in:</p>
 <ul>
 <li><p>Teaching or learning basic statistical concepts</p></li>
@@ -584,13 +517,14 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

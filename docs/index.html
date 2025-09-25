@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -88,14 +53,15 @@ div.csl-indent {
 <link href="./01_Basics.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30585b6bbc52feac0159273fe5e41b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a51c6eda23400dd08e9904a0902dfcf7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -155,7 +121,8 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistical inference with weights and survey design variables</a> 
@@ -183,7 +150,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -236,7 +203,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text">Appendix: Study-specific weighting and sample design information</span></a>
   </div>
 </li>
     </ul>
@@ -288,29 +255,6 @@ div.csl-indent {
 <p><em>Purpose of these guidelines</em></p>
 <p>The guidelines below attempt to address these challenges by documenting plain English procedures for robust population inference using surveys microdata available at the UK Data Service. It relies on examples from the Labour Force Survey, Family Expenditure Survey, and British Social Attitudes survey with examples in R, Stata and SPSS. The aim is enabling confident implementation of robust estimation strategies regardless of mathematical background.</p>
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1"></a>flowchart TD</span>
-<span id="cb1-2"><a href="#cb1-2"></a>    A[Target Population] --&gt; B[Survey Sample]</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    B --&gt; C{Raw Data Analysis}</span>
-<span id="cb1-4"><a href="#cb1-4"></a>    B --&gt; D{Weighted Analysis}</span>
-<span id="cb1-5"><a href="#cb1-5"></a>    </span>
-<span id="cb1-6"><a href="#cb1-6"></a>    C --&gt; E[Biased Estimates]</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    D --&gt; F[Robust Estimates]</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    </span>
-<span id="cb1-9"><a href="#cb1-9"></a>    G[Survey Design Effects] --&gt; H[Survey Weights]</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    I[Non-response] --&gt; H</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    J[Coverage Errors] --&gt; H</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    </span>
-<span id="cb1-13"><a href="#cb1-13"></a>    H --&gt; D</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    K[Design Variables] --&gt; D</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    </span>
-<span id="cb1-16"><a href="#cb1-16"></a>    E --&gt; L[❌ Unreliable Inference]</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    F --&gt; M[✅ Valid Population Inference]</span>
-<span id="cb1-18"><a href="#cb1-18"></a>    </span>
-<span id="cb1-19"><a href="#cb1-19"></a>    style A fill:#e1f5fe</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    style F fill:#c8e6c9</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    style E fill:#ffcdd2</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    style M fill:#c8e6c9</span>
-<span id="cb1-23"><a href="#cb1-23"></a>    style L fill:#ffcdd2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -331,7 +275,7 @@ div.csl-indent {
     K[Design Variables] --&gt; D
     
     E --&gt; L[❌ Unreliable Inference]
-    F --&gt; M[✅ Valid Population Inference]
+    F --&gt; M[✅ Valid Inference]
     
     style A fill:#e1f5fe
     style F fill:#c8e6c9
@@ -340,7 +284,7 @@ div.csl-indent {
     style L fill:#ffcdd2
 </pre>
 </div>
-<p></p></figure><p></p>
+<p></p><figcaption> <strong>Flowchart: robust population inference</strong></figcaption> </figure><p></p>
 </div>
 </div>
 </div>
@@ -435,13 +379,14 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

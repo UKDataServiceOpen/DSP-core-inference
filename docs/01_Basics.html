@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -89,14 +54,15 @@ div.csl-indent {
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30585b6bbc52feac0159273fe5e41b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a51c6eda23400dd08e9904a0902dfcf7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,7 +109,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -185,7 +151,8 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UKDS homepage" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistical inference with weights and survey design variables</a> 
@@ -213,7 +180,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_Design-Based_Inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,7 +233,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_Appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Appendix: Study-specific weighting and sample design information</span></span></a>
+ <span class="menu-text">Appendix: Study-specific weighting and sample design information</span></a>
   </div>
 </li>
     </ul>
@@ -279,25 +246,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#clustering-in-survey-sampling" id="toc-clustering-in-survey-sampling" class="nav-link active" data-scroll-target="#clustering-in-survey-sampling"><span class="header-section-number">1.1</span> 📦 Clustering in Survey Sampling</a>
+  <li><a href="#clustering-in-survey-sampling" id="toc-clustering-in-survey-sampling" class="nav-link active" data-scroll-target="#clustering-in-survey-sampling"><span class="header-section-number">1.1</span> Clustering in Survey Sampling</a>
   <ul class="collapse">
-  <li><a href="#clustering-in-the-uk-context" id="toc-clustering-in-the-uk-context" class="nav-link" data-scroll-target="#clustering-in-the-uk-context"><span class="header-section-number">1.1.1</span> 🗺️ <strong>Clustering in the UK Context</strong></a></li>
-  <li><a href="#figure-1-example-of-two-stage-cluster-sampling" id="toc-figure-1-example-of-two-stage-cluster-sampling" class="nav-link" data-scroll-target="#figure-1-example-of-two-stage-cluster-sampling"><span class="header-section-number">1.1.2</span> 📊 Figure 1: Example of Two-Stage Cluster Sampling</a></li>
-  <li><a href="#clustering-at-the-household-level" id="toc-clustering-at-the-household-level" class="nav-link" data-scroll-target="#clustering-at-the-household-level"><span class="header-section-number">1.1.3</span> 🏠 Clustering at the Household Level</a></li>
-  <li><a href="#trade-offs-of-clustering" id="toc-trade-offs-of-clustering" class="nav-link" data-scroll-target="#trade-offs-of-clustering"><span class="header-section-number">1.1.4</span> ⚠️ Trade-offs of Clustering</a></li>
-  <li><a href="#visual-summary-clustering-in-survey-sampling" id="toc-visual-summary-clustering-in-survey-sampling" class="nav-link" data-scroll-target="#visual-summary-clustering-in-survey-sampling"><span class="header-section-number">1.1.5</span> 📌 Visual Summary: Clustering in Survey Sampling</a></li>
+  <li><a href="#clustering-in-the-uk-context" id="toc-clustering-in-the-uk-context" class="nav-link" data-scroll-target="#clustering-in-the-uk-context"><span class="header-section-number">1.1.1</span> <strong>Clustering in the UK Context</strong></a></li>
+  <li><a href="#clustering-at-the-household-level" id="toc-clustering-at-the-household-level" class="nav-link" data-scroll-target="#clustering-at-the-household-level"><span class="header-section-number">1.1.2</span> Clustering at the Household Level</a></li>
+  <li><a href="#trade-offs-of-clustering" id="toc-trade-offs-of-clustering" class="nav-link" data-scroll-target="#trade-offs-of-clustering"><span class="header-section-number">1.1.3</span> Trade-offs of Clustering</a></li>
   </ul></li>
-  <li><a href="#stratification" id="toc-stratification" class="nav-link" data-scroll-target="#stratification"><span class="header-section-number">1.2</span> 🧩 Stratification</a>
+  <li><a href="#stratification" id="toc-stratification" class="nav-link" data-scroll-target="#stratification"><span class="header-section-number">1.2</span> Stratification</a>
   <ul class="collapse">
-  <li><a href="#how-is-stratification-different-from-clustering" id="toc-how-is-stratification-different-from-clustering" class="nav-link" data-scroll-target="#how-is-stratification-different-from-clustering"><span class="header-section-number">1.2.1</span> 🧠 How is stratification different from clustering?</a></li>
-  <li><a href="#example-stratification-by-region" id="toc-example-stratification-by-region" class="nav-link" data-scroll-target="#example-stratification-by-region"><span class="header-section-number">1.2.2</span> 🗺️ Example: Stratification by Region</a></li>
-  <li><a href="#stratification-in-uk-social-surveys" id="toc-stratification-in-uk-social-surveys" class="nav-link" data-scroll-target="#stratification-in-uk-social-surveys"><span class="header-section-number">1.2.3</span> 🇬🇧 Stratification in UK Social Surveys</a></li>
-  <li><a href="#why-use-stratification" id="toc-why-use-stratification" class="nav-link" data-scroll-target="#why-use-stratification"><span class="header-section-number">1.2.4</span> 🎯 Why Use Stratification?</a></li>
+  <li><a href="#how-is-stratification-different-from-clustering" id="toc-how-is-stratification-different-from-clustering" class="nav-link" data-scroll-target="#how-is-stratification-different-from-clustering"><span class="header-section-number">1.2.1</span> How is stratification different from clustering?</a></li>
+  <li><a href="#example-stratification-by-region" id="toc-example-stratification-by-region" class="nav-link" data-scroll-target="#example-stratification-by-region"><span class="header-section-number">1.2.2</span> Example: Stratification by Region</a></li>
+  <li><a href="#stratification-in-uk-social-surveys" id="toc-stratification-in-uk-social-surveys" class="nav-link" data-scroll-target="#stratification-in-uk-social-surveys"><span class="header-section-number">1.2.3</span> Stratification in UK Social Surveys</a></li>
+  <li><a href="#why-use-stratification" id="toc-why-use-stratification" class="nav-link" data-scroll-target="#why-use-stratification"><span class="header-section-number">1.2.4</span> Why Use Stratification?</a></li>
   </ul></li>
-  <li><a href="#proportionate-vs-disproportionate-sampling" id="toc-proportionate-vs-disproportionate-sampling" class="nav-link" data-scroll-target="#proportionate-vs-disproportionate-sampling"><span class="header-section-number">1.3</span> 🎯 Proportionate vs disproportionate sampling</a>
+  <li><a href="#proportionate-vs-disproportionate-sampling" id="toc-proportionate-vs-disproportionate-sampling" class="nav-link" data-scroll-target="#proportionate-vs-disproportionate-sampling"><span class="header-section-number">1.3</span> Proportionate vs disproportionate sampling</a>
   <ul class="collapse">
-  <li><a href="#proportionate-stratified-sampling" id="toc-proportionate-stratified-sampling" class="nav-link" data-scroll-target="#proportionate-stratified-sampling"><span class="header-section-number">1.3.1</span> 🧭 Proportionate Stratified Sampling</a></li>
-  <li><a href="#disproportionate-stratified-sampling" id="toc-disproportionate-stratified-sampling" class="nav-link" data-scroll-target="#disproportionate-stratified-sampling"><span class="header-section-number">1.3.2</span> ⚖️ Disproportionate Stratified Sampling</a></li>
+  <li><a href="#proportionate-stratified-sampling" id="toc-proportionate-stratified-sampling" class="nav-link" data-scroll-target="#proportionate-stratified-sampling"><span class="header-section-number">1.3.1</span> Proportionate Stratified Sampling</a></li>
+  <li><a href="#disproportionate-stratified-sampling" id="toc-disproportionate-stratified-sampling" class="nav-link" data-scroll-target="#disproportionate-stratified-sampling"><span class="header-section-number">1.3.2</span> Disproportionate Stratified Sampling</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -339,12 +304,12 @@ window.Quarto = {
 <!-- - reducing fieldwork costs. -->
 <hr>
 <section id="clustering-in-survey-sampling" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="clustering-in-survey-sampling"><span class="header-section-number">1.1</span> 📦 Clustering in Survey Sampling</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="clustering-in-survey-sampling"><span class="header-section-number">1.1</span> Clustering in Survey Sampling</h2>
 <p>Clustering is a common technique in survey design, especially in large-scale studies. Its usage implies <strong>multistage sampling</strong>, which means selecting sample units in two or more steps rather than all at once.</p>
 <p>Instead of sampling individuals directly, the population is first grouped into <strong>clusters</strong> small groups that are each a kind of ‘mini-population’. These clusters are chosen so that they are as diverse as possible internally, meaning that each one looks like a small version of the full population. A sample of these clusters is then randomly selected, and others are left out. Later stages of sampling take place within the selected clusters.</p>
 <hr>
 <section id="clustering-in-the-uk-context" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="clustering-in-the-uk-context"><span class="header-section-number">1.1.1</span> 🗺️ <strong>Clustering in the UK Context</strong></h3>
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="clustering-in-the-uk-context"><span class="header-section-number">1.1.1</span> <strong>Clustering in the UK Context</strong></h3>
 <p>In Great Britain, there is no national population register listing all individuals. The best available alternative is a list of addresses maintained by Royal Mail, called the <strong>Postcode Address File (PAF)</strong>. In Northern Ireland, the equivalent is the list provided by the <strong>Land and Property Services Agency (LPSA)</strong>.</p>
 <p>The PAF contains addresses (also called “delivery points”) but doesn’t tell us how many people or households live at each one. So we can’t use it for <strong>simple random sampling</strong> of individuals or households. However, it is well suited for geographic clustering.</p>
 <p>For example:</p>
@@ -355,16 +320,18 @@ window.Quarto = {
 </ul>
 <p>In many UK surveys, postcode sectors or districts are used as <strong>Primary Sampling Units (PSUs)</strong> - the first level at which random selection happens. This approach helps keep fieldwork practical and affordable by limiting travel distances and interviewer time.</p>
 <hr>
-</section>
-<section id="figure-1-example-of-two-stage-cluster-sampling" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="figure-1-example-of-two-stage-cluster-sampling"><span class="header-section-number">1.1.2</span> 📊 Figure 1: Example of Two-Stage Cluster Sampling</h3>
-<p><img src="pics/cluster.png" class="img-fluid" alt="Schematic representation of sample clustering"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/cluster.png" class="img-fluid figure-img" alt="Schematic representation of sample clustering"></p>
+<figcaption><strong>Figure 1: Example of Two-Stage Cluster Sampling</strong></figcaption>
+</figure>
+</div>
 <p>In Figure 1, the population is grouped into four postcode districts. Districts 1 and 4 are randomly selected as the <strong>Primary Sampling Units (PSUs)</strong>. In the second stage, addresses are randomly selected within these chosen districts. Because only some districts are selected, the final addresses are <strong>clustered</strong> within them. Later stages might involve sampling households or individuals from those addresses.</p>
 <p>This design is common in UK household surveys, where geography plays a big role in cost and logistics.</p>
 <hr>
 </section>
-<section id="clustering-at-the-household-level" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="clustering-at-the-household-level"><span class="header-section-number">1.1.3</span> 🏠 Clustering at the Household Level</h3>
+<section id="clustering-at-the-household-level" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="clustering-at-the-household-level"><span class="header-section-number">1.1.2</span> Clustering at the Household Level</h3>
 <p>Clustering can also happen within households. For example, some UK household surveys (like the <strong>Labour Force Survey</strong>) include <strong>all individuals in a selected household</strong>.</p>
 <p>Imagine we want to estimate the proportion of people born outside the UK. If we select individuals completely at random across the whole population, we might get a very accurate estimate. But if we sample whole households, the result could be less precise.</p>
 <p>Here’s why: people born outside the UK often live together. So in your sample, you might get:</p>
@@ -374,8 +341,8 @@ window.Quarto = {
 <li>A few mixed.</li>
 </ul>
 <p>That means the sample might over- or under-represent certain groups just by chance.</p>
-<section id="example" class="level4" data-number="1.1.3.1">
-<h4 data-number="1.1.3.1" class="anchored" data-anchor-id="example"><span class="header-section-number">1.1.3.1</span> Example:</h4>
+<section id="example" class="level4" data-number="1.1.2.1">
+<h4 data-number="1.1.2.1" class="anchored" data-anchor-id="example"><span class="header-section-number">1.1.2.1</span> Example:</h4>
 <p>e.g.</p>
 <pre><code>Household 1: 1 UK born individuals 
 Household 2: 3 UK born 
@@ -391,39 +358,27 @@ Household 10: 3 UK born </code></pre>
 <hr>
 </section>
 </section>
-<section id="trade-offs-of-clustering" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="trade-offs-of-clustering"><span class="header-section-number">1.1.4</span> ⚠️ Trade-offs of Clustering</h3>
+<section id="trade-offs-of-clustering" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="trade-offs-of-clustering"><span class="header-section-number">1.1.3</span> Trade-offs of Clustering</h3>
 <p>Clustering makes sampling more practical and cost-effective—but it comes with a trade-off: <strong>reduced precision</strong>. Because we are leaving out clusters from the population we are sampling from, we are making it ‘coarser’, and are capturing less overall diversity. This means estimates based on clustered data are generally less precise and may need <strong>larger sample sizes</strong> or other adjustments to compensate.</p>
 <p>We’ll return to this idea when we discuss how to account for clustering in data analysis.</p>
 <hr>
-</section>
-<section id="visual-summary-clustering-in-survey-sampling" class="level3" data-number="1.1.5">
-<h3 data-number="1.1.5" class="anchored" data-anchor-id="visual-summary-clustering-in-survey-sampling"><span class="header-section-number">1.1.5</span> 📌 Visual Summary: Clustering in Survey Sampling</h3>
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1"></a>flowchart TD</span>
-<span id="cb2-2"><a href="#cb2-2"></a>    A[FULL POPULATION] --&gt; B[Grouped into Clusters &lt;br/&gt;e.g. postcode districts]   </span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    B --&gt; C[Random Sample of Clusters &lt;br/&gt; ie Primary Sampling Units - PSUs]  </span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>    C --&gt; D[Further sampling:  &lt;br/&gt; ie  households, individuals]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
-    A[FULL POPULATION] --&gt; B[Grouped into Clusters &lt;br/&gt;e.g. postcode districts]   
-
-    B --&gt; C[Random Sample of Clusters &lt;br/&gt; ie Primary Sampling Units - PSUs]  
-
-    C --&gt; D[Further sampling:  &lt;br/&gt; ie  households, individuals]
-
+    A[FULL POPULATION] --&gt; B[Grouped into clusters &lt;br/&gt;e.g. postcode districts]   
+    B --&gt; C[Sampling of clusters &lt;br/&gt;Primary Sampling Units]  
+    C --&gt; D[Further sampling:  &lt;br/&gt;households, individuals]
 </pre>
 </div>
-<p></p></figure><p></p>
+<p></p><figcaption> <strong>Visual Summary: Clustering in Survey Sampling</strong></figcaption> </figure><p></p>
 </div>
 </div>
 </div>
-<p>🧠 <strong>Key Points to Remember</strong>:</p>
+<p><strong>Key Points to Remember</strong>:</p>
 <ul>
 <li>Clustering simplifies data collection but reduces precision.</li>
 <li>It is often combined with <strong>multistage sampling</strong>.</li>
@@ -433,25 +388,25 @@ Household 10: 3 UK born </code></pre>
 </section>
 </section>
 <section id="stratification" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="stratification"><span class="header-section-number">1.2</span> 🧩 Stratification</h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="stratification"><span class="header-section-number">1.2</span> Stratification</h2>
 <p>Stratification is another important technique used in survey sampling. It involves dividing the population into different groups - called strata - and then selecting a sample from each group. This ensures that important subgroups are properly represented in the final sample, even if they are small or harder to reach.</p>
 <section id="how-is-stratification-different-from-clustering" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="how-is-stratification-different-from-clustering"><span class="header-section-number">1.2.1</span> 🧠 How is stratification different from clustering?</h3>
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="how-is-stratification-different-from-clustering"><span class="header-section-number">1.2.1</span> How is stratification different from clustering?</h3>
 <p>In clustering, each selected group (such as a postcode district) is a mini version of the population - as it is designed to be internally diverse. In stratification, the groups are made to be as homogeneous as possible - people in each stratum share certain traits (like age or location), and this helps make groups comparisons more precise.</p>
 </section>
 <section id="example-stratification-by-region" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="example-stratification-by-region"><span class="header-section-number">1.2.2</span> 🗺️ Example: Stratification by Region</h3>
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="example-stratification-by-region"><span class="header-section-number">1.2.2</span> Example: Stratification by Region</h3>
 <p>Imagine we split the population into four regions: North, South, East, and West. From each region, we randomly select a fixed number of addresses - say, five from each. This ensures every region is covered in the sample, no matter how small or different it is.</p>
 <p>Figure 2 shows how samples are drawn evenly across regional strata.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pics/strata.png" class="img-fluid figure-img" alt="Schematic representation of sample stratification"></p>
-<figcaption>Figure 2: An example of stratified sampling</figcaption>
+<figcaption><strong>Figure 2: An example of stratified sampling</strong></figcaption>
 </figure>
 </div>
 </section>
 <section id="stratification-in-uk-social-surveys" class="level3" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="stratification-in-uk-social-surveys"><span class="header-section-number">1.2.3</span> 🇬🇧 Stratification in UK Social Surveys</h3>
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="stratification-in-uk-social-surveys"><span class="header-section-number">1.2.3</span> Stratification in UK Social Surveys</h3>
 <p>Strata in UK surveys are often based on:</p>
 <ul>
 <li><p>Geographic areas, such as Government Office Regions</p></li>
@@ -461,7 +416,7 @@ Household 10: 3 UK born </code></pre>
 <p>This information usually comes from Census data, which provides a detailed picture of the population across the country.</p>
 </section>
 <section id="why-use-stratification" class="level3" data-number="1.2.4">
-<h3 data-number="1.2.4" class="anchored" data-anchor-id="why-use-stratification"><span class="header-section-number">1.2.4</span> 🎯 Why Use Stratification?</h3>
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="why-use-stratification"><span class="header-section-number">1.2.4</span> Why Use Stratification?</h3>
 <p>Stratification is especially useful when:</p>
 <ul>
 <li><p>Some groups in the population are small but important (e.g.&nbsp;ethnic minorities, rural areas, younger people)</p></li>
@@ -472,7 +427,7 @@ Household 10: 3 UK born </code></pre>
 </section>
 </section>
 <section id="proportionate-vs-disproportionate-sampling" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="proportionate-vs-disproportionate-sampling"><span class="header-section-number">1.3</span> 🎯 Proportionate vs disproportionate sampling</h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="proportionate-vs-disproportionate-sampling"><span class="header-section-number">1.3</span> Proportionate vs disproportionate sampling</h2>
 <p>In <strong>simple random sampling</strong>, every person (or unit) in the population has the <strong>same chance</strong> of being selected. This means that the <strong>sampling fraction</strong>—the proportion of the population included in the sample—is calculated as:</p>
 <p><span class="math display">\[
   \text{Sampling fraction} = \frac{n}{N}
@@ -483,7 +438,7 @@ Household 10: 3 UK born </code></pre>
 <li><span class="math inline">\(N\)</span> = population size</li>
 </ul>
 <section id="proportionate-stratified-sampling" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="proportionate-stratified-sampling"><span class="header-section-number">1.3.1</span> 🧭 Proportionate Stratified Sampling</h3>
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="proportionate-stratified-sampling"><span class="header-section-number">1.3.1</span> Proportionate Stratified Sampling</h3>
 <p>When the <strong>same sampling fraction</strong> is used in each strata, we call it <strong>proportionate stratification</strong>. That means:</p>
 <p><span class="math display">\[
   \frac{n_h}{N_h} = \frac{n}{N}
@@ -497,14 +452,14 @@ Household 10: 3 UK born </code></pre>
 <hr>
 </section>
 <section id="disproportionate-stratified-sampling" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="disproportionate-stratified-sampling"><span class="header-section-number">1.3.2</span> ⚖️ Disproportionate Stratified Sampling</h3>
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="disproportionate-stratified-sampling"><span class="header-section-number">1.3.2</span> Disproportionate Stratified Sampling</h3>
 <p>Sometimes, researchers deliberately <strong>over-sample</strong> certain groups. This is called <strong>disproportionate stratification</strong> - when the sampling fraction is <strong>larger in some strata than others</strong>.</p>
 <p>This is useful when:</p>
 <ul>
 <li>The group is <strong>small</strong> but important for the study (e.g.&nbsp;ethnic minorities, people in rural areas)</li>
 <li>More data is needed to analyse that group accurately</li>
 </ul>
-<p>🔎 <strong>Example:</strong> In the <strong>British Election Study 2010</strong>, people from ethnic minority backgrounds were over-sampled. This was done because there was limited data on their voting behaviour, and researchers needed enough cases to draw valid conclusions.</p>
+<p><strong>Example:</strong> In the <strong>British Election Study 2010</strong>, people from ethnic minority backgrounds were over-sampled. This was done because there was limited data on their voting behaviour, and researchers needed enough cases to draw valid conclusions.</p>
 <hr>
 
 
@@ -598,13 +553,14 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -958,8 +914,8 @@ Wallrich, Lukas. 2019. <span>“Week 7 Using Survey Weights in r.”</span> Edit
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02_Design-Based_Inference.html" class="pagination-link" aria-label="Design-Based Inference from Social Surveys">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference from Social Surveys</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02_Design-Based_Inference.html" class="pagination-link" aria-label="Design-Based Inference">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Design-Based Inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

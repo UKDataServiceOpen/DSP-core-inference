@@ -11,12 +11,12 @@ execute:
   warning: false
   message: false
   cache: false
-  freeze: auto
-
+  freeze: false
 
 book:
   title: "Statistical inference  with weights and survey design variables"
   subtitle: Practical guidelines using  UKDS datasets
+#  downloads: [pdf]
   chapters:
     - index.qmd
     - 01_Basics.qmd
@@ -31,39 +31,12 @@ book:
     - 09_References.qmd
     - 08_Appendix.qmd
 
-
-
   sidebar:
     logo: "pics/UKDS_Logos_Col_Grey_300dpi.png"
     logo-href: https://ukdataservice.ac.uk
     logo-alt: "UKDS homepage"
     style: "floating"
     
-
-    # chapters:
-    #   - href: index.qmd
-    #     text: "Introduction"
-    # 
-    #   - href: 01_Basics.qmd
-    #     text: "Basics"
-    #   - href: 02_Design-Based_Inference.qmd
-    #     text: "Design-based inference"
-    #   - href: 03_Real_world.qmd
-    #     text: "Real-world inference"
-    #   - href: 04_Statistical_Inference.qmd
-    #     text: "Inference in practice"
-    #     
-    #   - section: "Examples"
-    #     contents:
-    #       - href: 05_R.qmd
-    #         text: "R"
-    #       - href: 06_SPSS.qmd
-    #         text: "SPSS"  
-    #       - href: 07_Stata.qmd
-    #         text: "Stata"
-
-      # - href: 08_Appendix.qmd
-      # - href: 09_References.qmd
 
 
 format:
@@ -74,18 +47,40 @@ format:
       toc: true
       toc-location: right
       highlight-style: arrow-light
-     # embed-resources: true
       smooth-scroll: true
       link-external-newwindow: true
       citations-hover: true
       footnotes-hover: true
+      
+    # titlepage-pdf:
+    #   titlepage: plain
+    #   titlepage-geometry:
+    #     - top=70mm
+    #     - left=30mm
+    #     - right=30mm
+    #     - bottom=30mm
+    #   titlepage-theme:
+    #     logo-size: 3cm
+    #     title-fontstyle: Huge
+    #   titlepage-logo: "pics/UKDS_Logos_Col_Grey_300dpi.png"  
+    #   documentclass: scrreport
+    #   fig-width: 7
+    #   papersize: A4
+    #   include-in-header: preamble.tex
+    #   geometry:
+    #     - top=25mm
+    #     - left=25mm
+    #     - right=25mm
+    #     - bottom=30mm
 
 
+theme:
+    - default
+    - custom_ukds.scss
 
-mainfont: "Open Sans" 
-sansfont: "Open Sans"
-monofont: "Courier New"
-monofontoptions: 'Scale=0.8'
+
+#monofont: "Courier New"
+#monofontoptions: 'Scale=0.8'
 pdf-engine: lualatex
 
 
